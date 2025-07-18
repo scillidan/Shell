@@ -1,0 +1,22 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Classes\*\shell\Open with &VSCodium]
+@="vscodium ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\vscodium\\current\\VSCodium.exe"
+
+[HKEY_CURRENT_USER\Software\Classes\*\shell\Open with &VSCodium\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\vscodium\\current\\VSCodium.exe\" \"%1\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &VSCodium]
+@="vscodium ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\vscodium\\current\\VSCodium.exe"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &VSCodium\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\vscodium\\current\\VSCodium.exe\" \"%V\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &VSCodium]
+@="vscodium ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\vscodium\\current\\VSCodium.exe"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &VSCodium\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\vscodium\\current\\VSCodium.exe\" \"%V\""

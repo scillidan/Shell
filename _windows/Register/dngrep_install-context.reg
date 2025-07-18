@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &dnGREP]
+@="dngrep ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\dngrep\\current\\dnGREP.exe"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &dnGREP\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\dngrep\\current\\dnGREP.exe\" \"%V\""
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &dnGREP]
+@="dngrep ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\dngrep\\current\\dnGREP.exe"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &dnGREP\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\dngrep\\current\\dnGREP.exe\" \"%V\""
