@@ -1,0 +1,22 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\alacritty-cmder]
+@="alacritty(cmder) ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\Alacritty\\current\\alacritty.exe"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\alacritty-cmder\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\Alacritty\\current\\alacritty.exe\" --config-file \"C:\\Users\\User\\Usr\\Git\\dotfiles\\.config\\alacritty\\alacritty_windows.toml\" --working-directory \"%V"
+
+[HKEY_CLASSES_ROOT\Drive\shell\alacritty-cmder]
+@="alacritty(cmder) ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\Alacritty\\current\\alacritty.exe"
+
+[HKEY_CLASSES_ROOT\Drive\shell\alacritty-cmder\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\Alacritty\\current\\alacritty.exe\" --config-file \"C:\\Users\\User\\Usr\\Git\\dotfiles\\.config\\alacritty\\alacritty_windows.toml\" --working-directory \"%V"
+
+[HKEY_CLASSES_ROOT\Directory\shell\alacritty-cmder]
+@="alacritty(cmder) ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\Alacritty\\current\\alacritty.exe"
+
+[HKEY_CLASSES_ROOT\Directory\shell\alacritty-cmder\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\Alacritty\\current\\alacritty.exe\" --config-file \"C:\\Users\\User\\Usr\\Git\\dotfiles\\.config\\alacritty\\alacritty_windows.toml\" --working-directory \"%V"

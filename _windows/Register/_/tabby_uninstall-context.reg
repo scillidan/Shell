@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\tabby]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\tabby\command]
+[-HKEY_CLASSES_ROOT\Drive\shell\tabby]
+[-HKEY_CLASSES_ROOT\Drive\shell\tabby\command]
+[-HKEY_CLASSES_ROOT\Directory\shell\tabby]
+[-HKEY_CLASSES_ROOT\Directory\shell\tabby\command]

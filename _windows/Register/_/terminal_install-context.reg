@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Windows Terminal Preview]
+@="terminal ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\windows-terminal-preview\\current\\WindowsTerminal.exe"
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Windows Terminal Preview\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\windows-terminal-preview\\current\\wt.exe\" -d \"%V\""
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\Windows Terminal Preview]
+@="terminal ."
+"Icon"="C:\\Users\\User\\Scoop\\apps\\windows-terminal-preview\\current\\WindowsTerminal.exe"
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\Windows Terminal Preview\command]
+@="\"C:\\Users\\User\\Scoop\\apps\\windows-terminal-preview\\current\\wt.exe\" -d \"%V\""

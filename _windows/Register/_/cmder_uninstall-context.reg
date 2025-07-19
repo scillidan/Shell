@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\cmder]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\cmder\command]
+[-HKEY_CLASSES_ROOT\Drive\shell\cmder]
+[-HKEY_CLASSES_ROOT\Drive\shell\cmder\command]
+[-HKEY_CLASSES_ROOT\Directory\shell\cmder]
+[-HKEY_CLASSES_ROOT\Directory\shell\cmder\command]

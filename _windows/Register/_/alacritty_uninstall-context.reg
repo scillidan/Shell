@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\alacritty-cmder]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\alacritty-cmder\command]
+[-HKEY_CLASSES_ROOT\Drive\shell\alacritty-cmder]
+[-HKEY_CLASSES_ROOT\Drive\shell\alacritty-cmder\command]
+[-HKEY_CLASSES_ROOT\Directory\shell\alacritty-cmder]
+[-HKEY_CLASSES_ROOT\Directory\shell\alacritty-cmder\command]

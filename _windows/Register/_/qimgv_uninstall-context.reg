@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\qimgv]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\qimgv\command]
+[-HKEY_CURRENT_USER\Software\Classes\Drive\shell\qimgv]
+[-HKEY_CURRENT_USER\Software\Classes\Drive\shell\qimgv\command]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\qimgv]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\qimgv\command]

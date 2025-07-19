@@ -1,0 +1,34 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+"EarTrumpet"=-
+"ActivityWatch"=-
+"CenterTaskbar"=-
+"Ditto"=-
+"Espanso"=-
+"Everything"=-
+"Gitify"=-
+"GoldenDict"=-
+"KBLAutoSwitch"=-
+"KeePassXC"=-
+"Lintalist"=-
+"Lively Wallpaper"=-
+"Ollama"=-
+"RectangleWin"=-
+"Reduce Memory"=-
+"resizer2"=-
+"Sizer"=-
+"T-Clock"=-
+"Umi-OCR"=-
+"virgo"=-
+"Zeal"=-
+"User"=-
+"QuickSwitch"=-
+"ShortScript"=-
+"keyboard-locker"=-
+"Toggle screen"=-
+"KeyMap"=-
+"GoldenDictOCR"=-
+"Clash Verge"=-
+"AutoHotkeys"=-
+"AutoHotkey Script"=-
