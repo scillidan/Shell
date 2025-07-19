@@ -1,4 +1,5 @@
 @echo off
+
 setlocal
 
 set "RIME_SHARE=%APPDATA%\rime"
@@ -52,4 +53,5 @@ for %%F in (%RIMEICE_DIR%) do (
 echo Files copied and links created successfully.
 
 endlocal
+
 pause

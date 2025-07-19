@@ -1,4 +1,5 @@
 @echo off
+
 setlocal
 
 set "PEGASUS_HOME=%SCOOP_HOME%\apps\pegasus\current"
@@ -45,4 +46,5 @@ for /d %%d in ("%PEGASUS_HOME%\Roms\*") do (
 rem mkdir "%RETROARCH_HOME%\Emulators"
 
 endlocal
+
 pause
