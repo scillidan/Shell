@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RIME_SHARE="$HOME/.local/share/fcitx5/rime"
-RIME_DOTDIR="$HOME/.config/rime/rime-ice"
+RIME_CONF="$HOME/.config/rime/rime-ice"
 RIME_SRC="$HOME/Usr/Source/rime"
 
 declare -a CONFIG_FILES=(
@@ -12,7 +12,7 @@ declare -a CONFIG_FILES=(
 )
 
 for file in "${CONFIG_FILES[@]}"; do
-	cp -f "$RIME_DOTDIR/$file" "$RIME_SHARE/$file" || {
+	cp -f "$RIME_CONF/$file" "$RIME_SHARE/$file" || {
 		echo "Failed to copy $file"
 		exit 1
 	}
