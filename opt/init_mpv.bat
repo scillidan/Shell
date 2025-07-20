@@ -33,7 +33,7 @@ type "%INPUT%\global.conf" "%INPUT%\manga.conf" > "%MPVC_MANGA%\input.conf"
 
 set "CONFIG_GLOBAL=%MPVC_VIDEO% %MPVC_MUSIC% %MPVC_MANGA%"
 for %%d in (%CONFIG_GLOBAL%) do (
-    rem 1. Get `uosc.zip` from [Releases](https://github.com/tomasklaen/uosc/releases).
+    rem 1. Get uosc.zip from https://github.com/tomasklaen/uosc/releases.
     rem 2. Decompress to `uosc/`.
     rem 3. Install `uosc/fonts/*.ttf`.
     mklink /J "%%d\scripts\uosc" "%MPV_DL%\uosc\scripts\uosc"
@@ -42,7 +42,7 @@ for %%d in (%CONFIG_GLOBAL%) do (
     mklink "%%d\scripts\thumbfast.lua" "%MPV_SRC%\thumbfast\thumbfast.lua"
     mklink "%%d\script-opts\thumbfast.conf" "%MPV_SRC%\thumbfast\thumbfast.conf"
 
-    rem 1. Get `HDR-Toys.zip` from [Releases](https://github.com/natural-harmonia-gropius/hdr-toys/releases)
+    rem 1. Get HDR-Toys.zip from https://github.com/natural-harmonia-gropius/hdr-toys/releases.
     rem 2. Decompress to `hdr-toys/`.
     mklink /J "%%d\shaders\hdr-toys" "%MPV_SRC%\hdr-toys\shaders\hdr-toys"
     mklink "%%d\scripts\hdr-toys-helper.lua" "%MPV_DL%\hdr-toys\scripts\hdr-toys-helper.lua"
@@ -72,7 +72,7 @@ for %%d in (%CONFIG_GLOBAL%) do (
 
     echo Play
 
-    rem Get `auto-save-state.lua` from [AN3223/dotfiles](https://github.com/AN3223/dotfiles/blob/master/.config/mpv/scripts/auto-save-state.lua).
+    rem Get auto-save-state.lua from https://github.com/AN3223/dotfiles/blob/master/.config/mpv/scripts/auto-save-state.lua.
     mklink "%%d\scripts\auto-save-state.lua" "%MPV_DL%\auto-save-state.lua"
 
     rem git clone --depth=1 https://github.com/po5/memo
@@ -161,9 +161,6 @@ for %%d in (%MPVC_VIDEO%) do (
 echo music config
 
 for %%d in (%MPVC_MUSIC%) do (
-    rem git clone --depth=1 https://github.com/zxhzxhz/mpv-chapters
-    mklink "%%d\scripts\mpv_chapters.js" "%MPV_SRC%\mpv-chapters\mpv_chapters.js"
-
     rem git clone --depth=1 https://github.com/thinkmcflythink/mpv-loudnorm
     mklink /J "%%d\scripts\real_loudnorm" "%MPV_SRC%\mpv-loudnorm"
 
@@ -173,9 +170,6 @@ for %%d in (%MPVC_MUSIC%) do (
 
     rem git clone --depth=1 https://github.com/cogentredtester/mpv-scripts mpv-scripts@cogentredtester
     mklink "%%d\scripts\save-playlist.lua" "%MPV_SRC%\mpv-scripts@cogentredtester\save-playlist.lua"
-
-    rem git clone --depth=1 https://github.com/stax76/mpv-scripts mpv-scripts@stax76
-    mklink "%%d\scripts\smart_volume.lua" "%MPV_SRC%\mpv-scripts@stax76\smart_volume.lua"
 )
 
 set "CONFIG_DIR_MANGA=%MPVC_MANGA%"

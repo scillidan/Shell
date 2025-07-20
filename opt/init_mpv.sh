@@ -173,9 +173,6 @@ for d in $MPVC_MUSIC; do
 
     # git clone --depth=1 https://github.com/cogentredtester/mpv-scripts mpv-scripts@cogentredtester
     ln -s "$MPV_SRC/mpv-scripts@cogentredtester/save-playlist.lua" "$d/scripts/save-playlist.lua"
-
-    # git clone --depth=1 https://github.com/stax76/mpv-scripts mpv-scripts@stax76
-    ln -s "$MPV_SRC/mpv-scripts@stax76/smart_volume.lua" "$d/scripts/smart_volume.lua"
 done
 
 CONFIG_DIR_MANGA="$MPVC_MANGA"
