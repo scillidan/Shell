@@ -2,9 +2,9 @@
 
 # Set variables
 MPV_CONF="$HOME/Usr/Git/dotfiles/.config/mpv"
-MPVC_VIDEO="$MPV_CONF/mpvc_video"
-MPVC_MUSIC="$MPV_CONF/mpvc_music"
-MPVC_MANGA="$MPV_CONF/mpvc_manga"
+MPVC_VIDEO="$HOME/Usr/Data/mpvc_video"
+MPVC_MUSIC="$HOME/Usr/Data/mpvc_music"
+MPVC_MANGA="$HOME/Usr/Data/mpvc_manga"
 
 config="$1"
 

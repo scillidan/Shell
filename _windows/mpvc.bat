@@ -3,9 +3,9 @@
 setlocal
 
 set "MPV_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\mpv"
-set "MPVC_VIDEO=%MPV_CONF%\mpvc_video"
-set "MPVC_MUSIC=%MPV_CONF%\mpvc_music"
-set "MPVC_MANGA=%MPV_CONF%\mpvc_manga"
+set "MPVC_VIDEO=%USERPROFILE%\Usr\Data\mpvc_video"
+set "MPVC_MUSIC=%USERPROFILE%\Usr\Data\mpvc_music"
+set "MPVC_MANGA=%USERPROFILE%\Usr\Data\mpvc_manga"
 
 set "config=%1"
 

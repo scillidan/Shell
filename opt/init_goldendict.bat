@@ -4,7 +4,7 @@ setlocal
 
 set "GOLDENDICT_DATA=%SCOOP_HOME%\apps\goldendict\current\portable"
 set "GOLDENDICT_HOME=%SCOOP_HOME%\apps\goldendict\current"
-set "GOLDENDICT_CONF=%USERPROFILE%\Usr\Git\dotfiles\goldendict"
+set "GOLDENDICT_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\goldendict"
 set "GOLDENDICT_SRC=%USERPROFILE%\Usr\Source\goldendict"
 set "GOLDENDICT_DL=%USERPROFILE%\Usr\Download\goldendict"
 
