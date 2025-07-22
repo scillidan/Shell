@@ -50,7 +50,7 @@ URLS=(
 	["hn.algolia.com"]="https://hn.algolia.com/?dateRange=all&page=0&prefix=false&sort=byPopularity&type=story&query="
 	["hub.docker.com"]="https://hub.docker.com/search?q="
 	["imdb.com"]="https://www.imdb.com/find?q="
-	["jackett"]="127.0.0.1:9117/UI/Dashboard#filter=all&search="
+	["jackett"]="http://ubuntu22:9117/UI/Dashboard#filter=all&search="
 	["javascripting.com"]="https://www.javascripting.com/search?q="
 	["jsdelivr.com"]="https://www.jsdelivr.com/?query="
 	["lib.rs"]="https://lib.rs/search?q="
