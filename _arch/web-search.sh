@@ -40,6 +40,7 @@ URLS=(
 	["ctan.org"]="https://www.ctan.org/search?phrase="
 	["devdocs.io"]="https://devdocs.io/#q="
 	["douban.com"]="https://www.douban.com/search?q="
+	["wordnik.com"]="https://www.wordnik.com/words/"
 	["etymonline.com"]="https://www.etymonline.com/search?q="
 	["fdroid.org"]="https://search.f-droid.org/?q="
 	["filehippo.com"]="https://filehippo.com/search/?q="
