@@ -6,12 +6,9 @@ $lnkPath = @(
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\EarTrumpet.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk",
- "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Gitify.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\GoldenDict.lnk",
- "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\gPodder.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keypirinha.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Lintalist.lnk",
- "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\QuiteRSS.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RBTray.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RectangleWin.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Reduce Memory.lnk",
@@ -24,7 +21,6 @@ $lnkPath = @(
 
 $optPath = @(
     "$env:ProgramFiles\Clash Verge\clash-verge.exe",
-    "$env:USERPROFILE\AppData\Local\Programs\Ollama\ollama app.exe",
     "$env:USERPROFILE\Scoop\shims\resizer2.exe",
     "$env:USERPROFILE\Usr\Git\Shell\_windows10\startup_autohotkey.bat"
 )
