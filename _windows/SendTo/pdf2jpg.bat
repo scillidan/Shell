@@ -16,7 +16,7 @@ for %%I in (%*) do (
 
     for %%F in ("%%I") do (
         set "filename=%%~nF"
-        magick convert -density 300 "%%I[!pageNum!]" -flatten -quality 90 "!filename!_img.jpg"
+        magick convert -density 300 "%%I[!pageNum!]" -flatten -quality 90 "!filename!.jpg"
     )
 )
 

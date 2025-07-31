@@ -22,7 +22,7 @@ $lnkPath = @(
 $optPath = @(
     "$env:ProgramFiles\Clash Verge\clash-verge.exe",
     "$env:USERPROFILE\Scoop\shims\resizer2.exe",
-    "$env:USERPROFILE\Usr\Git\Shell\_windows10\startup_autohotkey.bat"
+    "$env:USERPROFILE\Usr\Git\Shell\_windows\Other\startup_autohotkey.bat"
 )
 
 Remove-Item "$startupDir\*.lnk" -Force
