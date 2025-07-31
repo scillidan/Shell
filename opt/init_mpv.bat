@@ -3,7 +3,7 @@
 setlocal
 
 set "MPV_DATA=%SCOOP_HOME%\apps\mpv\current\portable_config"
-set "MPV_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\mpv"
+set "MPV_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\_mpv"
 set "MPV_SRC=%USERPROFILE%\Usr\Source\mpv"
 set "MPV_DL=%USERPROFILE%\Usr\Download\mpv"
 

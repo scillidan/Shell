@@ -2,7 +2,7 @@
 
 GOLDENDICT_DATA="$HOME/<path_to>"
 GOLDENDICT_HOME="$HOME/<path_to>"
-GOLDENDICT_CONF="$HOME/Usr/Git/dotfiles/.config/goldendict"
+GOLDENDICT_CONF="$HOME/Usr/Git/dotfiles/.config/_goldendict"
 GOLDENDICT_SRC="$HOME/Usr/Source/goldendict"
 GOLDENDICT_DL="$HOME/Usr/Download/goldendict"
 
@@ -25,9 +25,9 @@ ln -s "$GOLDENDICT_CONF/config.linkfile" "$GOLDENDICT_DATA/config"
 rm -rf "$GOLDENDICT_HOME/content"
 mkdir -p "$GOLDENDICT_HOME/content"
 
-ln -s "$GOLDENDICT_DL/files_mdx" "$GOLDENDICT_HOME/content/files_mdx"
-ln -s "$GOLDENDICT_DL/files_stardict" "$GOLDENDICT_HOME/content/files_stardict"
 ln -s "$GOLDENDICT_DL/morphology" "$GOLDENDICT_HOME/content/morphology"
+ln -s "$GOLDENDICT_DL/mdx" "$GOLDENDICT_HOME/content/mdx"
+ln -s "$GOLDENDICT_DL/stardict" "$GOLDENDICT_HOME/content/stardict"
 mkdir -p "$GOLDENDICT_HOME/content/sound-dirs"
 ln -s "$GOLDENDICT_DL/sound-dirs/Forvo_pron" "$GOLDENDICT_HOME/content/sound-dirs/Forvo_pron"
 ln -s "$GOLDENDICT_DL/sound-dirs/pronunciations-en.zips" "$GOLDENDICT_HOME/content/sound-dirs/pronunciations-en.zips"

@@ -4,7 +4,7 @@ setlocal
 
 set "GOLDENDICT_DATA=%SCOOP_HOME%\apps\goldendict\current\portable"
 set "GOLDENDICT_HOME=%SCOOP_HOME%\apps\goldendict\current"
-set "GOLDENDICT_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\goldendict"
+set "GOLDENDICT_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\_goldendict"
 set "GOLDENDICT_SRC=%USERPROFILE%\Usr\Source\goldendict"
 set "GOLDENDICT_DL=%USERPROFILE%\Usr\Download\goldendict"
 
@@ -23,9 +23,9 @@ mklink "%GOLDENDICT_DATA%\config" "%GOLDENDICT_CONF%\config.linkfile"
 
 rmdir /S /Q "%GOLDENDICT_HOME%\content"
 mkdir "%GOLDENDICT_HOME%\content"
-mklink /J "%GOLDENDICT_HOME%\content\files_mdx" "%GOLDENDICT_DL%\files_mdx"
-mklink /J "%GOLDENDICT_HOME%\content\files_stardict" "%GOLDENDICT_DL%\files_stardict"
 mklink /J "%GOLDENDICT_HOME%\content\morphology" "%GOLDENDICT_DL%\morphology"
+mklink /J "%GOLDENDICT_HOME%\content\mdx" "%GOLDENDICT_DL%\mdx"
+mklink /J "%GOLDENDICT_HOME%\content\stardict" "%GOLDENDICT_DL%\stardict"
 mkdir "%GOLDENDICT_HOME%\content\sound-dirs"
 mklink /J "%GOLDENDICT_HOME%\content\sound-dirs\Forvo_pron" "%GOLDENDICT_DL%\sound-dirs\Forvo_pron"
 mklink "%GOLDENDICT_HOME%\content\sound-dirs\pronunciations-en.zips" "%GOLDENDICT_DL%\sound-dirs\pronunciations-en.zips"

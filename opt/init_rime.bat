@@ -3,7 +3,7 @@
 setlocal
 
 set "RIME_SHARE=%APPDATA%\rime"
-set "RIME_DOTDIR=%DOTFILES_DIR%\.config\rime\rime-ice"
+set "RIME_DOTDIR=%DOTFILES_DIR%\.config\_rime\rime-ice"
 set "RIME_SRC=%USERPROFILE%\Usr\Source\rime"
 
 set PERSONAL_FILE=default.custom.yaml user.yaml weasel.custom.yaml symbols.yaml

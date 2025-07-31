@@ -1,7 +1,7 @@
 #!/bin/bash
 
 RIME_SHARE="$HOME/.local/share/fcitx5/rime"
-RIME_CONF="$HOME/.config/rime/rime-ice"
+RIME_CONF="$HOME/.config/_rime/rime-ice"
 RIME_SRC="$HOME/Usr/Source/rime"
 
 declare -a CONFIG_FILES=(
