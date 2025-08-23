@@ -2,7 +2,7 @@
 # Purpose: Generate a timepoint list as text file format from audio files or a directory.
 # It can be used to write timepoint list on video platform. And I used it for https://github.com/dyphire/mpv-scripts/blob/main/chapter-make-read.lua.
 # Tools: python, ffprobe
-# Usage: python file.bat -i <file_1> <file_2> [-o <output>]
+# Usage: python file.py -i <file_1> <file_2> [-o <output>]
 
 import os
 import subprocess
