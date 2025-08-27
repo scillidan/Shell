@@ -1,3 +1,3 @@
-window_root "~/Proj"
+window_root "~/Usr/Proj"
 
 new_window "Proj"
