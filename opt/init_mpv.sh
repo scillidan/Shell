@@ -22,14 +22,14 @@ for d in $MPVC_ALL; do
 done
 
 INCLUDE="$MPV_CONF/include"
-cat "$INCLUDE/global.conf" "$INCLUDE/video.conf" > "$MPVC_VIDEO/mpv.conf"
-cat "$INCLUDE/global.conf" "$INCLUDE/music.conf" > "$MPVC_MUSIC/mpv.conf"
-cat "$INCLUDE/global.conf" "$INCLUDE/manga.conf" > "$MPVC_MANGA/mpv.conf"
+cat "$INCLUDE/global.conf" "$INCLUDE/video.conf" >"$MPVC_VIDEO/mpv.conf"
+cat "$INCLUDE/global.conf" "$INCLUDE/music.conf" >"$MPVC_MUSIC/mpv.conf"
+cat "$INCLUDE/global.conf" "$INCLUDE/manga.conf" >"$MPVC_MANGA/mpv.conf"
 
 INPUT="$MPV_CONF/input"
-cat "$INPUT/global.conf" > "$MPVC_VIDEO/input.conf"
-cat "$INPUT/global.conf" > "$MPVC_MUSIC/input.conf"
-cat "$INPUT/global.conf" "$INPUT/manga.conf" > "$MPVC_MANGA/input.conf"
+cat "$INPUT/global.conf" >"$MPVC_VIDEO/input.conf"
+cat "$INPUT/global.conf" >"$MPVC_MUSIC/input.conf"
+cat "$INPUT/global.conf" "$INPUT/manga.conf" >"$MPVC_MANGA/input.conf"
 
 CONFIG_GLOBAL="$MPVC_VIDEO $MPVC_MUSIC $MPVC_MANGA"
 for d in $CONFIG_GLOBAL; do
@@ -42,15 +42,14 @@ for d in $CONFIG_GLOBAL; do
 	ln -s "$MPV_SRC/thumbfast/thumbfast.lua" "$d/scripts/thumbfast.lua"
 	ln -s "$MPV_SRC/thumbfast/thumbfast.conf" "$d/script-opts/thumbfast.conf"
 
-	# 1. Get `HDR-Toys.zip` from [Releases](https://github.com/natural-harmonia-gropius/hdr-toys/releases)
-	# 2. Decompress to `hdr-toys/`.
+	# git clone --depth=1 https://github.com/natural-harmonia-gropius/hdr-toys
 	ln -s "$MPV_SRC/hdr-toys/shaders/hdr-toys" "$d/shaders/hdr-toys"
-	ln -s "$MPV_DL/hdr-toys/scripts/hdr-toys-helper.lua" "$d/scripts/hdr-toys-helper.lua"
-	cat "$MPV_DL/hdr-toys/hdr-toys.conf" >> "$d/mpv.conf"
+	ln -s "$MPV_SRC/hdr-toys/scripts/hdr-toys.lua" "$d/scripts/hdr-toys.lua"
+	cat "$MPV_SRC/hdr-toys/hdr-toys.conf" >>"$d/mpv.conf"
 
 	# git clone --depth=1 https://github.com/hhirtz/mpv-retro-shaders
 	ln -s "$MPV_SRC/mpv-retro-shaders" "$d/shaders/mpv-retro-shaders"
-	cat "$MPV_SRC/mpv-retro-shaders/all.conf" >> "$d/mpv.conf"
+	cat "$MPV_SRC/mpv-retro-shaders/all.conf" >>"$d/mpv.conf"
 
 	echo "File"
 
@@ -186,8 +185,8 @@ for d in $CONFIG_DIR_MANGA; do
 	# git clone --depth=1 https://github.com/guidocella/mpv-image-config
 	ln -s "$MPV_SRC/mpv-image-config/scripts/image-bindings.lua" "$d/scripts/image-bindings.lua"
 	ln -s "$MPV_CONF/script-opts/image_bindings.conf" "$d/script-opts/image_bindings.conf"
-	cat "$MPV_SRC/mpv-image-config/mpv.conf" >> "$d/mpv.conf"
-	cat "$MPV_SRC/mpv-image-config/input.conf" >> "$d/input.conf"
+	cat "$MPV_SRC/mpv-image-config/mpv.conf" >>"$d/mpv.conf"
+	cat "$MPV_SRC/mpv-image-config/input.conf" >>"$d/input.conf"
 
 	# git clone --depth=1 https://github.com/occivink/mpv-image-viewer
 	ln -s "$MPV_SRC/mpv-image-viewer/scripts/freeze-window.lua" "$d/scripts/freeze-window.lua"
