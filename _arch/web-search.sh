@@ -1,7 +1,5 @@
-# https://github.com/miroslavvidovic/rofi-scripts/blob/master/web-search.sh
-
 #!/usr/bin/env bash
-
+# https://github.com/miroslavvidovic/rofi-scripts/blob/master/web-search.sh
 # -----------------------------------------------------------------------------
 # Info:
 #   author:    Miroslav Vidovic
@@ -60,6 +58,7 @@ URLS=(
 	["open-vsx.org"]="https://open-vsx.org/?sortBy=relevance&sortOrder=desc&search="
 	["opensubtitles.org"]="https://www.opensubtitles.org/en/search2/sublanguageid-chi,eng/moviename-"
 	["scira.ai"]="https://scira.ai/?query="
+	["perplexity.ai"]="https://www.perplexity.ai/?q="
 	["subhd.tv"]="https://subhd.tv/search/"
 	["youtube.com"]="https://www.youtube.com/results?search_query="
 	["emojikeyboard.io"]="https://emojikeyboard.io/search?query="

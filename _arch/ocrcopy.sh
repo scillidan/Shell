@@ -1,9 +1,8 @@
+#!/bin/bash
 # Write by GPT-4o mini🧙‍♂️, scillidan🤡
 # Purpose: Capture a screenshot, perform OCR, and copy the result to clipboard.
 # Tools: scrot, imagemagick, tesseract, xclip, dunst
 # Usage: script.sh
-
-#!/bin/bash
 
 set -euo pipefail
 

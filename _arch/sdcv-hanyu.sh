@@ -1,8 +1,7 @@
+#!/bin/bash
 # Purpose: Search Chinese words with simplified and traditional forms in SDCV. Need dictionary "HanYuDaCiDian", see https://github.com/scillidan/share_hanyudacidian.
 # Tools: hanconv, sdcv
 # Usage: sdcv-hanyu.sh <Chinese_word>
-
-#!/bin/bash
 
 if [ -z "$1" ]; then
 	echo "Usage: $0 <Chinese_word>"

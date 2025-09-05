@@ -1,9 +1,8 @@
+#!/bin/bash
 # Write by GPT-4o mini🧙‍♂️, scillidan🤡
 # Purpose: Record a selected window with optional audio.
 # Tools: wmctrl, rofi, xwininfo, ffmpeg
 # Usage: ffmpeg-record-window.sh
-
-#!/bin/bash
 
 WINDOW_LIST=$(wmctrl -l | awk '{for(i=3;i<=NF;i++) printf $i " "; print ""}')
 SELECTED_WINDOW=$(echo "$WINDOW_LIST" | rofi -dmenu -i -p "Select a window")
