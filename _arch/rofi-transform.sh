@@ -2,7 +2,6 @@
 # Write by GPT-4o mini🧙‍♂️, scillidan🤡
 # Depend on https://github.com/scillidan/Keypirinha-PuzzTools/blob/main/transforms.py
 
-# Dependencies check
 for cmd in rofi xclip python3 notify-send; do
 	if ! command -v "$cmd" >/dev/null 2>&1; then
 		echo "Error: $cmd is not installed." >&2
@@ -16,9 +15,6 @@ if [[ -z "$input" ]]; then
 	exit 1
 fi
 
-# Define all possible keys for selection, including nested keys
-# We embed this list in the script for convenience (all keys from TRANSFORMS and subkeys)
-
 options=(
 	"case.lowercase"
 	"case.uppercase"
@@ -28,6 +24,7 @@ options=(
 	"case.camelcase"
 	"case.pascalcase"
 	"case.nocase"
+	"format kebab"
 	"nutrimatic.from ANSWERIZE"
 	"nutrimatic.add A* between"
 	"nutrimatic.add ?"
@@ -69,7 +66,6 @@ import sys
 
 data = '''$input'''
 
-# Define lambdas and transforms
 _CASES = {
     'lowercase': str.lower,
     'uppercase': str.upper,
@@ -117,11 +113,18 @@ _TOOLS = {
     'markdown link': lambda x: '[{}]({})'.format(*[line.strip() for line in x.splitlines()]),
 }
 
+def format_kebab(x):
+    s = re.sub(r'[^A-Za-z0-9]+', '-', x)
+    s = re.sub(r'-+', '-', s)
+    s = s.strip('-')
+    return s
+
 TRANSFORMS = {
     'case': _CASES,
     'nutrimatic': _NUTRIMATICS,
     'sort': _SORTS,
     'tool': _TOOLS,
+    'format kebab': format_kebab,
     'alphabet': lambda _: 'abcdefghijklmnopqrstuvwxyz',
     'answerize': lambda x: re.sub('[^A-Z0-9]', '', x.upper()),
     'length': len,
@@ -167,7 +170,7 @@ try:
         category = choice
 
     # Categories where line-by-line processing makes sense
-    line_by_line_categories = ['case', 'nutrimatic', 'tool', 'answerize', 'alphabet', 'reverse', 'unique']
+    line_by_line_categories = ['case', 'format kebab', 'nutrimatic', 'tool', 'answerize', 'alphabet', 'reverse', 'unique']
 
     if category in line_by_line_categories:
         lines = data.splitlines()
