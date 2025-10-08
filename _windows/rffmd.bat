@@ -12,6 +12,6 @@ set "filepath=C:\Users\User\Usr\Git\cheat C:\Users\User\Usr\Git\Shell"
 FOR /F "usebackq" %%t IN (
   `rg --files --hidden --follow --glob "!.git" --glob "*.md" -e %word% %filepath% ^
   ^| fzf -m`
-) DO subl %%t
+) DO nvim %%t
 
 endlocal
