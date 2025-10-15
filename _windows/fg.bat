@@ -17,7 +17,7 @@ set RGEXE=rg.exe --column --line-number --no-heading --color=always --smart-case
 set BATEXE=bat.exe --color=always --style=numbers
 
 rem -- The configuration for launching fzf.
-set FLAGS=-m --ansi --disabled --delimiter :
+set FLAGS=--ansi --disabled --delimiter :
 set BIND_START=--bind "start:reload:%RGEXE% {q}"
 set BIND_RELOAD=--bind "change:reload:%RGEXE% {q} || call;"
 set BIND_ENTER=--bind "enter:execute({1})+abort"
