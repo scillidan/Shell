@@ -20,8 +20,8 @@ rem -- The configuration for launching fzf.
 set FLAGS=-m --ansi --disabled --delimiter :
 set BIND_START=--bind "start:reload:%RGEXE% {q}"
 set BIND_RELOAD=--bind "change:reload:%RGEXE% {q} || call;"
-set BIND_ENTER=--bind "enter:execute({1})"
-set BIND_EDIT=--bind "ctrl-e:execute(nvim {1} +{2})"
+set BIND_ENTER=--bind "enter:execute({1})+abort"
+set BIND_EDIT=--bind "ctrl-e:execute(nvim {1} +{2})+abort"
 set BINDS=--bind "ctrl-u:preview-up,ctrl-d:preview-down,alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview"
 set PREVIEW=--preview "%BATEXE% {1} --highlight-line {2}"
 set PREVIEW_WINDOW=--preview-window "up,60%%,border-bottom,+{2}+3/3,~3"
