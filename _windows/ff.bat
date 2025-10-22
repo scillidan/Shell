@@ -1,7 +1,10 @@
 @echo off
-rem Reference: https://github.com/chrisant996/clink-gizmos/issues/19,
-rem https://thevaluable.dev/practical-guide-fzf-example/
-rem Purpose: Interactive file and directory finder using fzf with various preview and key bindings.
+rem Reference:
+rem - https://github.com/chrisant996/clink-gizmos/issues/19
+rem - https://thevaluable.dev/practical-guide-fzf-example
+rem PS: everything-cli (es) is optional. I kept some comments as notes.
+rem I want to preview dir using eza, but there are some errors. So I used erdtree (erd).
+rem Purpose: Interactive file and directory finder using fzf with preview and key bindings.
 rem Tools: rg, fd, erd, bat, fzf
 rem Usage: file.bat
 
