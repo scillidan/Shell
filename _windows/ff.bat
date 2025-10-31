@@ -2,10 +2,9 @@
 rem Reference:
 rem - https://github.com/chrisant996/clink-gizmos/issues/19
 rem - https://thevaluable.dev/practical-guide-fzf-example
-rem PS: everything-cli (es) is optional. I kept some comments as notes.
-rem I want to preview dir using eza, but there are some errors. So I used erdtree (erd).
+rem PS: everything-cli (es) is optional. Similar to its, I kept some comments as notes.
 rem Purpose: Interactive file and directory finder using fzf with preview and key bindings.
-rem Tools: rg, fd, erd, bat, fzf
+rem Tools: rg, fd, bat, fzf, eza
 rem Usage: file.bat
 
 setlocal
@@ -13,7 +12,9 @@ setlocal
 set RG=rg --files --hidden --follow --glob "!.git"
 :: set ES=es -match-path "*" -path ./
 set FD=fd -t d -t l .* -pL ./
-set ERD=erd --color auto --hidden --follow --human --sort name --dir-order first
+set EZA=eza -lbhHigUmuSa {-1}
+:: set LS=ls -l {-1}
+:: set ERD=erd --color auto --hidden --follow --human --sort name --dir-order first
 set BAT=bat --style=numbers --color=always
 
 set FLAG=--multi --walker-skip .github
@@ -21,9 +22,11 @@ set FLAG_STYLE=--layout=reverse --border none --preview-border none --no-scrollb
 set BIND=--bind "ctrl-u:preview-up,ctrl-d:preview-down,alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview"
 set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%RG%)+change-preview(%BAT% {})+refresh-preview"
 :: set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%ES%)+change-preview()+refresh-preview"
-set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%ERD% {})+refresh-preview"
+set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%EZA% {})+refresh-preview"
+:: set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%LS% {})+refresh-preview"
+:: set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%ERD% {})+refresh-preview"
 set BIND_OPEN=--bind "enter:execute({+})+abort"
-set BIND_EDIT=--bind "ctrl-e:execute(%EDITOR% {+})+abort"
+set BIND_EDIT=--bind "ctrl-e:execute(nvim {+})+abort"
 :: set BIND_EDIT_SUBL=--bind "ctrl-e:execute(subl -a {+})+abort"
 :: set BIND_EDIT_VSCODE=--bind "ctrl-e:execute(code -r {+})+abort"
 :: set BIND_EDIT_VSCODIUM=--bind "ctrl-e:execute(vscodium -r {+})+abort"
