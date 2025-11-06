@@ -1,7 +1,7 @@
-:: https://stackoverflow.com/questions/61606077/trying-to-convert-magick-to-a-bat-to-drag-and-drop
-:: Purpose: Convert an image to multiple 32x32 BMP tiles using ImageMagick.
-:: Tools: magick
-:: Usage: file.bat <image_file>
+rem https://stackoverflow.com/questions/61606077/trying-to-convert-magick-to-a-bat-to-drag-and-drop
+rem Purpose: Convert an image to multiple 32x32 BMP tiles using ImageMagick.
+rem Tools: magick
+rem Usage: file.bat <image_file>
 
 @echo off
 

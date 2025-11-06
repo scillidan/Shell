@@ -7,6 +7,7 @@ $lnkPath = @(
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\GoldenDict.lnk",
+ "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Gitify.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keypirinha.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Lintalist.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Magpie.lnk",
@@ -16,7 +17,6 @@ $lnkPath = @(
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Sizer.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\T-Clock.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
- "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Umi-OCR.lnk",
  "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Zeal.lnk"
 )
 

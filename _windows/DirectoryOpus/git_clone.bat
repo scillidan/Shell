@@ -1,6 +1,6 @@
-:: Purpose: Clone a Git repository from a URL copied to the clipboard using Alacritty terminal.
-:: Tools: powershell, alacritty, git
-:: Usage: file.bat <directory>
+rem Purpose: Clone a Git repository from a URL copied to the clipboard using Alacritty terminal.
+rem Tools: powershell, alacritty, git
+rem Usage: file.bat <directory>
 
 @echo off
 setlocal EnableDelayedExpansion

@@ -1,6 +1,6 @@
-:: Purpose: Generate SHA256 checksums for files in a specified directory, skipping existing checksums.
-:: Tools: sha256
-:: Usage: file.bat <directory>
+rem Purpose: Generate SHA256 checksums for files in a specified directory, skipping existing checksums.
+rem Tools: sha256
+rem Usage: file.bat <directory>
 
 @echo off
 setlocal enabledelayedexpansion

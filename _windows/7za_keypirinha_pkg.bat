@@ -1,6 +1,6 @@
-:: Purpose: Create a Keypirinha package archive from a specified directory.
-:: Tools: 7z
-:: Usage: file.bat <dir>
+rem Purpose: Create a Keypirinha package archive from a specified directory.
+rem Tools: 7z
+rem Usage: file.bat <dir>
 
 @echo off
 setlocal

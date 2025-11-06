@@ -1,6 +1,6 @@
-:: Purpose: Convert specified image files to JPEG format and delete original files.
-:: Tools: magick
-:: Usage: file.bat <input_nojpg_files>
+rem Purpose: Convert specified image files to JPEG format and delete original files.
+rem Tools: magick
+rem Usage: file.bat <input_nojpg_files>
 
 @echo off
 setlocal enabledelayedexpansion

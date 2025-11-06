@@ -1,6 +1,6 @@
-:: Purpose: Rename files using gsudo in a specified directory with the nv editor.
-:: Tools: gsudo, node, renamer
-:: Usage: file.bat <directory>
+rem Purpose: Rename files using gsudo in a specified directory with the nv editor.
+rem Tools: gsudo, node, renamer
+rem Usage: file.bat <directory>
 
 @echo off
 

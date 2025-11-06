@@ -1,6 +1,6 @@
-:: Purpose: Export a specific page from PDF files as JPEG images using ImageMagick.
-:: Tools: magick
-:: Usage: file.bat <input_pdf_files>
+rem Purpose: Export a specific page from PDF files as JPEG images using ImageMagick.
+rem Tools: magick
+rem Usage: file.bat <input_pdf_files>
 
 @echo off
 setlocal enabledelayedexpansion

@@ -1,6 +1,6 @@
-:: Purpose: Optimize PNG files using oxipng.
-:: Tools: oxipng
-:: Usage: file.bat <input_png_files>
+rem Purpose: Optimize PNG files using oxipng.
+rem Tools: oxipng
+rem Usage: file.bat <input_png_files>
 
 @echo off
 setlocal enabledelayedexpansion
