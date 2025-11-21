@@ -13,7 +13,7 @@ if defined EDITOR set EDITEXE=%EDITOR%
 if not defined EDITOR set EDITEXE=notepad.exe
 
 rem -- Flags for invoking rg.exe and bat.exe.
-set RGEXE=rg.exe --column --line-number --no-heading --color=always --smart-case
+set RGEXE=rg.exe --hidden --follow --glob "!.git" --column --line-number --no-heading --color=always --smart-case
 set BATEXE=bat.exe --color=always --style=numbers
 
 rem -- The configuration for launching fzf.
