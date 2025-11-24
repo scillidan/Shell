@@ -64,6 +64,7 @@ URLS=(
 	["subhd.tv"]="https://subhd.tv/search/"
 	["wordnik.com"]="https://www.wordnik.com/words/"
 	["youtube.com"]="https://www.youtube.com/results?search_query="
+	["zealusercontributions"]="https://zealusercontributions.vercel.app/search?q="
 	# ["linkding"]="http://127.0.0.1:8060/bookmarks?q="
 	# ["yomitan"]="chrome-extension://likgccmbimhjbgkjambclfkhldnlhbnn/search.html?query="
 )
