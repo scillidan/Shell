@@ -59,6 +59,7 @@ URLS=(
 	["open-vsx.org"]="https://open-vsx.org/?sortBy=relevance&sortOrder=desc&search="
 	["opensubtitles.org"]="https://www.opensubtitles.org/en/search2/sublanguageid-chi,eng/moviename-"
 	["perplexity.ai"]="https://www.perplexity.ai/?q="
+	["portableapps.com"]="https://portableapps.com/search/node/"
 	["scira.ai"]="https://scira.ai/?query="
 	["skell.sketchengine.eu"]="https://skell.sketchengine.eu/#result?lang=en&f=concordance&query="
 	["subhd.tv"]="https://subhd.tv/search/"
