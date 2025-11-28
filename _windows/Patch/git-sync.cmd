@@ -1,0 +1,3 @@
+@echo off
+
+%BASH% %USERPROFILE%\Usr\Shell\git-sync\git-sync %*
