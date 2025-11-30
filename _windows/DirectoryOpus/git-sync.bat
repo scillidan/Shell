@@ -1,4 +1,4 @@
 @echo off
 
 cd %*
-%BASH% git-sync %*
+git-sync.cmd
