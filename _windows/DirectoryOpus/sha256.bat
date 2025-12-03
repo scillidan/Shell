@@ -1,8 +1,8 @@
-rem Purpose: Generate SHA256 checksums for files in a specified directory, skipping existing checksums.
-rem Tools: sha256
-rem Usage: file.bat <directory>
-
 @echo off
+@rem Purpose: Generate SHA256 checksums for files in a specified directory, skipping existing checksums.
+@rem Tools: sha256
+@rem Usage: file.bat <directory>
+
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (

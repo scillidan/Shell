@@ -1,8 +1,8 @@
-rem Purpose: Resize images using Yoga and delete the original files after conversion.
-rem Tools: yoga
-rem Usage: file.bat <input_image_files>
-
 @echo off
+@rem Purpose: Resize images using Yoga and delete the original files after conversion.
+@rem Tools: yoga
+@rem Usage: file.bat <input_image_files>
+
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (

@@ -1,8 +1,8 @@
-rem Purpose: Convert font files to WOFF and WOFF2 formats using webify and ttf2woff2.
-rem Tools: webify, ttf2woff2
-rem Usage: file.bat <input_font_files>
-
 @echo off
+@rem Purpose: Convert font files to WOFF and WOFF2 formats using webify and ttf2woff2.
+@rem Tools: webify, ttf2woff2
+@rem Usage: file.bat <input_font_files>
+
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (

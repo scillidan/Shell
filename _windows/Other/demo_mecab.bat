@@ -1,8 +1,7 @@
-rem Purpose: Process an input string using MeCab and format it in Wakati.
-rem Tools: MeCab
-rem Usage: file.bat <input_string>
-
 @echo off
+@rem Purpose: Process an input string using MeCab and format it in Wakati.
+@rem Tools: MeCab
+@rem Usage: file.bat <input_string>
 
 setlocal EnableDelayedExpansion
 

@@ -1,8 +1,7 @@
+@echo off
 rem Purpose: Run yazi.exe with all arguments and change directory based on yazi's output.
 rem Tools: yazi.exe
 rem Usage: y.bat <arguments>
-
-@echo off
 
 set "tmpfile=%TEMP%\yazi-cwd.tmp"
 

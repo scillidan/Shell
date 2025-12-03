@@ -1,8 +1,8 @@
-rem Purpose: Create a playlist file from specified audio files and directories.
-rem Tools: Command Prompt
-rem Usage: file.bat <file_or_directory>
-
 @echo off
+@rem Purpose: Create a playlist file from specified audio files and directories.
+@rem Tools: Command Prompt
+@rem Usage: file.bat <file_or_directory>
+
 setlocal enabledelayedexpansion
 
 set "outputFile=playlist.m3u"

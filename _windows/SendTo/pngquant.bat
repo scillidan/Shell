@@ -1,8 +1,8 @@
-rem Purpose: Optimize PNG files using pngquant.
-rem Tools: pngquant
-rem Usage: file.bat <input_png_files>
-
 @echo off
+@rem Purpose: Optimize PNG files using pngquant.
+@rem Tools: pngquant
+@rem Usage: file.bat <input_png_files>
+
 setlocal enabledelayedexpansion
 
 if "%~1"=="" (
