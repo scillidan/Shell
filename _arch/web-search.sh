@@ -56,7 +56,7 @@ URLS=(
 	["ctan.org"]="https://www.ctan.org/search?phrase="
 	["javascripting.com"]="https://www.javascripting.com/search?q="
 	["jsdelivr.com"]="https://www.jsdelivr.com/?query="
-	["typst.app"]="https://typst.app/universe/package/"
+	["typst.app"]="https://typst.app/universe/search/?q="
 	# Search
 	["google.com"]="https://www.google.com/search?q="
 	["scira.ai"]="https://scira.ai/?query="
