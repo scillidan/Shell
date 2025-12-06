@@ -2,3 +2,5 @@
 
 cd %*
 git-sync.cmd
+
+pause

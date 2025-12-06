@@ -1,0 +1,1 @@
+C:\Users\User\Usr\Shell\ltts\.venv\Scripts\ltts.exe %*

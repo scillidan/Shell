@@ -79,6 +79,7 @@ URLS=(
 	# Other
 	["flickr.com"]="https://www.flickr.com/search/?license=2%2C3%2C4%2C5%2C6%2C9&text="
 	["douban.com"]="https://www.douban.com/search?q="
+	["ScoopInstaller/Extras/pulls"]="https://github.com/ScoopInstaller/Extras/pulls?q="
 	# Cache
 	#" [site/yomitan"]="= chrome-extension://likgccmbimhjbgkjambclfkhldnlhbnn/search.html?query="
 	#" [site/linkding"]="= http://127.0.0.1:8060/bookmarks?q="

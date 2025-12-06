@@ -1,3 +1,1 @@
-@echo off
-
 %BASH% %USERPROFILE%\Usr\Shell\multi-git-status\mgitstatus
