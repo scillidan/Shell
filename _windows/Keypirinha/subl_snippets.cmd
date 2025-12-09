@@ -1,0 +1,1 @@
+subl "C:\Users\User\AppData\Roaming\Sublime Text\Packages\User\Snippets"
