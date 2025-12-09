@@ -1,7 +1,7 @@
 @echo off
 @rem Purpose: Create a Keypirinha package archive from a specified directory.
 @rem Tools: 7z
-@rem Usage: file.bat <dir>
+@rem Usage: file.bat <fullpath>
 
 setlocal
 

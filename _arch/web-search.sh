@@ -76,9 +76,10 @@ URLS=(
 	# Tool
 	["dmns.app"]="https://dmns.app/domains?q="
 	["ipaddress.com"]="https://www.ipaddress.com/website/"
+	["douban.com"]="https://www.douban.com/search?q="
+	["worldcat.org"]="https://search.worldcat.org/search?offset=1&q="
 	# Other
 	["flickr.com"]="https://www.flickr.com/search/?license=2%2C3%2C4%2C5%2C6%2C9&text="
-	["douban.com"]="https://www.douban.com/search?q="
 	["ScoopInstaller/Extras/pulls"]="https://github.com/ScoopInstaller/Extras/pulls?q="
 	# Cache
 	#" [site/yomitan"]="= chrome-extension://likgccmbimhjbgkjambclfkhldnlhbnn/search.html?query="
