@@ -1,18 +1,17 @@
 @echo off
-@rem Purpose: Create a playlist file from specified audio files and directories.
-@rem Tools: Command Prompt
-@rem Usage: file.bat <file_or_directory>
+rem Purpose: Create an M3U playlist from specified files and directories.
+rem Usage: file.bat <file_or_directory>
 
 setlocal enabledelayedexpansion
 
-set "outputFile=playlist.m3u"
+set "output_file=playlist.m3u"
 
 if "%~1"=="" (
     echo No file or directory selected.
     exit /b
 )
 
-if exist "%outputFile%" del "%outputFile%"
+if exist "%output_file%" del "%output_file%"
 
 :loop
 for %%F in (%*) do (
@@ -25,8 +24,8 @@ for %%F in (%*) do (
             )
         ) else (
             echo Processing file: %%F
-            echo #EXTM3U >> "%outputFile%"
-            echo %%~fF >> "%outputFile%"
+            echo #EXTM3U >> "%output_file%"
+            echo %%~fF >> "%output_file%"
         )
     )
 )

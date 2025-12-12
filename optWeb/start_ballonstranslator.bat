@@ -7,4 +7,3 @@ cd C:\Users\User\Usr\OptWeb\BallonsTranslator
 start .venv\Scripts\python.exe launch.py
 
 pause
-

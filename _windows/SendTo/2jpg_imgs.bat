@@ -1,7 +1,7 @@
 @echo off
-@rem Purpose: Resize images using Yoga and delete the original files after conversion.
-@rem Tools: yoga
-@rem Usage: file.bat <input_image_files>
+@rem Purpose: Convert specified image files to JPEG format and delete original files.
+@rem Tools: magick
+@rem Usage: file.bat <nojpgs>
 
 setlocal enabledelayedexpansion
 
@@ -12,9 +12,9 @@ if "%~1"=="" (
 
 for %%I in (%*) do (
     if exist "%%~I" (
-        set "outputFile=%%~dpI_yoga_%%~nI.png"
+        set "outputFile=%%~dpnI.jpg"
 
-        yoga image --resize 1920 "%%~I" "!outputFile!"
+        magick convert "%%~I" -quality 90 "!outputFile!"
 
         if exist "!outputFile!" (
             echo Converted "%%~I" to "!outputFile!"

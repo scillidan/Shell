@@ -22,6 +22,7 @@ declare -A URLS
 URLS=(
 	# Dictionary
 	["allacronyms.com"]="https://www.allacronyms.com/aa-searchme?q="
+	["bosworthtoller.com"]="https://bosworthtoller.com/search?q="
 	["emojikeyboard.io"]="https://emojikeyboard.io/search?query="
 	["etymonline.com"]="https://www.etymonline.com/search?q="
 	["skell.sketchengine.eu"]="https://skell.sketchengine.eu/#result?lang=en&f=concordance&query="

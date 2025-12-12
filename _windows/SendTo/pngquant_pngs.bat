@@ -1,7 +1,7 @@
 @echo off
-@rem Purpose: Optimize PNG files using oxipng.
-@rem Tools: oxipng
-@rem Usage: file.bat <input_png_files>
+@rem Purpose: Optimize PNG files using pngquant.
+@rem Tools: pngquant
+@rem Usage: file.bat <pngs>
 
 setlocal enabledelayedexpansion
 
@@ -12,7 +12,7 @@ if "%~1"=="" (
 
 for %%I in (%*) do (
     if exist "%%~I" (
-        oxipng -o 4 -i 1 --strip safe "%%~I"
+        pngquant --force --verbose --ordered --speed=1 --quality=85 "%%~I"
     ) else (
         echo File "%%~I" does not exist.
     )
