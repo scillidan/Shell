@@ -7,7 +7,7 @@ rem 3. Run `minieru-img "C:\path\to\image.jpg"` or `minieru-img "image1.jpg" "im
 setlocal enabledelayedexpansion
 
 set "MINERU=C:\Users\User\Usr\OptWeb\MinerU\.venv\Scripts\mineru.exe"
-set "LANGUAGE=--lang ch" rem Optional
+set "LANGUAGE="
 set "OUTPUT=%USERPROFILE%\Documents\MinerU"
 set "OPEN_OUTPUT=true"
 
@@ -25,7 +25,7 @@ if not "%~1"=="" (
     for %%F in (%*) do (
         if exist "%%F" (
             echo Processing: %%F
-            start "" "%MINERU%" %LANGUAGE% --path "%%F" --output "%OUTPUT%"
+            start /wait "" "%MINERU%" %LANGUAGE% --path "%%F" --output "%OUTPUT%"
         )
     )
 )
@@ -49,7 +49,7 @@ if defined CLIPBOARD_FILES (
     for %%F in (!CLIPBOARD_FILES!) do (
         echo Processing: %%~F
         if exist "%%~F" (
-            start "" "%MINERU%" %LANGUAGE% --path "%%~F" --output "%OUTPUT%"
+            start /wait "" "%MINERU%" %LANGUAGE% --path "%%~F" --output "%OUTPUT%"
         ) else (
             echo File not found: %%~F
         )
@@ -86,15 +86,17 @@ if "!CLIP_RESULT!"=="SAVED" (
         echo Image saved to: !TEMP_FILE!
         echo.
         echo Processing saved image...
-        start "" "%MINERU%" %LANGUAGE% --path "!TEMP_FILE!" --output "%OUTPUT%"
+        start /wait "" "%MINERU%" %LANGUAGE% --path "!TEMP_FILE!" --output "%OUTPUT%"
     )
 )
 
+:CLEAN_UP
 rem Clean up temp files after processing
 echo Cleaning up temporary files...
 if exist "%TEMP%\clip_result.txt" del "%TEMP%\clip_result.txt"
 if exist "!TEMP_FILE!" del "!TEMP_FILE!"
 
+:OPEN_OUTPUT
 rem Open output path only once at the end
 if "%OPEN_OUTPUT%"=="true" (
     echo Open the output folder
