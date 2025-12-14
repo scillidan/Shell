@@ -1,4 +1,5 @@
 @echo off
+rem Write by GPT-4o mini🧙‍♂️, scillidan🤡
 rem https://opendatalab.github.io/MinerU/usage/cli_tools/
 rem 1. Select image files in File Explorer, drag them onto this batch file
 rem 2. Put script into C:\Users\User\AppData\Roaming\Microsoft\Windows\SendTo. Select image files the goto Context Menu > SendTo > minieru-img.bat
@@ -7,9 +8,9 @@ rem 3. Run `minieru-img "C:\path\to\image.jpg"` or `minieru-img "image1.jpg" "im
 setlocal enabledelayedexpansion
 
 set "MINERU=C:\Users\User\Usr\OptWeb\MinerU\.venv\Scripts\mineru.exe"
-set "LANGUAGE="
 set "OUTPUT=%USERPROFILE%\Documents\MinerU"
 set "OPEN_OUTPUT=true"
+set "FLAG="
 
 if not exist "%OUTPUT%" mkdir "%OUTPUT%"
 
@@ -18,17 +19,26 @@ echo MinerU Processor
 echo ================================================
 echo.
 
+rem Flag to indicate files were provided on the command line / drag-drop
+set "FILES_PROVIDED=0"
+
 rem Method 1: Check for dragged files
 if not "%~1"=="" (
+    set "FILES_PROVIDED=1"
     echo Processing dragged files...
     echo.
     for %%F in (%*) do (
         if exist "%%F" (
             echo Processing: %%F
-            start /wait "" "%MINERU%" %LANGUAGE% --path "%%F" --output "%OUTPUT%"
+            start /wait "" "%MINERU%" %FLAG% --path "%%F" --output "%OUTPUT%"
+        ) else (
+            echo File not found: %%F
         )
     )
 )
+
+rem If files were provided, skip clipboard processing
+if "%FILES_PROVIDED%"=="1" goto SKIP_CLIPBOARD
 
 rem Method 2: Check clipboard for files
 echo Checking clipboard for file paths...
@@ -49,7 +59,7 @@ if defined CLIPBOARD_FILES (
     for %%F in (!CLIPBOARD_FILES!) do (
         echo Processing: %%~F
         if exist "%%~F" (
-            start /wait "" "%MINERU%" %LANGUAGE% --path "%%~F" --output "%OUTPUT%"
+            start /wait "" "%MINERU%" %FLAG% --path "%%~F" --output "%OUTPUT%"
         ) else (
             echo File not found: %%~F
         )
@@ -86,12 +96,12 @@ if "!CLIP_RESULT!"=="SAVED" (
         echo Image saved to: !TEMP_FILE!
         echo.
         echo Processing saved image...
-        start /wait "" "%MINERU%" %LANGUAGE% --path "!TEMP_FILE!" --output "%OUTPUT%"
+        start /wait "" "%MINERU%" %FLAG% --path "!TEMP_FILE!" --output "%OUTPUT%"
     )
 )
 
-:CLEAN_UP
-rem Clean up temp files after processing
+:SKIP_CLIPBOARD
+rem Clean up temp files after processing (if any)
 echo Cleaning up temporary files...
 if exist "%TEMP%\clip_result.txt" del "%TEMP%\clip_result.txt"
 if exist "!TEMP_FILE!" del "!TEMP_FILE!"

@@ -4,13 +4,10 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CenterTaskbar.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\DeskPins.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Ditto.lnk",
-    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\dnGREP.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\EarTrumpet.lnk",
-    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Gitify.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\GoldenDict.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keypirinha.lnk",
-    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Lintalist.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RBTray.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RectangleWin.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Reduce Memory.lnk",
@@ -18,15 +15,19 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\T-Clock.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Zeal.lnk"
-    # "$env:USERPROFILE\Desktop\Anki.lnk"
-    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk",
-    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Magpie.lnk",
+    # Set startup in Opt
+    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk"
+    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk"
+    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Magpie.lnk"
 )
 
 $optPath = @(
-    "$env:USERPROFILE\Scoop\shims\resizer2.exe",
-    "$env:USERPROFILE\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat"
-    # "$env:ProgramFiles\Clash Verge\clash-verge.exe",
+    "$env:USER\Scoop\shims\resizer2.exe",
+    "$env:USER\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat",
+    "$env:USER\Usr\Opt\dnGREP\dnGREP.exe",
+    "$env:USER\Usr\Opt\Espanso\espansod.exe start"
+    # Set startup in Opt
+    # "$env:ProgramFiles\Clash Verge\clash-verge.exe"
 )
 
 Remove-Item "$startupDir\*.lnk" -Force

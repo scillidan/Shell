@@ -20,6 +20,10 @@
 declare -A URLS
 
 URLS=(
+	# Book
+	["annas-archive.org"]="https://annas-archive.org/search?index=&page=1&sort=&display=&q="
+	["douban.com"]="https://www.douban.com/search?q="
+	["worldcat.org"]="https://search.worldcat.org/search?offset=1&q="
 	# Dictionary
 	["allacronyms.com"]="https://www.allacronyms.com/aa-searchme?q="
 	["bosworthtoller.com"]="https://bosworthtoller.com/search?q="
@@ -77,8 +81,6 @@ URLS=(
 	# Tool
 	["dmns.app"]="https://dmns.app/domains?q="
 	["ipaddress.com"]="https://www.ipaddress.com/website/"
-	["douban.com"]="https://www.douban.com/search?q="
-	["worldcat.org"]="https://search.worldcat.org/search?offset=1&q="
 	# Other
 	["flickr.com"]="https://www.flickr.com/search/?license=2%2C3%2C4%2C5%2C6%2C9&text="
 	["ScoopInstaller/Extras/pulls"]="https://github.com/ScoopInstaller/Extras/pulls?q="
