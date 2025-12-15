@@ -1,4 +1,5 @@
 @echo off
+rem https://github.com/shilangyu/scoop-search
 
 if "%1" == "search" (
     call :search_subroutine %*

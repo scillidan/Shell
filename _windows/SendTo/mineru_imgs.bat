@@ -9,9 +9,10 @@ rem PS: Only tested part of the input file format.
 setlocal enabledelayedexpansion
 
 set "MINERU=C:\Users\User\Usr\OptWeb\MinerU\.venv\Scripts\mineru.exe"
-set "OUTPUT=%USERPROFILE%\Documents\MinerU"
+set "FLAG=--backend vlm-transformers"
 set "OPEN_OUTPUT=true"
-set "FLAG="
+rem Custom user environment variables here
+set "OUTPUT=%USER%\Documents\MinerU"
 
 if not exist "%OUTPUT%" mkdir "%OUTPUT%"
 

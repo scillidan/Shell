@@ -1,1 +1,1 @@
-%BASH% %USERPROFILE%\Usr\Shell\ugit\ugit %*
+bash %USER%\Usr\Shell\ugit\ugit %*

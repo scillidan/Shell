@@ -2,10 +2,11 @@
 
 setlocal
 
-set "MPV_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\mpv"
-set "MPVC_VIDEO=%USERPROFILE%\Usr\Data\mpvc_video"
-set "MPVC_MUSIC=%USERPROFILE%\Usr\Data\mpvc_music"
-set "MPVC_MANGA=%USERPROFILE%\Usr\Data\mpvc_manga"
+rem Custom user environment variables here
+set "MPV_CONF=%USER%\Usr\Git\dotfiles\.config\mpv"
+set "MPVC_VIDEO=%USER%\Usr\Data\mpvc_video"
+set "MPVC_MUSIC=%USER%\Usr\Data\mpvc_music"
+set "MPVC_MANGA=%USER%\Usr\Data\mpvc_manga"
 
 set "config=%1"
 

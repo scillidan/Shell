@@ -4,7 +4,9 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CenterTaskbar.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\DeskPins.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Ditto.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\dnGREP.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\EarTrumpet.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk"
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Gitify.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\GoldenDict.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keypirinha.lnk",
@@ -16,18 +18,15 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Zeal.lnk"
     # Set startup in Opt
-    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Magpie.lnk"
 )
 
 $optPath = @(
-    "$env:USER\Scoop\shims\resizer2.exe",
-    "$env:USER\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat",
-    "$env:USER\Usr\Opt\dnGREP\dnGREP.exe",
-    "$env:USER\Usr\Opt\Espanso\espansod.exe start"
+    @{ Path = "$env:USER\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat"; Arguments = ""; WorkingDir = "" },
     # Set startup in Opt
-    # "$env:ProgramFiles\Clash Verge\clash-verge.exe"
+    # @{ Path = "$env:ProgramFiles\Clash Verge\clash-verge.exe"; Arguments = ""; WorkingDir = "" }
 )
 
 Remove-Item "$startupDir\*.lnk" -Force
@@ -37,11 +36,22 @@ foreach ($app in $lnkPath) {
 }
 
 foreach ($exe in $optPath) {
-    $exeName = [System.IO.Path]::GetFileNameWithoutExtension($exe)
+    $exePath = $exe.Path
+    $exeArgs = $exe.Arguments
+    $exeName = [System.IO.Path]::GetFileNameWithoutExtension($exePath)
     $shortcutPath = Join-Path -Path $startupDir -ChildPath "$exeName.lnk"
     $shell = New-Object -ComObject WScript.Shell
     $shortcut = $shell.CreateShortcut($shortcutPath)
-    $shortcut.TargetPath = $exe
+    $shortcut.TargetPath = $exePath
+
+    if ($exeArgs -ne "") {
+        $shortcut.Arguments = $exeArgs
+    }
+
+    if ($exe.WorkingDir -ne "") {
+        $shortcut.WorkingDirectory = $exe.WorkingDir
+    }
+
     $shortcut.Save()
 }
 

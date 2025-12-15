@@ -8,9 +8,9 @@ rem PS: Only tested part of the input file format.
 setlocal enabledelayedexpansion
 
 rem === find 7z executable ===
-set "SEVEN="
+set "DC="
 for %%Z in (7z.exe 7za.exe 7zr.exe) do (
-  where %%Z >nul 2>&1 && set "SEVEN=%%Z" && goto :found7z
+  where %%Z >nul 2>&1 && set "DC=%%Z" && goto :found7z
 )
 echo ERROR: 7z not found in PATH. Please install 7-Zip or put 7z.exe in PATH.
 goto :EOF
@@ -88,7 +88,7 @@ set "TMP=%TEMP%\7zxt_%RANDOM%_%RANDOM%"
 md "%TMP%" >nul 2>&1
 
 rem list entries with details
-"%SEVEN%" l -ba -slt "%ARCH%" > "%TMP%\_list.txt" 2>nul
+"%DC%" l -ba -slt "%ARCH%" > "%TMP%\_list.txt" 2>nul
 if errorlevel 1 (
   echo ERROR: failed to list archive "%ARCH%".
   rd /s /q "%TMP%" >nul 2>&1
@@ -122,7 +122,7 @@ rem extract
 if !STRIP! EQU 1 (
   echo Archive appears to have single top-level folder: "!ROOT!"
   echo Extracting to temporary folder...
-  "%SEVEN%" x -y -o"%TMP%" "%ARCH%"
+  "%DC%" x -y -o"%TMP%" "%ARCH%"
   if errorlevel 1 (
     echo ERROR: extraction failed for "%ARCH%"
     rd /s /q "%TMP%" >nul 2>&1
@@ -141,7 +141,7 @@ if !STRIP! EQU 1 (
   rd /s /q "%TMP%" >nul 2>&1
 ) else (
   echo Extracting directly to "%DEST%" ...
-  "%SEVEN%" x -y -o"%DEST%" "%ARCH%"
+  "%DC%" x -y -o"%DEST%" "%ARCH%"
   if errorlevel 1 (
     echo ERROR: extraction failed for "%ARCH%"
     rd /s /q "%TMP%" >nul 2>&1

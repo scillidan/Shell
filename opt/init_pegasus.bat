@@ -2,11 +2,12 @@
 
 setlocal
 
-set "PEGASUS_HOME=%SCOOP_HOME%\apps\pegasus\current"
-set "RETROARCH_HOME=%SCOOP_HOME%\apps\retroarch\current"
-set "PEGASUS_CONF=%USERPROFILE%\Usr\File\file_pegasus-frontend"
-set "PEGASUS_SRC=%USERPROFILE%\Usr\Source\pegasus"
-set "PEGASUS_DL=%USERPROFILE%\Usr\Download\pegasus"
+set "PEGASUS_HOME=%SCOOP%\apps\pegasus\current"
+set "RETROARCH_HOME=%SCOOP%\apps\retroarch\current"
+rem Custom user environment variables here
+set "PEGASUS_CONF=%USER%\Usr\File\file_pegasus-frontend"
+set "PEGASUS_SRC=%USER%\Usr\Source\pegasus"
+set "PEGASUS_DL=%USER%\Usr\Download\pegasus"
 
 rmdir /S /Q "%PEGASUS_HOME%\RetroArch"
 mklink /J "%PEGASUS_HOME%\RetroArch" "%RETROARCH_HOME%"

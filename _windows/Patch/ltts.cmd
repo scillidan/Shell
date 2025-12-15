@@ -1,1 +1,1 @@
-C:\Users\User\Usr\Shell\ltts\.venv\Scripts\ltts.exe %*
+%USER%\Usr\Shell\ltts\.venv\Scripts\ltts.exe %*

@@ -2,9 +2,11 @@
 
 setlocal
 
-set "RIME_SHARE=%APPDATA%\rime"
+rem Custom user environment variables here
+rem set "RIME_SHARE=%APPDATA%\rime"
+set "RIME_SHARE=%USER%\Usr\Data\rime"
 set "RIME_DOTDIR=%DOTFILES_DIR%\.config\_rime\rime-ice"
-set "RIME_SRC=%USERPROFILE%\Usr\Source\rime"
+set "RIME_SRC=%USER%\Usr\Source\rime"
 
 set PERSONAL_FILE=default.custom.yaml user.yaml weasel.custom.yaml symbols.yaml
 

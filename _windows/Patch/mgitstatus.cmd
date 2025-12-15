@@ -1,1 +1,1 @@
-%BASH% %USERPROFILE%\Usr\Shell\multi-git-status\mgitstatus
+bash %USER%\Usr\Shell\multi-git-status\mgitstatus

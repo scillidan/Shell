@@ -4,9 +4,10 @@ setlocal
 
 set "GOLDENDICT_DATA=%SCOOP%\apps\goldendict\current\portable"
 set "GOLDENDICT_HOME=%SCOOP%\apps\goldendict\current"
-set "GOLDENDICT_CONF=%USERPROFILE%\Usr\Git\dotfiles\.config\_goldendict"
-set "GOLDENDICT_SRC=%USERPROFILE%\Usr\Source\goldendict"
-set "GOLDENDICT_DL=%USERPROFILE%\Usr\Download\goldendict"
+rem Custom user environment variables here
+set "GOLDENDICT_CONF=%USER%\Usr\Git\dotfiles\.config\_goldendict"
+set "GOLDENDICT_SRC=%USER%\Usr\Source\goldendict"
+set "GOLDENDICT_DL=%USER%\Usr\Download\goldendict"
 
 rmdir /S /Q "%GOLDENDICT_HOME%\extras"
 rmdir /S /Q "%GOLDENDICT_HOME%\icons"
@@ -18,8 +19,6 @@ mklink /J "%GOLDENDICT_DATA%\fonts" "%GOLDENDICT_SRC%\GoldenDict-Full-Dark-Theme
 mkdir "%GOLDENDICT_DATA%\styles\Dark"
 type "%GOLDENDICT_SRC%\GoldenDict-Full-Dark-Theme\GoldenDict\styles\Dark\article-style.css" "%GOLDENDICT_CONF%\article-style_user.css" > "%GOLDENDICT_DATA%\styles\Dark\article-style.css"
 mklink "%GOLDENDICT_DATA%\styles\Dark\qt-style.css" "%GOLDENDICT_SRC%\GoldenDict-Full-Dark-Theme\GoldenDict\styles\Dark\qt-style.css"
-copy "%GOLDENDICT_CONF%\config" "%GOLDENDICT_CONF%\config.linkfile"
-mklink "%GOLDENDICT_DATA%\config" "%GOLDENDICT_CONF%\config.linkfile"
 
 rmdir /S /Q "%GOLDENDICT_HOME%\content"
 mkdir "%GOLDENDICT_HOME%\content"
@@ -29,7 +28,6 @@ mklink /J "%GOLDENDICT_HOME%\content\stardict" "%GOLDENDICT_DL%\stardict"
 mkdir "%GOLDENDICT_HOME%\content\sound-dirs"
 mklink /J "%GOLDENDICT_HOME%\content\sound-dirs\Forvo_pron" "%GOLDENDICT_DL%\sound-dirs\Forvo_pron"
 mklink "%GOLDENDICT_HOME%\content\sound-dirs\pronunciations-en.zips" "%GOLDENDICT_DL%\sound-dirs\pronunciations-en.zips"
-mklink "%GOLDENDICT_HOME%\content\sound-dirs\kokoro-tts_etymonline.zips" "%GOLDENDICT_DL%\sound-dirs\kokoro-tts_etymonline.zips"
 
 set "FORVO_PRON=%GOLDENDICT_DL%\sound-dirs\Forvo_pron"
 set "FORVO_OPUS=%GOLDENDICT_DL%\sound-dirs\Forvo_pronunciations\export\opus"

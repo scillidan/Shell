@@ -1,0 +1,1 @@
+%SCOOP%\shims\curl.exe

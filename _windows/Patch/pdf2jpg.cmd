@@ -1,1 +1,1 @@
-%BASH% C:\Users\User\Usr\Git\Shell\_arch\pdf2jpg.sh $*
+bash %USER%\Usr\Git\Shell\_arch\pdf2jpg.sh $*

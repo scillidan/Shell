@@ -1,1 +1,1 @@
-espeak-ng --path "C:\Users\User\Scoop\apps\espeak-ng\current\eSpeak NG\espeak-ng-data" %*
+espeak-ng --path $SCOOP$\apps\espeak-ng\current\eSpeak NG\espeak-ng-data %*

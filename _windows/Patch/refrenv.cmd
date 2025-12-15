@@ -1,1 +1,0 @@
-%USERPROFILE%\Usr\Shell\RefrEnv\refrenv.bat

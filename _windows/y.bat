@@ -1,4 +1,5 @@
 @echo off
+rem Write by GPT-4o mini🧙‍♂️, scillidan🤡
 
 rem Create a temporary file to store the current working directory
 set "tmpfile=%TEMP%\yazi-cwd.tmp"

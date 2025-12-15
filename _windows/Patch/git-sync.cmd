@@ -1,1 +1,1 @@
-%BASH% %USERPROFILE%\Usr\Shell\git-sync\git-sync %*
+bash %USER%\Usr\Shell\git-sync\git-sync %*
