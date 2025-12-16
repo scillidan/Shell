@@ -1,1 +1,1 @@
-%SCOOP%\shims\bash.exe
+%SCOOP%\shims\bash.exe %*

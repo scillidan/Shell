@@ -1,1 +1,1 @@
-%SCOOP%\shims\curl.exe
+%SCOOP%\shims\curl.exe %*
