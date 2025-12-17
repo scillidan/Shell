@@ -7,7 +7,6 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\dnGREP.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\EarTrumpet.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk"
-    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Gitify.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\GoldenDict.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keypirinha.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RBTray.lnk",
@@ -24,7 +23,7 @@ $lnkPath = @(
 
 $optPath = @(
     @{ Path = "$env:USER\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
-    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat"; Arguments = ""; WorkingDir = "" }
     # Set startup in Opt
     # @{ Path = "$env:ProgramFiles\Clash Verge\clash-verge.exe"; Arguments = ""; WorkingDir = "" }
 )
