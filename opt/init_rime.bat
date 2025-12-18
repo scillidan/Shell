@@ -1,4 +1,10 @@
 @echo off
+rem Setup dotfiles from https://github.com/scillidan/dotfiles/tree/main/.config/_rime
+rem 1. mkdir "%USER%\Usr\Source\rime"
+rem 2. git clone --depth=1 https://github.com/iDvel/rime-ice %USERPROFILE%\Usr\Source\rime\rime-ice
+rem Update
+rem 1. cd %USERPROFILE%\Usr\Source\rime\rime-ice
+rem 2. git pull
 
 setlocal
 

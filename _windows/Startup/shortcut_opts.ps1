@@ -23,7 +23,7 @@ $lnkPath = @(
 
 $optPath = @(
     @{ Path = "$env:USER\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
-    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\init_autohotkey.bat"; Arguments = ""; WorkingDir = "" }
+    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\mprocs_autohotkey.bat"; Arguments = ""; WorkingDir = "" }
     # Set startup in Opt
     # @{ Path = "$env:ProgramFiles\Clash Verge\clash-verge.exe"; Arguments = ""; WorkingDir = "" }
 )

@@ -1,4 +1,8 @@
 #!/bin/bash
+# 1. Clone and download all plugins written by comments.
+# 2. Run this script to setup plugins and dotfiles (from https://github.com/scillidan/dotfiles/tree/main/.config/_mpv).
+# 3. Add https://github.com/scillidan/Shell/blob/main/_arch/mpvc.sh into PATH.
+# 4. Usage as `mpvc video $*`
 
 # Set configurations
 MPV_DOTDIR="$HOME/.config/mpv"

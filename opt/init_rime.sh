@@ -1,4 +1,11 @@
 #!/bin/bash
+# Setup dotfiles from https://github.com/scillidan/dotfiles/tree/main/.config/_rime
+# 1. mkdir -p ~/.local/share/fcitx5/rime
+# 2. mkdir -p ~/Usr/Source/rime
+# 3. git clone --depth=1 https://github.com/iDvel/rime-ice ~/Usr/Source/rime/rime-ice
+# Update
+# 1. cd %USERPROFILE%\Usr\Source\rime\rime-ice
+# 2. git pull
 
 RIME_SHARE="$HOME/.local/share/fcitx5/rime"
 RIME_CONF="$HOME/.config/_rime/rime-ice"
