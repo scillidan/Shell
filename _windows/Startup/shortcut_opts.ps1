@@ -1,5 +1,6 @@
 $startupDir = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
 $lnkPath = @(
+    # Opt that will do makelink for it .lnk on Startup\
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Ollama.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CenterTaskbar.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\DeskPins.lnk",
@@ -16,15 +17,20 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\T-Clock.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Zeal.lnk"
-    # Set startup in Opt
+    # Opt that set it run at startup
+    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\AltBacktick.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Magpie.lnk"
+    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\qBittorrent Enhanced Edition.lnk"
+    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk"
 )
 
-$optPath = @(
+$binPath = @(
+    # Opt that will do makelink for it .lnk on Startup\
     @{ Path = "$env:USER\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
-    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\mprocs_autohotkey.bat"; Arguments = ""; WorkingDir = "" }
-    # Set startup in Opt
+    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\mprocs_autohotkey.cmd"; Arguments = ""; WorkingDir = "" }
+    # Opt that set it run at startup
+    # @{ Path = "$env:LOCALAPPDATA\Microsoft\WindowsApps\Snipaste.exe"; Arguments = ""; WorkingDir = "" }
     # @{ Path = "$env:ProgramFiles\Clash Verge\clash-verge.exe"; Arguments = ""; WorkingDir = "" }
 )
 
@@ -34,7 +40,7 @@ foreach ($app in $lnkPath) {
     Copy-Item -Path $app -Destination $startupDir -Force
 }
 
-foreach ($exe in $optPath) {
+foreach ($exe in $binPath) {
     $exePath = $exe.Path
     $exeArgs = $exe.Arguments
     $exeName = [System.IO.Path]::GetFileNameWithoutExtension($exePath)

@@ -25,8 +25,10 @@ if "%config%"=="video" (
 )
 
 :mpvc
-mpv.exe --config-dir="%CONFIG_DIR%" --force-window --keep-open=yes %2
+start "" mpv.exe --config-dir="%CONFIG_DIR%" --force-window --keep-open=yes %2
 goto :end
 
 :end
 endlocal
+
+exit /b
