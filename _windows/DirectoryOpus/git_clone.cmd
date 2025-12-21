@@ -8,7 +8,7 @@ setlocal EnableDelayedExpansion
 for /f "usebackq delims=" %%G in (`powershell -command "Get-Clipboard"`) do set "url=%%G"
 
 cd %* || exit /b
-C:\Users\User\Scoop\shims\git.exe clone --depth=1 %url%
+git clone --depth=1 %url%
 
 if %errorlevel% equ 0 (
     echo Clone successful!
