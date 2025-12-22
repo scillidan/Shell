@@ -1,6 +1,4 @@
 @echo off
-rem Custom user environment variables here.
-rem And %SCOOP%\apps\autohotkey1.1\current\autohotkeyu64.exe.
 
 mprocs ^
 	"autohotkeyu64 %DOTFILES_DIR%\.config\_windows_autohotkey\User.ahk" ^

@@ -1,6 +1,6 @@
 #!/bin/bash
-# https://gist.github.com/Amooti73/9dac66ffee26f93baf211ab8c05949cd
-# Dependencies: tesseract-ocr imagemagick scrot xsel rofi
+# Source: https://gist.github.com/Amooti73/9dac66ffee26f93baf211ab8c05949cd
+# Dependences: tesseract-ocr, imagemagick, scrot, xsel, rofi
 
 set -e
 

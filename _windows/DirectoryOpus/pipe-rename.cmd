@@ -1,7 +1,7 @@
 @echo off
-@rem Purpose: Rename files in a specified directory using gsudo with nvim as the editor.
-@rem Tools: gsudo, pipe-rename
-@rem Usage: file.bat <directory>
+REM Rename files in a specified directory using gsudo with nvim as the editor.
+REM Dependence: gsudo, pipe-rename
+REM Usage: script.cmd <directory>
 
 cd %*
 gsudo renamer --editor "nvim" *

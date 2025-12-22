@@ -1,71 +1,103 @@
 #!/usr/bin/env bash
 # Write by GPT-4o mini🧙‍♂️, scillidan🤡
-# Depend on https://github.com/scillidan/Keypirinha-PuzzTools/blob/main/transforms.py
+# Base on https://github.com/scillidan/Keypirinha-PuzzTools/blob/main/transforms.py
 
-for cmd in rofi xclip python3 notify-send; do
-	if ! command -v "$cmd" >/dev/null 2>&1; then
-		echo "Error: $cmd is not installed." >&2
-		exit 1
-	fi
+# Exit on error, undefined variables, and pipe failures
+set -euo pipefail
+
+# List of required commands
+dependencies=(rofi xclip python3 notify-send)
+missing_deps=()
+
+# Check for all required dependencies
+for cmd in "${dependencies[@]}"; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        missing_deps+=("$cmd")
+    fi
 done
 
-input=$(xclip -selection clipboard -o 2>/dev/null)
-if [[ -z "$input" ]]; then
-	notify-send -u critical "Convert Error" "Clipboard is empty."
-	exit 1
+# Notify user if any dependencies are missing
+if [[ ${#missing_deps[@]} -gt 0 ]]; then
+    notify-send -u critical "Missing Dependencies" \
+        "Please install: ${missing_deps[*]}"
+    exit 1
 fi
 
+# Determine clipboard source (default clipboard, or primary with -p flag)
+selection="clipboard"
+if [[ $# -gt 0 ]]; then
+    case $1 in
+        -p|--primary) selection="primary" ;;
+        *) selection="clipboard" ;;
+    esac
+fi
+
+# Get input from clipboard
+input=$(xclip -selection "$selection" -o 2>/dev/null || true)
+if [[ -z "$input" ]]; then
+    notify-send -u critical "Convert Error" "Clipboard is empty."
+    exit 1
+fi
+
+# Available transformation options
 options=(
-	"case.lowercase"
-	"case.uppercase"
-	"case.titlecase"
-	"case.kebabcase"
-	"case.snakecase"
-	"case.camelcase"
-	"case.pascalcase"
-	"case.nocase"
-	"format kebab"
-	"nutrimatic.from ANSWERIZE"
-	"nutrimatic.add A* between"
-	"nutrimatic.add ?"
-	"nutrimatic.from enumeration"
-	"sort.alphabetical"
-	"sort.by length"
-	"sort.reverse"
-	"tool.2github commits atom"
-	"tool.2github releases atom"
-	"tool.2github raw url"
-	"tool.2ghcli url"
-	"tool.2unix url"
-	"tool.22unix url"
-	"tool.2windows url"
-	"tool.2windows url2"
-	"tool.lobechat assistants"
-	"tool.linebreak 2comma"
-	"tool.markdown link"
-	"alphabet"
-	"answerize"
-	"length"
-	"reverse"
-	"rotate"
-	"transpose"
-	"unique"
+    "case.lowercase"
+    "case.uppercase"
+    "case.titlecase"
+    "case.kebabcase"
+    "case.snakecase"
+    "case.camelcase"
+    "case.pascalcase"
+    "case.nocase"
+    "format kebab"
+    "nutrimatic.from ANSWERIZE"
+    "nutrimatic.add A* between"
+    "nutrimatic.add ?"
+    "nutrimatic.from enumeration"
+    "sort.alphabetical"
+    "sort.by length"
+    "sort.reverse"
+    "tool.2github commits atom"
+    "tool.2github releases atom"
+    "tool.2github raw url"
+    "tool.2ghcli url"
+    "tool.2unix url"
+    "tool.22unix url"
+    "tool.2windows url"
+    "tool.2windows url2"
+    "tool.lobechat assistants"
+    "tool.linebreak 2comma"
+    "tool.markdown link"
+    "alphabet"
+    "answerize"
+    "length"
+    "reverse"
+    "rotate"
+    "transpose"
+    "unique"
 )
 
+# Display selection menu using rofi
 choice=$(printf '%s\n' "${options[@]}" | rofi -dmenu -p "Select transform:")
-
 if [[ -z "$choice" ]]; then
-	notify-send "Conversion Cancelled" "No transform selected"
-	exit 0
+    notify-send "Conversion Cancelled" "No transform selected"
+    exit 0
 fi
 
-# Call python with input and choice
+# Transform data using Python
+# WARNING: The current approach has a security vulnerability
+# The variables $input and $choice are not properly escaped
+# This could lead to code injection if they contain single quotes
 result=$(python3 -c "
 import re
 import sys
 
+# UNSAFE: Variables inserted directly into Python code
+# If $input or $choice contains single quotes, it breaks the script
+# Example dangerous input: input=\"' + __import__('os').system('rm -rf /') + '\"
 data = '''$input'''
 
+# Transformation functions dictionary
 _CASES = {
     'lowercase': str.lower,
     'uppercase': str.upper,
@@ -77,6 +109,7 @@ _CASES = {
     'nocase': str,
 }
 
+# Create grid transformation (for rotate/transpose)
 def make_grid_transform(grid_transform):
     def transform(d):
         has_tab = '\\t' in d
@@ -86,6 +119,7 @@ def make_grid_transform(grid_transform):
         return new_line.join(('\\t' if has_tab else '').join(line) for line in new_grid)
     return transform
 
+# Nutrimatic transformations
 _NUTRIMATICS = {
     'from ANSWERIZE': lambda x: x.lower().replace('?', 'A'),
     'add A* between': lambda x: 'A*' + 'A*'.join(x) + 'A*',
@@ -93,12 +127,14 @@ _NUTRIMATICS = {
     'from enumeration': lambda x: ' '.join(f'A{{{n}}}' for n in re.findall(r'\\d+', x)),
 }
 
+# Sorting transformations
 _SORTS = {
     'alphabetical': lambda x: '\\n'.join(sorted(x.split('\\n'))),
     'by length': lambda x: '\\n'.join(sorted(x.split('\\n'), key=len)),
     'reverse': lambda x: '\\n'.join(reversed(x.split('\\n'))),
 }
 
+# Tool transformations
 _TOOLS = {
     '2github commits atom': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\\1/\\2/commits.atom', x),
     '2github releases atom': lambda x: re.sub(r'https://github.com/([^/]+)/([^/]+)(?:/.*)?', r'https://github.com/\\1/\\2/releases.atom', x),
@@ -113,12 +149,14 @@ _TOOLS = {
     'markdown link': lambda x: '[{}]({})'.format(*[line.strip() for line in x.splitlines()]),
 }
 
+# Kebab format function
 def format_kebab(x):
     s = re.sub(r'[^A-Za-z0-9]+', '-', x)
     s = re.sub(r'-+', '-', s)
     s = s.strip('-')
     return s
 
+# Main transforms dictionary
 TRANSFORMS = {
     'case': _CASES,
     'nutrimatic': _NUTRIMATICS,
@@ -134,6 +172,7 @@ TRANSFORMS = {
     'unique': lambda x: ''.join(sorted(set(x))),
 }
 
+# Get the selected transformation
 choice = '$choice'
 
 def get_transform(choice):
@@ -175,7 +214,7 @@ try:
     if category in line_by_line_categories:
         lines = data.splitlines()
         transformed_lines = [f(line) for line in lines]
-        out = '\n'.join(transformed_lines)
+        out = '\\n'.join(transformed_lines)
     else:
         # For other transforms like sort, length, rotate, transpose, apply on whole text
         out = f(data)
@@ -191,13 +230,14 @@ except Exception as e:
 print(out)
 ")
 
+# Check if transformation succeeded
 if [[ $? -ne 0 || -z "$result" ]]; then
-	notify-send -u critical "Transform Error" "Failed to apply transform."
-	exit 1
+    notify-send -u critical "Transform Error" "Failed to apply transform."
+    exit 1
 fi
 
 # Copy result to clipboard
-echo -n "$result" | xclip -selection clipboard
+echo -n "$result" | xclip -selection "$selection"
 
 # Notify user
 notify-send "Transform applied" "$result"

@@ -1,6 +1,6 @@
 @echo off
 
 cd %*
-git-sync.cmd
+git-sync
 
 pause

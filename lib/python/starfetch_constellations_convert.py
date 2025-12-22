@@ -1,13 +1,14 @@
-# Converts constellations from the format in Haruno19/starfetch to the format used in this Rust rewrite of the program.
 # Modify from https://github.com/CoderCharmander/starfetch/blob/master/convert.py by GPT-3.5🧙
-# Run `python convert.py file.json` to convert `file.json` to `cvt_file.json`.
-# Then run `prettier --write --paser json cvt_file.json` to format it.
+# Converts constellations from the format in Haruno19/starfetch to the format used in this Rust rewrite of the program.
+# Usage:
+# 1. python convert.py file.json
+# 2. prettier --write --paser json _cvt_file.json
 
 import sys
 import json
 
 input_file = sys.argv[1]
-output_file = "cvt_" + input_file
+output_file = "_cvt_" + input_file
 
 with open(input_file, 'r', encoding='utf-8') as f:
     orig_json = json.load(f)

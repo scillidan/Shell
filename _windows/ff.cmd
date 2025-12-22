@@ -1,11 +1,10 @@
 @echo off
-rem Reference:
-rem - https://github.com/chrisant996/clink-gizmos/issues/19
-rem - https://thevaluable.dev/practical-guide-fzf-example
-rem PS: everything-cli (es) is optional. Similar to its, I kept some comments as notes.
-rem Purpose: Interactive file and directory finder using fzf with preview and key bindings.
-rem Tools: rg, fd, bat, fzf, eza, nvim
-rem Usage: file.bat
+REM Interactive file and directory finder using fzf with preview and key bindings.
+REM Dependences: rg, fd, bat, fzf, eza, nvim.
+REM PS: everything-cli (es) is optional. Similar to its, I kept some comments as notes.
+REM Reference:
+REM - https://github.com/chrisant996/clink-gizmos/issues/19
+REM - https://thevaluable.dev/practical-guide-fzf-example
 
 setlocal
 

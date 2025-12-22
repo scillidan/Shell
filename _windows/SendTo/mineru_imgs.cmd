@@ -1,10 +1,12 @@
 @echo off
-rem Write by GPT-4o mini🧙‍♂️, scillidan🤡
-rem https://opendatalab.github.io/MinerU/usage/cli_tools/
-rem 1. Select image files in File Explorer, drag them onto this batch file.
-rem 2. Put script into C:\Users\User\AppData\Roaming\Microsoft\Windows\SendTo. Select image files the goto Context Menu > SendTo > minieru_imgs.bat.
-rem 3. Run `minieru_imgs "C:\path\to\image.jpg"` or `minieru_imgs "image1.jpg" "image2.png"`.
-rem PS: Only tested part of the input file format.
+REM Write by GPT-4o mini🧙‍♂️, scillidan🤡
+REM Usage:
+REM 1.1 Copy/makelink script into C:\Users\User\AppData\Roaming\Microsoft\Windows\SendTo
+REM 1.2 Select files > Context Menu > SendTo > script.bat
+REM 2. Drag and drop files onto this script
+REM 3. script.cmd <img1> <img2> ...
+REM Reference:
+REM - https://opendatalab.github.io/MinerU/usage/cli_tools/
 
 setlocal enabledelayedexpansion
 

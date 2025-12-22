@@ -1,8 +1,8 @@
 #!/bin/bash
 # Write by GPT-4o mini🧙‍♂️, scillidan🤡
-# Purpose: Select and kill processes using a graphical interface.
-# Tools: ps, sed, rofi, awk, kill
-# Usage: script.sh
+# Select and kill processes using a graphical interface.
+# Dependences: ps, sed, rofi, awk, kill
+# Usage: ./script.sh
 
 # List all processes except header line
 lines=$(ps -ef | sed 1d)

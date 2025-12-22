@@ -13,7 +13,7 @@ magick montage %* ^
     -tile x1 ^
     -geometry +1+1 ^
     -background #000 ^
-    "%output_montage%" 
+    "%output_montage%"
 
 magick convert "%output_montage%" ^
     -border 1 ^

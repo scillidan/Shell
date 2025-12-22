@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Set variables
 MPVC_VIDEO="$HOME/Usr/Data/mpvc_video"
 MPVC_MUSIC="$HOME/Usr/Data/mpvc_music"
 MPVC_MANGA="$HOME/Usr/Data/mpvc_manga"

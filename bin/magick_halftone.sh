@@ -1,6 +1,5 @@
-# https://brontosaurusrex.github.io/2019/08/12/Halftone,-Imagemagick
-
 #!/bin/bash
+# Source: https://brontosaurusrex.github.io/2019/08/12/Halftone,-Imagemagick
 
 set -e
 

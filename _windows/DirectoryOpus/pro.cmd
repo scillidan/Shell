@@ -1,4 +1,1 @@
-@echo off
-
-cd %*
-pro
+cd %* && pro
