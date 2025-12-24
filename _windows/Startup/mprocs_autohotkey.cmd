@@ -2,7 +2,7 @@
 
 mprocs ^
 	"autohotkeyu64 %DOTFILES_DIR%\.config\_windows_autohotkey\User.ahk" ^
-	"autohotkeyu64 %DOTFILES_DIR%\.config\_windows_autohotkey\keyboard_switch.ahk" ^
+	"autohotkeyu64 %DOTFILES_DIR%\.config\_windows_autohotkey\keyboard_autoswitch.ahk" ^
 	"autohotkeyu64 %USERHOME%\Usr\Source\autohotkey\ahk-keyboard-locker\keyboard-locker.ahk" ^
 	"autohotkeyu64 %USERHOME%\Usr\Source\autohotkey\QuickSwitch\QuickSwitch.ahk" ^
 	"autohotkeyu64 %USERHOME%\Usr\Source\autohotkey\ShortScript\ShortScript.ahk" ^

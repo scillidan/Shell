@@ -2,6 +2,7 @@ $startupDir = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
 $lnkPath = @(
     # Opt that will do makelink for it .lnk on Startup\
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Ollama.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CapsLock Input Method Switcher (Non Cursor).lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CenterTaskbar.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\DeskPins.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Ditto.lnk",
