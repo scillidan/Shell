@@ -1,6 +1,6 @@
 #!/bin/bash
-# Write by GPT-4o mini🧙‍♂️, scillidan🤡
-# Select and kill processes using a graphical interface.
+# Select and kill processes with rofi.
+# Authors: GPT-4o mini🧙‍♂️, scillidan🤡
 # Dependences: ps, sed, rofi, awk, kill
 # Usage: ./script.sh
 

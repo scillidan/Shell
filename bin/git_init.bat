@@ -1,0 +1,1 @@
+bash git_init.sh %*

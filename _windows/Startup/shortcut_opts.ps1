@@ -21,7 +21,6 @@ $lnkPath = @(
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\AltBacktick.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Everything.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Magpie.lnk"
-    # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\qBittorrent Enhanced Edition.lnk"
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk"
 )
 

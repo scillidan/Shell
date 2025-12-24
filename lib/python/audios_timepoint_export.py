@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate track timepoint list from audio files.
-Author: GPT-4o mini👨‍💻, scillidan🤡
+Authors: GPT-4o mini👨‍💻, scillidan🤡
 Usage: python script.py -i <audio1> <audio2> [-o output.txt]
 """
 

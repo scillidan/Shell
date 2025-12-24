@@ -1,0 +1,1 @@
+bash git_tag.sh %*

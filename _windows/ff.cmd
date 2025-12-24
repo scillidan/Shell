@@ -1,7 +1,7 @@
 @echo off
 REM Interactive file and directory finder using fzf with preview and key bindings.
 REM Dependences: rg, fd, bat, fzf, eza, nvim.
-REM PS: everything-cli (es) is optional. Similar to its, I kept some comments as notes.
+REM PS: I kept some comments as notes. For example, everything-cli (es) is optional.
 REM Reference:
 REM - https://github.com/chrisant996/clink-gizmos/issues/19
 REM - https://thevaluable.dev/practical-guide-fzf-example

@@ -81,6 +81,7 @@ URLS=(
 	# Tool
 	["dmns.app"]="https://dmns.app/domains?q="
 	["ipaddress.com"]="https://www.ipaddress.com/website/"
+	["virustotal.com"]="https://www.virustotal.com/gui/seach/"
 	# Other
 	["flickr.com"]="https://www.flickr.com/search/?license=2%2C3%2C4%2C5%2C6%2C9&text="
 	["ScoopInstaller/Extras/pulls"]="https://github.com/ScoopInstaller/Extras/pulls?q="
