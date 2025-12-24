@@ -3,10 +3,12 @@
 # References:
 # - https://qiita.com/KEINOS/items/3ab8879654e808d12791
 # - https://github.com/xiaodaxia-2008/golden-dict-trans
-# Authors: mistral.ai🧙‍♂️, scillidan🤡
+# - https://ollama.com/blog/thinking
+# Authors: mistral.ai🧙‍♂️, gpt-4o-mini🧙‍♂️, scillidan🤡
 # Usage:
 # pip install requests
 # python script.py --model <ollama_model> <input>
+# python script.py --model <ollama_model> --think true --hidethinking <true|false> <input>
 
 import requests
 import json
@@ -25,7 +27,7 @@ def is_chinese(text):
             return True
     return False
 
-def translate_text(text, model_name):
+def translate_text(text, model_name, think, hidethinking):
     # Set the Ollama API URL
     url = "http://localhost:11434/api/generate"
 
@@ -40,6 +42,8 @@ def translate_text(text, model_name):
     data = {
         'model': model_name,
         'prompt': prompt,
+        'think': think,
+        'hidethinking': hidethinking,
         'stream': False
     }
 
@@ -77,11 +81,13 @@ def main():
     # Set up the command line argument parser
     parser = argparse.ArgumentParser(description='Translate text using Ollama API.')
     parser.add_argument('--model', type=str, default='llama3.1:8b', help='Model name to use for translation')
+    parser.add_argument('--think', type=bool, default=False, help='Enable or disable thinking process (true or false)')
+    parser.add_argument('--hidethinking', action='store_true', help='Hide thinking output')
     parser.add_argument('text', type=str, help='Input text to translate')
 
     args = parser.parse_args()
 
-    translated_text, target_language = translate_text(args.text, args.model)
+    translated_text, target_language = translate_text(args.text, args.model, args.think, args.hidethinking)
     if translated_text:
         # Generate HTML output for GoldenDict
         html_output = f"""

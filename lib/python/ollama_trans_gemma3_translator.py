@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # Translate Non-Chinese to Chinese or translate Chinese to English with Ollama.
+# References:
+# - https://qiita.com/KEINOS/items/3ab8879654e808d12791
+# - https://github.com/xiaodaxia-2008/golden-dict-trans
 # Model: https://ollama.com/zongwei/gemma3-translator
 # Authors: mistral.ai🧙‍♂️, scillidan🤡
 # Usage:
