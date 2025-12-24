@@ -12,6 +12,6 @@ if "%~1"=="" (
 
 for %%I in (%*) do (
     if exist "%%~I" (
-        kiwix-manage %USER%\Usr\Data\kiwix\library.xml add "%%~I"
+        kiwix-manage %USERHOME%\Usr\Data\kiwix\library.xml add "%%~I"
     )
 )

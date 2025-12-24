@@ -26,8 +26,8 @@ $lnkPath = @(
 
 $binPath = @(
     # Opt that will do makelink for it .lnk on Startup\
-    @{ Path = "$env:USER\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
-    @{ Path = "$env:USER\Usr\Git\Shell\_windows\Startup\mprocs_autohotkey.cmd"; Arguments = ""; WorkingDir = "" }
+    @{ Path = "$env:USERHOME\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\Startup\mprocs_autohotkey.cmd"; Arguments = ""; WorkingDir = "" }
     # Opt that set it run at startup
     # @{ Path = "$env:LOCALAPPDATA\Microsoft\WindowsApps\Snipaste.exe"; Arguments = ""; WorkingDir = "" }
     # @{ Path = "$env:ProgramFiles\Clash Verge\clash-verge.exe"; Arguments = ""; WorkingDir = "" }

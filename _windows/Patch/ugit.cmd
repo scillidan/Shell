@@ -1,1 +1,1 @@
-bash %USER%\Usr\Shell\ugit\ugit %*
+bash %USERHOME%\Usr\Shell\ugit\ugit %*

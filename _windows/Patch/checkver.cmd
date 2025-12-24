@@ -1,7 +1,7 @@
 @echo off
 
-pushd "%USER%\Scoop\apps\scoop\current"
+pushd "%SCOOP%\apps\scoop\current"
 
-pwsh bin\checkver.ps1 -App %* -Dir %USER%\Usr\GitFork\Bucket\bucket
+pwsh bin\checkver.ps1 -App %* -Dir %USERHOME%\Usr\GitFork\Bucket\bucket
 
 popd

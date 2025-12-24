@@ -1,18 +1,18 @@
 @echo off
 rem Setup dotfiles from https://github.com/scillidan/dotfiles/tree/main/.config/_rime
-rem 1. mkdir "%USER%\Usr\Source\rime"
-rem 2. git clone --depth=1 https://github.com/iDvel/rime-ice %USERPROFILE%\Usr\Source\rime\rime-ice
+rem 1. mkdir "%USERHOME%\Usr\Source\rime"
+rem 2. git clone --depth=1 https://github.com/iDvel/rime-ice %USER%\Usr\Source\rime\rime-ice
 rem Update
-rem 1. cd %USERPROFILE%\Usr\Source\rime\rime-ice
+rem 1. cd %USERHOME%\Usr\Source\rime\rime-ice
 rem 2. git pull
 
 setlocal
 
 rem Custom user environment variables here
 rem set "RIME_SHARE=%APPDATA%\rime"
-set "RIME_SHARE=%USER%\Usr\Data\rime"
+set "RIME_SHARE=%USERHOME%\Usr\Data\rime"
 set "RIME_DOTDIR=%DOTFILES_DIR%\.config\_rime\rime-ice"
-set "RIME_SRC=%USER%\Usr\Source\rime"
+set "RIME_SRC=%USERHOME%\Usr\Source\rime"
 
 set PERSONAL_FILE=default.custom.yaml user.yaml weasel.custom.yaml symbols.yaml
 

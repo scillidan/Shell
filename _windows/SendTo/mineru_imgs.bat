@@ -14,7 +14,7 @@ rem Custom user environment variables here
 set "MINERU=％USER%\Usr\OptWeb\MinerU\.venv\Scripts\mineru.exe"
 set "FLAG=--backend vlm-transformers"
 set "OPEN_OUTPUT=true"
-set "OUTPUT=%USER%\Documents\MinerU"
+set "OUTPUT=%USERHOME%\Documents\MinerU"
 
 if not exist "%OUTPUT%" mkdir "%OUTPUT%"
 
