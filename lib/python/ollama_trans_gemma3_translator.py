@@ -1,4 +1,11 @@
-#!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "requests",
+#     "langdetect"
+# ]
+# ///
+#
 # Translate Non-Chinese to Chinese or translate Chinese to English with Ollama.
 # References:
 # - https://qiita.com/KEINOS/items/3ab8879654e808d12791
@@ -6,9 +13,8 @@
 # Model: https://ollama.com/zongwei/gemma3-translator
 # Authors: mistral.ai🧙‍♂️, scillidan🤡
 # Usage:
-# pip install requests langdetect
-# python script.py <input>
-# python script.py --debug <input>
+# uv run script.py <input>
+# uv run script.py --debug <input>
 
 import requests
 import json

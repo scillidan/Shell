@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "requests"
+# ]
+# ///
+#
 # Translate Non-Chinese to Chinese or translate Chinese to English with Ollama.
 # References:
 # - https://qiita.com/KEINOS/items/3ab8879654e808d12791
@@ -6,9 +12,8 @@
 # - https://ollama.com/blog/thinking
 # Authors: mistral.ai🧙‍♂️, gpt-4o-mini🧙‍♂️, scillidan🤡
 # Usage:
-# pip install requests
-# python script.py --model <ollama_model> <input>
-# python script.py --model <ollama_model> --think true --hidethinking <true|false> <input>
+# uv run script.py --model <ollama_model> <input>
+# uv run script.py --model <ollama_model> --think true --hidethinking <true|false> <input>
 
 import requests
 import json
