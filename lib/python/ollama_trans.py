@@ -14,6 +14,8 @@
 # Usage:
 # uv run script.py --model <ollama_model> <input>
 # uv run script.py --model <ollama_model> --think true --hidethinking <true|false> <input>
+# Bugs:
+# - Output jumbled code when translate English to Chinese in GoldenDict on Windows 10.
 
 import requests
 import json
@@ -21,28 +23,38 @@ import argparse
 import re
 import sys
 import io
+import unicodedata
 
 # Ensure stdout uses UTF-8 encoding
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
+def normalize_text(text):
+    """Normalize text to handle special characters and encoding issues."""
+    if not text:
+        return ""
+    normalized = unicodedata.normalize('NFKC', text)
+    problematic_chars = ['\x00', '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07',
+                       '\x08', '\x0b', '\x0c', '\x0e', '\x0f']
+    for char in problematic_chars:
+        normalized = normalized.replace(char, '')
+    normalized = ' '.join(normalized.split())
+    return normalized.strip()
+
 def is_chinese(text):
-    # Check if the text contains Chinese characters
+    """Check if the text contains Chinese characters."""
     for char in text:
         if '\u4e00' <= char <= '\u9fff':
             return True
     return False
 
 def translate_text(text, model_name, think, hidethinking):
-    # Set the Ollama API URL
+    """Translate text using Ollama API."""
     url = "http://localhost:11434/api/generate"
-
-    # Determine the translation direction based on the input language
     if is_chinese(text):
         prompt = f'Translate the following Chinese sentence to English and return ONLY the following JSON format with no other text:\n{{"english": "<translation here>"}}\n\nChinese: {text}'
     else:
         prompt = f'Translate the following sentence to Chinese (Simplified, zh-cn) and return ONLY the following JSON format with no other text:\n{{"chinese": "<translation here>"}}\n\nSentence: {text}'
 
-    # Set the request headers and data
     headers = {'Content-Type': 'application/json; charset=utf-8'}
     data = {
         'model': model_name,
@@ -52,7 +64,6 @@ def translate_text(text, model_name, think, hidethinking):
         'stream': False
     }
 
-    # Send the request
     response = requests.post(url, headers=headers, data=json.dumps(data, ensure_ascii=False).encode('utf-8'))
 
     if response.status_code != 200:
@@ -60,12 +71,10 @@ def translate_text(text, model_name, think, hidethinking):
         print(response.text)
         return None, None
 
-    # Parse the response
     response_data = response.json()
     output = response_data.get('response', '').strip()
 
     try:
-        # Try to extract the JSON part from the raw output
         json_match = re.search(r'\{.*\}', output, re.DOTALL)
         if json_match:
             output = json_match.group(0)
@@ -76,28 +85,44 @@ def translate_text(text, model_name, think, hidethinking):
             return result.get('chinese', ''), 'Chinese (Simplified)'
     except json.JSONDecodeError as e:
         print(f"Failed to parse JSON: {e}\nRaw output:\n{output}")
-        # Try to return the raw output
         return output, None
 
 def main():
     if len(sys.argv) < 2:
-        return  # Exit silently if no input is provided
+        return
 
-    # Set up the command line argument parser
     parser = argparse.ArgumentParser(description='Translate text using Ollama API.')
     parser.add_argument('--model', type=str, default='llama3.1:8b', help='Model name to use for translation')
     parser.add_argument('--think', type=bool, default=False, help='Enable or disable thinking process (true or false)')
     parser.add_argument('--hidethinking', action='store_true', help='Hide thinking output')
-    parser.add_argument('text', type=str, help='Input text to translate')
+    parser.add_argument('--silent', action='store_true', help='Suppress error messages')
+    parser.add_argument('text', type=str, nargs='?', default='', help='Input text to translate')
 
     args = parser.parse_args()
 
-    translated_text, target_language = translate_text(args.text, args.model, args.think, args.hidethinking)
+    # Read from stdin if no text provided
+    if not args.text:
+        try:
+            args.text = sys.stdin.read().strip()
+        except Exception:
+            if not args.silent:
+                print("Error: No input text provided")
+            sys.exit(1)
+
+    if not args.text:
+        if not args.silent:
+            print("Error: Empty input text")
+        sys.exit(1)
+
+    # Normalize input text
+    normalized_text = normalize_text(args.text)
+    translated_text, target_language = translate_text(normalized_text, args.model, args.think, args.hidethinking)
+
     if translated_text:
-        # Generate HTML output for GoldenDict
-        html_output = f"""
-{translated_text}
-"""
+        # Clean up translation
+        clean_translation = translated_text.strip()
+        # Simple, clean HTML output for GoldenDict
+        html_output = f"{clean_translation}"
         print(html_output)
 
 if __name__ == "__main__":
