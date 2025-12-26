@@ -14,7 +14,7 @@
 # 2. In environment, add:
 #   - TENCENT_SECRET_ID=<YOUR_SECRET_ID>
 #   - TENCENT_SECRET_KEY=<YOUR_SECRET_KEY>
-# 3. uv run script.py <input_text>
+# 3. uv run script.py [--original-text] <input_text>
 
 import json
 import sys
@@ -61,6 +61,11 @@ def parse_arguments() -> argparse.Namespace:
         '--silent',
         action='store_true',
         help='Suppress error messages (useful for GoldenDict integration)'
+    )
+    parser.add_argument(
+        '--original-text',
+        action='store_true',
+        help='Show the original input text after translation'
     )
     return parser.parse_args()
 
@@ -291,7 +296,6 @@ def main():
     if args.text:
         source_text = args.text
     else:
-        # Read from stdin (GoldenDict pipes text this way)
         try:
             source_text = sys.stdin.read().strip()
         except Exception:
@@ -332,6 +336,9 @@ def main():
             print("Translation failed. Please check your API credentials and network connection.")
         sys.exit(1)
 
+    # Output the original input text if requested
+    if args.original_text:
+        print(source_text)
 
 if __name__ == "__main__":
     main()

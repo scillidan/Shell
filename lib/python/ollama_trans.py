@@ -13,9 +13,8 @@
 # Authors: mistral.ai🧙‍♂️, gpt-4o-mini🧙‍♂️, scillidan🤡
 # Usage:
 # uv run script.py --model <ollama_model> <input>
-# uv run script.py --model <ollama_model> --think true --hidethinking <true|false> <input>
-# Bugs:
-# - Output jumbled code when translate English to Chinese in GoldenDict on Windows 10.
+# uv run script.py --model <ollama_model> [--think true] [--hidethinking true|false] <input>
+# PS: For using in GoldenDict on Windows 10, add optional --utf16.
 
 import requests
 import json
@@ -96,6 +95,7 @@ def main():
     parser.add_argument('--think', type=bool, default=False, help='Enable or disable thinking process (true or false)')
     parser.add_argument('--hidethinking', action='store_true', help='Hide thinking output')
     parser.add_argument('--silent', action='store_true', help='Suppress error messages')
+    parser.add_argument('--utf16', action='store_true', help='Output translation in UTF-16 encoding')
     parser.add_argument('text', type=str, nargs='?', default='', help='Input text to translate')
 
     args = parser.parse_args()
@@ -121,9 +121,14 @@ def main():
     if translated_text:
         # Clean up translation
         clean_translation = translated_text.strip()
-        # Simple, clean HTML output for GoldenDict
-        html_output = f"{clean_translation}"
-        print(html_output)
+
+        if args.utf16:
+            encoded_output = clean_translation.encode("utf-16", errors="replace")
+            sys.stdout.buffer.write(encoded_output)
+            sys.stdout.buffer.flush()
+        else:
+            html_output = f"{clean_translation}"
+            print(html_output)
 
 if __name__ == "__main__":
     main()

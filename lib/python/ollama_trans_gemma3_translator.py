@@ -13,10 +13,8 @@
 # Model: https://ollama.com/zongwei/gemma3-translator
 # Authors: mistral.ai🧙‍♂️, scillidan🤡
 # Usage:
-# uv run script.py <input>
-# uv run script.py --debug <input>
-# Bugs:
-# - Output jumbled code when translate English to Chinese in GoldenDict on Windows 10.
+# uv run script.py [--debug] <input>
+# PS: For using in GoldenDict on Windows 10, add optional --utf16.
 
 import requests
 import json
@@ -25,6 +23,7 @@ import re
 import sys
 import io
 import unicodedata
+import os
 from langdetect import detect
 
 # Ensure stdout uses UTF-8 encoding
@@ -32,6 +31,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 
 # Set the model name here
 MODEL_NAME = 'zongwei/gemma3-translator:4b'
+
+# Retrieve the value of the OLLAMA_HOST environment variable, defaulting to "http://localhost" if not set
+ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost")
 
 def normalize_text(text):
     """Normalize text to handle special characters and encoding issues."""
@@ -64,7 +66,7 @@ def translate_text(text, debug=False):
     if debug and text != normalized_text:
         print(f"<!-- Normalized text: '{text}' -> '{normalized_text}' -->")
 
-    url = "http://localhost:11434/api/generate"
+    url = f"{ollama_host}:11434/api/generate"
     if is_chinese(normalized_text):
         prompt = f'Translate from Chinese to English:\n{{"english": "<translation here>"}}\n\nChinese: {normalized_text}'
     else:
@@ -121,13 +123,19 @@ def main():
 
     parser = argparse.ArgumentParser(description='Translate text using Ollama API.')
     parser.add_argument('--debug', action='store_true', help='Enable debug output')
+    parser.add_argument('--utf16', action='store_true', help='Output translation in UTF-16 encoding')
     parser.add_argument('text', type=str, help='Input text to translate')
 
     args = parser.parse_args()
 
     translated_text, _ = translate_text(args.text, args.debug)
     if translated_text:
-        print(f"{translated_text}")
+        if args.utf16:
+            encoded_output = translated_text.strip().encode("utf-16", errors="replace")
+            sys.stdout.buffer.write(encoded_output)
+            sys.stdout.buffer.flush()
+        else:
+            print(f"{translated_text}")
 
 if __name__ == "__main__":
     main()
