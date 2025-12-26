@@ -6,7 +6,7 @@
 # ]
 # ///
 #
-# Tencent Cloud Translation API wrapper for translate Non-Chinese to Chinese or translate Chinese to English.
+# Tencent Cloud Translation API wrapper for translate Multi-language to Chinese or translate Chinese to English.
 # Reference: https://github.com/LexsionLee/tencent-translate-for-goldendict
 # Authors: DeepSeek🧙, scillidan🤡
 # Usage:
