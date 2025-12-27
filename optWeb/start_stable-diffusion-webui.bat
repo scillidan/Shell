@@ -2,7 +2,7 @@
 
 setlocal
 
-cd C:\Users\User\Usr\OptWeb\stable-diffusion-webui
+cd %USERHOME%\Usr\OptImg\stable-diffusion-webui
 start webui-user.bat
 
 endlocal

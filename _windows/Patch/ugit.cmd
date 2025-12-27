@@ -1,1 +1,0 @@
-bash %USERHOME%\Usr\Shell\ugit\ugit %*

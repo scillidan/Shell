@@ -1,15 +1,15 @@
 #!/bin/bash
-# Create montage with transparent background and spacing from images.
+# Create montage with background and spacing from images.
 # Authors: mistral.ai🧙‍♂️, scillidan🤡
-# Usage: ./script.sh --gird <col>x<row> <img1> <img2>
+# Usage: ./script.sh --gird <col>x<row> <img1> <img2> ...
 
 output_montage="_montage.png"
 
 # Default values
 grid_cols=1
 grid_rows=1
-# Border size for spacing
 border=1
+background=none
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -54,7 +54,7 @@ done
 echo "Creating montage with grid ${grid_cols}x${grid_rows}..."
 magick montage "${resized_files[@]}" \
     -tile "${grid_cols}x${grid_rows}" \
-    -background none \
+    -background ${background} \
     -geometry "${max_width}x${max_height}+${border}+${border}" \
     "$output_montage"
 

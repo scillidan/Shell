@@ -1,6 +1,6 @@
 @echo off
 
-cd C:\Users\User\Usr\OptWeb\ComfyUI
+cd %USERHOME%\Usr\OptImg\ComfyUI
 call .venv\Scripts\activate.bat
 python main.py
 

@@ -11,7 +11,7 @@ REM - https://opendatalab.github.io/MinerU/usage/cli_tools/
 setlocal enabledelayedexpansion
 
 rem Custom user environment variables here
-set "MINERU=％USER%\Usr\OptWeb\MinerU\.venv\Scripts\mineru.exe"
+set "MINERU=％USER%\Usr\OptTxt\MinerU\.venv\Scripts\mineru.exe"
 set "FLAG=--backend vlm-transformers"
 set "OPEN_OUTPUT=true"
 set "OUTPUT=%USERHOME%\Documents\MinerU"

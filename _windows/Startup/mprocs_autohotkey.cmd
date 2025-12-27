@@ -8,5 +8,4 @@ mprocs ^
 	"autohotkeyu64 %USERHOME%\Usr\Source\autohotkey\ShortScript\ShortScript.ahk" ^
 	"autohotkeyu64 %USERHOME%\Usr\Source\autohotkey\Vis2\demo_user.ahk" ^
 	"autohotkeyu64 \"%USERHOME%\Usr\Source\autohotkey\toggle-screen-autohotkey\Toggle screen.ahk\"" ^
-	"cd %USERHOME%\Usr\Source\autohotkey\vxdesktops.ahk && autohotkeyu64 vxdesktops.ahk" ^
 	"cd %USERHOME%\Usr\Source\goldendict\GoldenDictOCR && autohotkeyu64 GoldenDictOCR.ahk"

@@ -2,9 +2,9 @@
 
 setlocal
 
-cd C:\Users\User\Usr\OptWeb\Kokoro-FastAPI
+cd "%USERHOME%\Usr\OptWeb\Kokoro-FastAPI"
 call .venv\Scripts\activate.bat
-set PHONEMIZER_ESPEAK_LIBRARY="C:\Users\User\Scoop\apps\espeak-ng\current\eSpeak NG\libespeak-ng.dll"
+set PHONEMIZER_ESPEAK_LIBRARY="%SCOOP%\espeak-ng\current\eSpeak NG\libespeak-ng.dll"
 set PYTHONUTF8=1
 set PROJECT_ROOT=%cd%
 set USE_GPU=true

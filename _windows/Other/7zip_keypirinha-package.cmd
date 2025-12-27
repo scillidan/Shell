@@ -10,5 +10,5 @@ REM 3. script.cmd <directory(s)>
 if "%~1"=="" exit /b
 if not exist "%~1\" exit /b
 
-7z a -x!.git "%~1.zip" "%~1\*"
+7z a "%~1.zip" "%~1\*" -x!.git -x!.github
 move /Y "%~1.zip" "%~1.keypirinha-package"

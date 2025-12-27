@@ -1,1 +1,0 @@
-bash %USERHOME%\Usr\Shell\multi-git-status\mgitstatus

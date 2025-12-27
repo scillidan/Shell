@@ -2,6 +2,6 @@
 
 pushd "%SCOOP%\apps\scoop\current"
 
-pwsh bin\checkver.ps1 -App %* -Dir %USERHOME%\Usr\GitFork\Bucket\bucket
+pwsh bin\checkver.ps1 -App %* -Dir %USERHOME%\Usr\GitFork\scoop-bucket\bucket
 
 popd
