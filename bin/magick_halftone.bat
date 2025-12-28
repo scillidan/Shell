@@ -1,1 +1,0 @@
-bash magick_halftone.sh %*

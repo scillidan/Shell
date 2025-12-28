@@ -1,1 +1,0 @@
-bash magick_gen.sh %*

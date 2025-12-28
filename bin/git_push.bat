@@ -1,1 +1,0 @@
-bash git_push.sh %*
