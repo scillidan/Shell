@@ -1,20 +1,28 @@
-#!/usr/bin/env bash
-# Usage: script.sh <repo-name> [files] [commit-message]
+#!/bin/bash
 
 gitinit() {
-  local repo_name="$1"
+  local user_repo="$1"
   local add_files="${2:-.}"
   local commit_msg="${3:-Initial commit}"
 
-  if [ -z "$repo_name" ]; then
-    echo "Usage: gitinit <repo-name> [files] [commit-message]"
+  if [ -z "$user_repo" ]; then
+    echo "Usage: gitinit <user>/<repo> [files] [commit-message]"
     return 1
   fi
 
+  echo "Initializing git repository..."
   git init
-  git remote add origin "https://github.com/$USER/$repo_name.git"
+  echo "Adding remote origin: https://github.com/$user_repo.git"
+  git remote add origin "https://github.com/$user_repo.git"
+  echo "Creating and switching to the main branch..."
   git branch -M main
+  echo "Adding files: $add_files"
   git add $add_files
+  echo "Committing with message: $commit_msg"
   git commit -m "$commit_msg"
+  echo "Pushing to origin..."
   git push -u origin main
 }
+
+# Call the function with arguments
+gitinit "$@"

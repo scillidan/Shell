@@ -1,0 +1,1 @@
+scoop install "%USERHOME%\Usr\GitFork\scoop-bucket\bucket\%*.json"

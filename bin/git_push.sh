@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Auto commit with current datetime as message
 
 # Get current date and time in ISO 8601 format

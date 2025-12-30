@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Delete local & remote tag, then recreate and push it
 # Authors: perplexity.ai🧙‍♂️, scillidan🤡
 

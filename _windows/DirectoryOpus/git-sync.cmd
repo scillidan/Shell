@@ -1,6 +1,9 @@
 @echo off
 
-cd %*
-git-sync
+pushd %*
+
+git-sync.cmd
+
+popd
 
 pause

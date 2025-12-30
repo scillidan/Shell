@@ -1,1 +1,5 @@
-cd %* && pro
+pushd %*
+
+pro
+
+popd

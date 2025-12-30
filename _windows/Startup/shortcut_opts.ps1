@@ -10,10 +10,12 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\EarTrumpet.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Espanso.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\GoldenDict.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keyboard Locker.lnk"
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Keypirinha.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RBTray.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\RectangleWin.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Reduce Memory.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\resizer2.lnk"
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Sizer.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\T-Clock.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
@@ -28,8 +30,12 @@ $lnkPath = @(
 
 $binPath = @(
     # Opt that will do makelink for it .lnk on Startup\
-    @{ Path = "$env:USERHOME\Scoop\shims\resizer2.exe"; Arguments = ""; WorkingDir = "" },
-    @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\Startup\mprocs_autohotkey.cmd"; Arguments = ""; WorkingDir = "" }
+    @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\AutoHotkey\keyboard_autoswitch.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\AutoHotkey\keyboard_switch.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:SCOOP\apps\quickswitch\current\QuickSwitch.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:SCOOP\apps\shortscript\current\ShortScript.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:SCOOP\apps\togglescreen\current\ToggleScreen.exe"; Arguments = ""; WorkingDir = "" },
+    @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\AutoHotkey\_mprocs_ahks.cmd"; Arguments = ""; WorkingDir = "" }
     # Opt that set it run at startup
     # @{ Path = "$env:LOCALAPPDATA\Microsoft\WindowsApps\Snipaste.exe"; Arguments = ""; WorkingDir = "" }
     # @{ Path = "$env:ProgramFiles\Clash Verge\clash-verge.exe"; Arguments = ""; WorkingDir = "" }
