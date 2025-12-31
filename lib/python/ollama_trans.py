@@ -13,7 +13,7 @@
 # Authors: mistral.ai🧙‍♂️, gpt-4o-mini🧙‍♂️, scillidan🤡
 # Usage:
 # uv run script.py --model <ollama_model> <input>
-# uv run script.py --model <ollama_model> [--think true] [--hidethinking true|false] <input>
+# uv run script.py --model <ollama_model> [--think true] [--hidethinking] <input>
 # PS: For using in GoldenDict on Windows 10, add optional --utf16.
 
 import requests

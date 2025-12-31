@@ -1,7 +1,7 @@
 #!/bin/bash
 # Create montage with background and spacing from images.
 # Authors: mistral.ai🧙‍♂️, scillidan🤡
-# Usage: ./script.sh --gird <col>x<row> <img1> <img2> ...
+# Usage: ./script.sh --grid <col>x<row> <img1> <img2> ...
 
 output_montage="_montage.png"
 
@@ -62,4 +62,8 @@ magick montage "${resized_files[@]}" \
 magick "$output_montage" -trim +repage "$output_montage"
 
 echo "Montage created: $output_montage"
+
+echo "Clear:${resized_files[@]}"
+rm ${resized_files[@]}
+
 echo "Done!"

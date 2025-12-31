@@ -1,5 +1,5 @@
 @echo off
-REM Dependencies: powershell, git, git-sync
+REM Dependencies: powershell, lazygit
 REM Usage: script.cmd [path]
 
 set "target_path=%1"
@@ -14,9 +14,4 @@ if not defined target_path (
     exit /b 1
 )
 
-pushd "%target_path%"
-
-echo Running git-sync...
-git-sync
-
-popd
+lazygit --path "%target_path%"
