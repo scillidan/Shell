@@ -1,7 +1,6 @@
 @echo off
-REM Clone a Git repository from the clipboard into a specified directory.
 REM Dependences: powershell, git
-REM Usage: script.cmd <workdir>
+REM Usage: script.cmd <path>
 
 for /f "delims=" %%G in ('powershell -command "Get-Clipboard"') do set "url=%%G"
 
