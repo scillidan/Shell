@@ -3,20 +3,21 @@
 set -e
 
 cleanup() {
-    if [[ -n "$VENV_ACT" ]]; then
-        deactivate
-    fi
+    unset BASE_DIR
+    unset VENV_ACT
     unset MINERU_VIRTUAL_VRAM_SIZE
 }
 trap cleanup EXIT
 
 case "$OSTYPE" in
     linux-gnu*)
-        # Arch Linux
+        # Fill the path
+        BASE_DIR="$HOME/Usr/OptTxt/MinerU"
         VENV_ACT=".venv/bin/activate"
         ;;
     msys|cygwin)
-        # Windows (Git Bash or Cygwin)
+        # Fill the path
+        BASE_DIR="/c/Users/$(whoami)/Usr/OptTxt/MinerU"
         VENV_ACT=".venv/Scripts/activate"
         ;;
     *)
@@ -25,7 +26,7 @@ case "$OSTYPE" in
         ;;
 esac
 
-pushd "$USERHOME/Usr/OptTxt/MinerU" || exit 1
+pushd "$BASE_DIR" || exit 1
 
 source "$VENV_ACT"
 # export MINERU_VIRTUAL_VRAM_SIZE=10

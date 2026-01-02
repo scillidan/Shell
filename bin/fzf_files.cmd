@@ -13,7 +13,6 @@ rem set ES=es -match-path "*" -path ./
 set FD=fd -t d -t l .* -pL ./
 set EZA=eza -lbhHigUmuSa {-1}
 rem set LS=ls -l {-1}
-rem set ERD=erd --color auto --hidden --follow --human --sort name --dir-order first
 set BAT=bat --style=numbers --color=always
 
 set FLAG=--multi --walker-skip .github
@@ -23,7 +22,6 @@ set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%RG%)+change-p
 rem set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%ES%)+change-preview()+refresh-preview"
 set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%EZA% {})+refresh-preview"
 rem set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%LS% {})+refresh-preview"
-rem set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%ERD% {})+refresh-preview"
 set BIND_OPEN=--bind "enter:execute({+})+abort"
 set BIND_EDIT=--bind "ctrl-e:execute(nvim {+})+abort"
 rem set BIND_EDIT_SUBL=--bind "ctrl-e:execute(subl -a {+})+abort"

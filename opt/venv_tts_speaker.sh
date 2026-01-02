@@ -1,14 +1,24 @@
 #!/bin/bash
 # Cli shell for https://github.com/coqui-ai/TTS.
 # Authors: mistral.ai🧙‍♂️, scillidan🤡
+# Dependences: CUDA (test on 12.9)
+# Install:
+# git clone --depth=1 https://github.com/idiap/coqui-ai-TTS
+# uv venv --python 3.12
+# .venv\Scripts\activate.bat
+# uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu129
+# uv pip install -e .
 # Usage:
-# Refer to https://scillidan-cheat.vercel.app/?search=TTS to install
+# tts --list_models
+# tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_language_idxs
+# tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_speaker_idxs
 # (Linux) ./tts_speaker.sh <speaker> <output.wav> "<text>"
 # (Windows) bash tts_speaker.sh <speaker> <output.wav> "<text>"
 
 set -e
 
-# Define speaker abbreviations and full names
+language="en"
+
 declare -A SPEAKERS=(
     ["SQ"]="Suad Qasim"          # female, low voice, 2
     ["AF"]="Ana Florence"        # female, low voice, 3
@@ -70,15 +80,16 @@ declare -A SPEAKERS=(
     ["MRu"]="Marcos Rudaski"
 )
 
-# Set base directory and virtual environment activation path
 case "$OSTYPE" in
     linux-gnu*)
         VENV_ACT=".venv/bin/activate"
-        BASE_DIR="$HOME"
+        # Fill the path
+        BASE_DIR="$HOME/Usr/OptAud/coqui-ai-TTS"
         ;;
     msys|cygwin)
         VENV_ACT=".venv/Scripts/activate"
-        BASE_DIR="/c/Users/$(whoami)"
+        # Fill the path
+        BASE_DIR="/c/Users/$(whoami)/Usr/OptAud/coqui-ai-TTS"
         ;;
     *)
         echo "Unsupported OS: $OSTYPE"
@@ -86,28 +97,26 @@ case "$OSTYPE" in
         ;;
 esac
 
-# Cleanup function
 cleanup() {
-    if [[ -n "$VENV_ACT" ]]; then
-        deactivate
-    fi
     unset BASE_DIR
+    unset $VENV_ACT
+    trap - EXIT
 }
-
 trap cleanup EXIT
 
-# Navigate to the TTS directory
-pushd "$BASE_DIR/Usr/OptAud/TTS" || exit 1
+pushd "$BASE_DIR" || exit 1
 
-# Activate virtual environment
-source "$VENV_ACT"
+if [ -f "$VENV_ACT" ]; then
+    source "$VENV_ACT"
+else
+    echo "Virtual environment not found at: $VENV_ACT"
+    exit 1
+fi
 
-# Function to run TTS with speaker abbreviation
 tts_speaker() {
     local speaker_abbr="$1"
     local output_file="$BASE_DIR/Downloads/$2"
     local input_text="$3"
-    local language="en"
     local model="tts_models/multilingual/multi-dataset/xtts_v2"
 
     if [[ -z "${SPEAKERS[$speaker_abbr]}" ]]; then
@@ -123,7 +132,6 @@ tts_speaker() {
     tts --device cuda --model_name "$model" --language_idx "$language" --speaker_idx "$speaker_name" --text "$input_text" --out_path "$output_file"
 }
 
-# Main execution
 tts_speaker "$1" "$2" "$3"
 
 popd || exit 1

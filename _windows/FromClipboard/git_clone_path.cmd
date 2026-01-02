@@ -1,6 +1,8 @@
 @echo off
 REM Dependences: powershell, git
-REM Usage: script.cmd <path>
+REM Usage:
+REM 1. Copy a repo URL
+REM 2. script.cmd <path>
 
 for /f "delims=" %%G in ('powershell -command "Get-Clipboard"') do set "url=%%G"
 

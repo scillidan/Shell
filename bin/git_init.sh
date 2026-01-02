@@ -6,14 +6,14 @@ gitinit() {
   local commit_msg="${3:-Initial commit}"
 
   if [ -z "$user_repo" ]; then
-    echo "Usage: gitinit <user>/<repo> [files] [commit-message]"
+    echo "Usage: gitinit <user>/<repo>(.git) [files] [commit-message]"
     return 1
   fi
 
   echo "Initializing git repository..."
   git init
-  echo "Adding remote origin: https://github.com/$user_repo.git"
-  git remote add origin "https://github.com/$user_repo.git"
+  echo "Adding remote origin: https://github.com/$user_repo"
+  git remote add origin "https://github.com/$user_repo"
   echo "Creating and switching to the main branch..."
   git branch -M main
   echo "Adding files: $add_files"

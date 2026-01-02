@@ -1,1 +1,0 @@
-espeak-ng --path $SCOOP$\apps\espeak-ng\current\eSpeak NG\espeak-ng-data %*
