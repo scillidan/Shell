@@ -23,9 +23,14 @@ import re
 import sys
 import io
 import unicodedata
+import os
 
 # Ensure stdout uses UTF-8 encoding
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost")
+if ollama_host and not ollama_host.startswith(('http://', 'https://')):
+    ollama_host = f'http://{ollama_host}'
 
 def normalize_text(text):
     """Normalize text to handle special characters and encoding issues."""
@@ -48,7 +53,7 @@ def is_chinese(text):
 
 def translate_text(text, model_name, think, hidethinking):
     """Translate text using Ollama API."""
-    url = "http://localhost:11434/api/generate"
+    url = f"{ollama_host}:11434/api/generate"
     if is_chinese(text):
         prompt = f'Translate the following Chinese sentence to English and return ONLY the following JSON format with no other text:\n{{"english": "<translation here>"}}\n\nChinese: {text}'
     else:
@@ -91,7 +96,7 @@ def main():
         return
 
     parser = argparse.ArgumentParser(description='Translate text using Ollama API.')
-    parser.add_argument('--model', type=str, default='llama3.1:8b', help='Model name to use for translation')
+    parser.add_argument('--model', type=str, default='', help='Model name to use for translation')
     parser.add_argument('--think', type=bool, default=False, help='Enable or disable thinking process (true or false)')
     parser.add_argument('--hidethinking', action='store_true', help='Hide thinking output')
     parser.add_argument('--silent', action='store_true', help='Suppress error messages')
