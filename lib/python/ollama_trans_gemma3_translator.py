@@ -29,11 +29,11 @@ from langdetect import detect
 # Ensure stdout uses UTF-8 encoding
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-# Set the model name here
-MODEL_NAME = 'zongwei/gemma3-translator:4b'
+model_name = 'zongwei/gemma3-translator:4b'
 
-# Retrieve the value of the OLLAMA_HOST environment variable, defaulting to "http://localhost" if not set
 ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost")
+if ollama_host and not ollama_host.startswith(('http://', 'https://')):
+    ollama_host = f'http://{ollama_host}'
 
 def normalize_text(text):
     """Normalize text to handle special characters and encoding issues."""
@@ -75,7 +75,7 @@ def translate_text(text, debug=False):
 
     headers = {'Content-Type': 'application/json; charset=utf-8'}
     data = {
-        'model': MODEL_NAME,
+        'model': model_name,
         'prompt': prompt,
         'stream': False
     }
