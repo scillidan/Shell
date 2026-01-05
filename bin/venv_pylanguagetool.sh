@@ -7,20 +7,25 @@
 
 cleanup() {
     unset BASE_DIR
-    unset $VENV_ACT
+    unset VENV_DIR
+    unset VENV_ACT
+    unset VENV_CMD
     trap - EXIT
 }
 trap cleanup EXIT
 
+VENV_DIR=".pylanguagetool"
+VENV_CMD="pylanguagetool --input-type html --lang en-US -c"
+
 case "$OSTYPE" in
     linux-gnu*)
         # Fill the path
-        BASE_DIR="$HOME/Usr/Shell/.pyLanguagetool"
+        BASE_DIR="$HOME/Usr/Shell/$VENV_DIR"
         VENV_ACT="./bin/activate"
         ;;
     msys|cygwin)
         # Fill the path
-        BASE_DIR="/c/Users/$(whoami)/Usr/Shell/.pyLanguagetool"
+        BASE_DIR="/c/Users/$(whoami)/Usr/Shell/$VENV_DIR"
         VENV_ACT="./Scripts/activate"
         ;;
     *)
@@ -39,7 +44,7 @@ else
 fi
 
 # Read text from the systems clipboard
-pylanguagetool --input-type html --lang en-US -c $*
+$VENV_CMD $*
 
 popd || exit 1
 

@@ -3,7 +3,7 @@
 ; Usage: autohotkeyu64.exe script.ahk
 
 ; Delay (milliseconds) after switching to a new window
-SwitchDelay := 300
+SwitchDelay := 2000
 ; EN‑US layout code (0x0409)
 EN_Code := 0x409
 

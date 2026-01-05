@@ -4,11 +4,12 @@
 # Dependences: CUDA (test on 12.9)
 # Install:
 # git clone --depth=1 https://github.com/idiap/coqui-ai-TTS
-# uv venv --python 3.12
+# uv venv --python 3.10
 # .venv\Scripts\activate.bat
-# uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu129
+# uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 # uv pip install -e .
 # Usage:
+# (Windows) set ESPEAK_DATA_PATH=<path_to>\espeak-ng-data
 # tts --list_models
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_language_idxs
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_speaker_idxs

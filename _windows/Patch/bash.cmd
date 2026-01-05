@@ -1,3 +1,3 @@
 @echo off
 
-%SCOOP%\shims\bash.exe %*
+%SCOOP%\apps\git\current\usr\bin\bash.exe %*

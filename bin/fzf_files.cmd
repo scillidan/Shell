@@ -1,36 +1,49 @@
 @echo off
 REM Interactive file and directory finder using fzf with preview and key bindings.
-REM Dependences: rg, fd, bat, fzf, eza, nvim.
-REM PS: I kept some comments as notes. For example, everything-cli (es) is optional.
-REM Reference:
+REM Dependences: fd, dir, bat, fzf
+REM Optionals: rg, everything-cli(es), dirx, eza ...
+REM References:
 REM - https://github.com/chrisant996/clink-gizmos/issues/19
 REM - https://thevaluable.dev/practical-guide-fzf-example
+REM - https://github.com/narnaud/clink-terminal/blob/main/scripts/fzf-preview.cmd
+REM PS:
+REM After switching modes, the sorting of Files mode will change. I don't know why.
 
 setlocal
 
-set RG=rg --files --hidden --follow --glob "!.git"
-rem set ES=es -match-path "*" -path ./
-set FD=fd -t d -t l .* -pL ./
-set EZA=eza -lbhHigUmuSa {-1}
-rem set LS=ls -l {-1}
-set BAT=bat --style=numbers --color=always
+REM Optionals
+set FD=fd -t l -p -E ".git" -E ".venv" -E "__pycache__" -E "node_modules" -E "public" -E "site"
+set RG=rg --files --hidden --follow --glob "!.git" --glob "!.venv" --glob "!__pycache__" --glob "!node_modules" --glob "!public" --glob "!site"
+set ES=es -match-path "*" -path .
 
-set FLAG=--multi --walker-skip .github
+set DIR=dir /b /a-d /o:n /s
+set DIRX=dirx /b /X:d /a:-s-h --bare-relative --level=3 --tree --icons=always --escape-codes=always --utf8 --ignore-glob=.git/**
+set EZA=eza --tree --icons --classify --group-directories-first --git
+set ERD=erd --layout inverted --color auto --human --sort name --dir-order first --hidden --follow
+
+set BAT=bat --force-colorization --style=numbers,changes --line-range=:500
+
+set SEARCH_FILE=%FD% -t f
+set SEARCH_DIR=%FD% -t d
+set PREVIEW_FILE=%BAT%
+set REVIEW_DIR=%DIRX%
+
+REM fzf
+set FZF_DEFAULT_COMMAND=%SEARCH_FILE%
+set FLAG=--multi
 set FLAG_STYLE=--layout=reverse --border none --preview-border none --no-scrollbar --no-separator --inline-info
-set BIND=--bind "ctrl-u:preview-up,ctrl-d:preview-down,alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview"
-set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%RG%)+change-preview(%BAT% {})+refresh-preview"
-rem set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%ES%)+change-preview()+refresh-preview"
-set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%EZA% {})+refresh-preview"
-rem set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%FD%)+change-preview(%LS% {})+refresh-preview"
+set BIND=--bind "ctrl-k:preview-up,ctrl-j:preview-down,ctrl-h:preview-page-up,ctrl-l:preview-page-down,ctrl-t:toggle-preview"
+set BIND_SEARCH_FILE=--bind "alt-f:change-prompt(Files > )+reload(%SEARCH_FILE%)+change-preview(%PREVIEW_FILE% {})+refresh-preview"
+set BIND_SEARCH_DIR=--bind "alt-d:change-prompt(Dirs > )+reload(%SEARCH_DIR%)+change-preview(%REVIEW_DIR% {})+refresh-preview"
 set BIND_OPEN=--bind "enter:execute({+})+abort"
-set BIND_EDIT=--bind "ctrl-e:execute(nvim {+})+abort"
+set BIND_EDIT=--bind "ctrl-e:execute(%EDITOR% {+})+abort"
+rem set BIND_EDIT_NVIM=--bind "ctrl-e:execute(nvim {+})+abort"
 rem set BIND_EDIT_SUBL=--bind "ctrl-e:execute(subl -a {+})+abort"
 rem set BIND_EDIT_VSCODE=--bind "ctrl-e:execute(code -r {+})+abort"
 rem set BIND_EDIT_VSCODIUM=--bind "ctrl-e:execute(vscodium -r {+})+abort"
-set PREVIEW=--preview "%BAT% {}"
-set PREVIEW_WINDOW=--preview-window "right,60%%,wrap"
-set QUERY=
+set PREVIEW=--preview "%PREVIEW_FILE% {}"
+set PREVIEW_WINDOW=--preview-window "right,60%%,wrap,~2"
 
-fzf %FLAG% %FLAG_STYLE% %BIND% %BIND_SEARCH_FILE% %BIND_SEARCH_DIR% %BIND_OPEN% %BIND_EDIT% %PREVIEW% %PREVIEW_WINDOW% %QUERY%
+fzf %FLAG% %FLAG_STYLE% %BIND% %BIND_SEARCH_FILE% %BIND_SEARCH_DIR% %BIND_OPEN% %BIND_EDIT% %PREVIEW% %PREVIEW_WINDOW%
 
 endlocal
