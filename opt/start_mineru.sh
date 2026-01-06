@@ -11,12 +11,12 @@ trap cleanup EXIT
 
 case "$OSTYPE" in
     linux-gnu*)
-        # Fill the path
+        # Update the path
         BASE_DIR="$HOME/Usr/OptTxt/MinerU"
         VENV_ACT=".venv/bin/activate"
         ;;
     msys|cygwin)
-        # Fill the path
+        # Update the path
         BASE_DIR="/c/Users/$(whoami)/Usr/OptTxt/MinerU"
         VENV_ACT=".venv/Scripts/activate"
         ;;

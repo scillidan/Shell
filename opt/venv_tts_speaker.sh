@@ -1,8 +1,8 @@
 #!/bin/bash
-# Cli shell for https://github.com/coqui-ai/TTS.
-# Authors: mistral.ai🧙‍♂️, scillidan🤡
-# Dependences: CUDA (test on 12.9)
-# Install:
+# CLI shell for https://github.com/coqui-ai/TTS
+# Authors: DeepSeek🧙‍♂️, scillidan🤡
+# Dependencies: CUDA (tested on 12.4)
+# Installation:
 # git clone --depth=1 https://github.com/idiap/coqui-ai-TTS
 # uv venv --python 3.10
 # .venv\Scripts\activate.bat
@@ -13,20 +13,23 @@
 # tts --list_models
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_language_idxs
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_speaker_idxs
-# (Linux) ./tts_speaker.sh <speaker> <output.wav> "<text>"
-# (Windows) bash tts_speaker.sh <speaker> <output.wav> "<text>"
+# ./tts_speaker.sh <speaker> <output.wav> "<text>"
+# ./tts_speaker.sh <speaker> <output_dir> --file <filename>
+# (Windows) bash tts_speaker.sh ...
 
 set -e
 
+model_path="tts_models/multilingual/multi-dataset/xtts_v2"
 language="en"
+flag=--device cuda
 
 declare -A SPEAKERS=(
     ["SQ"]="Suad Qasim"          # female, low voice, 2
     ["AF"]="Ana Florence"        # female, low voice, 3
-    ["ZA"]="Zacharie Aimilios"   #   male, low voice, 2
-    ["EM"]="Eugenio Mataracı"    #   male, low voice, 3
-    ["DSch"]="Dionisio Schuyler" #   male, low voice, 4
-    ["VE"]="Viktor Eka"          #   male, low voice, 5
+    ["ZA"]="Zacharie Aimilios"   # male, low voice, 2
+    ["EM"]="Eugenio Mataracı"    # male, low voice, 3
+    ["DSch"]="Dionisio Schuyler" # male, low voice, 4
+    ["VE"]="Viktor Eka"          # male, low voice, 5
     ["CD"]="Claribel Dervla"
     ["DS"]="Daisy Studious"
     ["GW"]="Gracie Wise"
@@ -84,12 +87,12 @@ declare -A SPEAKERS=(
 case "$OSTYPE" in
     linux-gnu*)
         VENV_ACT=".venv/bin/activate"
-        # Fill the path
+        # Update the path
         BASE_DIR="$HOME/Usr/OptAud/coqui-ai-TTS"
         ;;
     msys|cygwin)
         VENV_ACT=".venv/Scripts/activate"
-        # Fill the path
+        # Update the path
         BASE_DIR="/c/Users/$(whoami)/Usr/OptAud/coqui-ai-TTS"
         ;;
     *)
@@ -100,7 +103,7 @@ esac
 
 cleanup() {
     unset BASE_DIR
-    unset $VENV_ACT
+    unset VENV_ACT
     trap - EXIT
 }
 trap cleanup EXIT
@@ -114,11 +117,11 @@ else
     exit 1
 fi
 
-tts_speaker() {
+tts_single() {
     local speaker_abbr="$1"
-    local output_file="$BASE_DIR/Downloads/$2"
-    local input_text="$3"
-    local model="tts_models/multilingual/multi-dataset/xtts_v2"
+    local input_text="$2"
+    local output_file="${3:-output.wav}"
+    local model="$model_path"
 
     if [[ -z "${SPEAKERS[$speaker_abbr]}" ]]; then
         echo "Error: Unknown speaker abbreviation '$speaker_abbr'."
@@ -130,9 +133,107 @@ tts_speaker() {
     fi
 
     local speaker_name="${SPEAKERS[$speaker_abbr]}"
-    tts --device cuda --model_name "$model" --language_idx "$language" --speaker_idx "$speaker_name" --text "$input_text" --out_path "$output_file"
+    tts $flag --model_name "$model" --language_idx "$language" --speaker_idx "$speaker_name" --text "$input_text" --out_path "$output_file"
+    echo .
+    echo "Generated: $output_file"
 }
 
-tts_speaker "$1" "$2" "$3"
+tts_batch() {
+    local speaker_abbr="$1"
+    local input_file="$2"
+    local output_dir="${3:-output}"
+    local model="$model_path"
+
+    if [[ -z "${SPEAKERS[$speaker_abbr]}" ]]; then
+        echo "Error: Unknown speaker abbreviation '$speaker_abbr'."
+        echo "Available speakers:"
+        for abbr in "${!SPEAKERS[@]}"; do
+            echo "  $abbr: ${SPEAKERS[$abbr]}"
+        done
+        exit 1
+    fi
+
+    if [ ! -f "$input_file" ]; then
+        echo "Error: Input file '$input_file' not found."
+        exit 1
+    fi
+
+    mkdir -p "$output_dir"
+
+    local speaker_name="${SPEAKERS[$speaker_abbr]}"
+    local line_number=1
+
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        # Skip empty lines
+        if [[ -z "$line" ]]; then
+            echo "Skipping empty line $line_number"
+            ((line_number++))
+            continue
+        fi
+
+        # Skip lines starting with # (comments)
+        if [[ "$line" =~ ^# ]]; then
+            echo "Skipping comment line $line_number"
+            ((line_number++))
+            continue
+        fi
+
+        # Generate sequential filename (e.g., 0001.wav)
+        local output_file=$(printf "%s/%04d.wav" "$output_dir" $line_number)
+
+        echo "Line $line_number: ${line:0:50}..."
+        tts $flag --model_name "$model" --language_idx "$language" --speaker_idx "$speaker_name" --text "$line" --out_path "$output_file"
+
+        if [ $? -eq 0 ]; then
+            echo "  ✓ Generated: $(basename "$output_file")"
+        else
+            echo "  ✗ Failed to generate: $(basename "$output_file")"
+        fi
+
+        ((line_number++))
+    done < "$input_file"
+    echo .
+    echo "Total files generated: $((line_number-1))"
+    echo "Output directory: $output_dir"
+}
+
+show_usage() {
+    echo "Opps! Please read the script's comments."
+}
+
+main() {
+    if [ $# -eq 0 ]; then
+        show_usage
+        exit 1
+    fi
+
+    if [ $# -ge 3 ] && [ "$2" = "--file" ]; then
+        if [ $# -lt 3 ]; then
+            echo "Error: Batch mode requires a filename after --file"
+            echo ""
+            show_usage
+            exit 1
+        fi
+
+        local speaker="$1"
+        local input_file="$3"
+        local output_dir="${4:-output}"  # Default to "output" directory
+
+        tts_batch "$speaker" "$input_file" "$output_dir"
+    elif [ $# -ge 2 ]; then
+        local speaker="$1"
+        local text="$2"
+        local output_file="${3:-output.wav}"  # Default to output.wav
+
+        tts_single "$speaker" "$text" "$output_file"
+    else
+        echo "Error: Invalid arguments."
+        echo ""
+        show_usage
+        exit 1
+    fi
+}
+
+main "$@"
 
 popd || exit 1

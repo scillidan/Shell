@@ -10,11 +10,11 @@ trap cleanup EXIT
 
 case "$OSTYPE" in
     linux-gnu*)
-        # Fill the path
+        # Update the path
         BASE_DIR="$HOME\Usr\OptAud\OpenReader-WebUI"
         ;;
     msys|cygwin)
-        # Fill the path
+        # Update the path
         BASE_DIR="/c/Users/$(whoami)/Usr/OptAud/OpenReader-WebUI"
         ;;
     *)

@@ -22,10 +22,12 @@ set EZA=eza --tree --icons --classify --group-directories-first --git
 set ERD=erd --layout inverted --color auto --human --sort name --dir-order first --hidden --follow
 
 set BAT=bat --force-colorization --style=numbers,changes --line-range=:500
+REM
+set PREVIEW_SCRIPT=fzf-preview.cmd
 
 set SEARCH_FILE=%FD% -t f
 set SEARCH_DIR=%FD% -t d
-set PREVIEW_FILE=%BAT%
+set PREVIEW_FILE=%PREVIEW_SCRIPT%
 set REVIEW_DIR=%DIRX%
 
 REM fzf
