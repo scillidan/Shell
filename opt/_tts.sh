@@ -6,22 +6,21 @@
 # git clone --depth=1 https://github.com/idiap/coqui-ai-TTS
 # uv venv --python 3.10
 # .venv\Scripts\activate.bat
-# uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# uv pip install torch --index-url https://download.pytorch.org/whl/cu124
 # uv pip install -e .
 # Usage:
-# (Windows) set ESPEAK_DATA_PATH=<path_to>\espeak-ng-data
 # tts --list_models
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_language_idxs
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_speaker_idxs
-# ./tts_speaker.sh <speaker> <output.wav> "<text>"
-# ./tts_speaker.sh <speaker> <output_dir> --file <filename>
-# (Windows) bash tts_speaker.sh ...
+# ./file.sh <speaker> <output.wav> "<text>"
+# ./file.sh <speaker> <output_dir> --file <filename>
+# (Windows) bash file.sh ...
 
 set -e
 
 model_path="tts_models/multilingual/multi-dataset/xtts_v2"
 language="en"
-flag=--device cuda
+flag="--device cuda"
 
 declare -A SPEAKERS=(
     ["SQ"]="Suad Qasim"          # female, low voice, 2
@@ -84,15 +83,16 @@ declare -A SPEAKERS=(
     ["MRu"]="Marcos Rudaski"
 )
 
+# Store the original directory where the script was called from
+ORIGINAL_DIR="$(pwd)"
+
 case "$OSTYPE" in
     linux-gnu*)
         VENV_ACT=".venv/bin/activate"
-        # Update the path
         BASE_DIR="$HOME/Usr/OptAud/coqui-ai-TTS"
         ;;
     msys|cygwin)
         VENV_ACT=".venv/Scripts/activate"
-        # Update the path
         BASE_DIR="/c/Users/$USERNAME/Usr/OptAud/coqui-ai-TTS"
         ;;
     *)
@@ -104,6 +104,7 @@ esac
 cleanup() {
     unset BASE_DIR
     unset VENV_ACT
+    unset ORIGINAL_DIR
     trap - EXIT
 }
 trap cleanup EXIT
@@ -153,9 +154,16 @@ tts_batch() {
         exit 1
     fi
 
+    # Check if the file exists (handles both relative and absolute paths)
     if [ ! -f "$input_file" ]; then
-        echo "Error: Input file '$input_file' not found."
-        exit 1
+        # Try looking in the original directory
+        if [ -f "$ORIGINAL_DIR/$input_file" ]; then
+            input_file="$ORIGINAL_DIR/$input_file"
+        else
+            echo "Error: Input file '$input_file' not found."
+            echo "Also checked: '$ORIGINAL_DIR/$input_file'"
+            exit 1
+        fi
     fi
 
     mkdir -p "$output_dir"
@@ -198,7 +206,18 @@ tts_batch() {
 }
 
 show_usage() {
-    echo "Opps! Please read the script's comments."
+    echo "Usage:"
+    echo "  $0 <speaker> <output.wav> \"<text>\""
+    echo "  $0 <speaker> <output_dir> --file <filename>"
+    echo ""
+    echo "Examples:"
+    echo "  $0 SQ output.wav \"Hello world\""
+    echo "  $0 SQ alice --file alice2_.txt"
+    echo ""
+    echo "Available speakers:"
+    for abbr in "${!SPEAKERS[@]}"; do
+        echo "  $abbr: ${SPEAKERS[$abbr]}"
+    done
 }
 
 main() {
@@ -207,20 +226,15 @@ main() {
         exit 1
     fi
 
-    if [ $# -ge 3 ] && [ "$2" = "--file" ]; then
-        if [ $# -lt 3 ]; then
-            echo "Error: Batch mode requires a filename after --file"
-            echo ""
-            show_usage
-            exit 1
-        fi
-
+    # Check for batch mode (must have at least 4 args and third is "--file")
+    if [ $# -ge 4 ] && [ "$3" = "--file" ]; then
         local speaker="$1"
-        local input_file="$3"
-        local output_dir="${4:-output}"  # Default to "output" directory
+        local output_dir="$2"  # This is the output directory for batch mode
+        local input_file="$4"  # The filename comes after --file
 
         tts_batch "$speaker" "$input_file" "$output_dir"
     elif [ $# -ge 2 ]; then
+        # Single mode: speaker, text, [output_file]
         local speaker="$1"
         local text="$2"
         local output_file="${3:-output.wav}"  # Default to output.wav
