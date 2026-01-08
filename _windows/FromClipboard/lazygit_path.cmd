@@ -1,6 +1,6 @@
 @echo off
 REM Dependencies: powershell, lazygit
-REM Usage: script.cmd [path]
+REM Usage: file.cmd [path]
 
 set "target_path=%1"
 

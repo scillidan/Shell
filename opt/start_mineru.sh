@@ -17,7 +17,7 @@ case "$OSTYPE" in
         ;;
     msys|cygwin)
         # Update the path
-        BASE_DIR="/c/Users/$(whoami)/Usr/OptTxt/MinerU"
+        BASE_DIR="/c/Users/$USERNAME/Usr/OptTxt/MinerU"
         VENV_ACT=".venv/Scripts/activate"
         ;;
     *)

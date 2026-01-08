@@ -16,7 +16,7 @@ case "$OSTYPE" in
         ;;
     msys|cygwin)
         # Windows (Git Bash or Cygwin)
-        BASE_DIR="/c/Users/$(whoami)"
+        BASE_DIR="/c/Users/$USERNAME"
         ;;
     *)
         echo "Unsupported OS: $OSTYPE"

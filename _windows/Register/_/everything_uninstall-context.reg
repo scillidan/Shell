@@ -1,8 +1,8 @@
 Windows Registry Editor Version 5.00
 
-[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\dngrep]
-[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\dngrep\command]
-[-HKEY_CURRENT_USER\Software\Classes\Drive\shell\dngrep]
-[-HKEY_CURRENT_USER\Software\Classes\Drive\shell\dngrep\command]
-[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\dngrep]
-[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\dngrep\command]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Everything]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Everything\command]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Everything]
+[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Everything\command]
+[-HKEY_CURRENT_USER\Software\Classes\Drive\shell\Everything]
+[-HKEY_CURRENT_USER\Software\Classes\Drive\shell\Everything\command]

@@ -1,4 +1,4 @@
-# Text spliter.
+# Limit each line to the maximum length.
 # Authors: DeepSeek🧙‍♂️, scillidan🤡
 # Usage: python file.py <input_file> [output_file] [max_length]
 
@@ -12,7 +12,7 @@ def clean_text(text):
     if not text:
         return text
 
-    # Remove quotes and parentheses
+    # Remove quotes and parentheses>
     text = re.sub(r'["\'"()\[\]{}]', '', text)
 
     # Remove multiple spaces

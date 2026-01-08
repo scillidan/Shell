@@ -25,7 +25,7 @@ case "$OSTYPE" in
         ;;
     msys|cygwin)
         # Fill the path
-        BASE_DIR="/c/Users/$(whoami)/Usr/Shell/$VENV_DIR"
+        BASE_DIR="/c/Users/$USERNAME/Usr/Shell/$VENV_DIR"
         VENV_ACT="./Scripts/activate"
         ;;
     *)

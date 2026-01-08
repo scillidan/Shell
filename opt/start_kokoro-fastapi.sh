@@ -25,7 +25,7 @@ case "$OSTYPE" in
         ;;
     msys|cygwin)
         # Fill the path
-        BASE_DIR="/c/Users/$(whoami)/Usr/OptAud/Kokoro-FastAPI"
+        BASE_DIR="/c/Users/$USERNAME/Usr/OptAud/Kokoro-FastAPI"
         VENV_ACT=".venv/Scripts/activate"
         ;;
     *)

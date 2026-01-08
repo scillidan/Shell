@@ -1,6 +1,6 @@
 @echo off
 REM Dependence: powershell, gsudo, pipe-rename
-REM Usage: script.cmd [path]
+REM Usage: file.cmd [path]
 
 set "target_path=%1"
 

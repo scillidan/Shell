@@ -93,7 +93,7 @@ case "$OSTYPE" in
     msys|cygwin)
         VENV_ACT=".venv/Scripts/activate"
         # Update the path
-        BASE_DIR="/c/Users/$(whoami)/Usr/OptAud/coqui-ai-TTS"
+        BASE_DIR="/c/Users/$USERNAME/Usr/OptAud/coqui-ai-TTS"
         ;;
     *)
         echo "Unsupported OS: $OSTYPE"

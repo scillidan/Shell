@@ -15,7 +15,7 @@ case "$OSTYPE" in
         ;;
     msys|cygwin)
         # Update the path
-        BASE_DIR="/c/Users/$(whoami)/Usr/OptAud/OpenReader-WebUI"
+        BASE_DIR="/c/Users/$USERNAME/Usr/OptAud/OpenReader-WebUI"
         ;;
     *)
         echo "Unsupported OS: $OSTYPE"

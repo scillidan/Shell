@@ -32,7 +32,6 @@ $binPath = @(
     # Opt that will do makelink for it .lnk on Startup\
     @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\Other\startup_mprocs_ahks.cmd"; Arguments = ""; WorkingDir = "" },
     @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\autohotkey\keyboard_autoswitch.exe"; Arguments = ""; WorkingDir = "" },
-    @{ Path = "$env:USERHOME\Usr\Git\Shell\_windows\autohotkey\keyboard_switch.exe"; Arguments = ""; WorkingDir = "" },
     @{ Path = "$env:SCOOP\apps\quickswitch\current\QuickSwitch.exe"; Arguments = ""; WorkingDir = "" },
     @{ Path = "$env:SCOOP\apps\shortscript\current\ShortScript.exe"; Arguments = ""; WorkingDir = "" },
     @{ Path = "$env:SCOOP\apps\togglescreen\current\ToggleScreen.exe"; Arguments = ""; WorkingDir = "" }

@@ -1,5 +1,7 @@
 @echo off
-REM Dependences: powershell, git
+REM Dependences: powershell, repomix
+REM Install:
+REM bun add -g repomix
 REM Usage:
 REM 1. Copy a repo URL
 REM 2. file.cmd <path>
@@ -20,15 +22,14 @@ if "%~1"=="" (
 
 set "workdir=%~1"
 
-echo Cloning: %url% into %workdir%
+echo Packs: %url%
 pushd %workdir%
-git clone --depth=1 "%url%"
+repomix --remote "%url%" --output _repomix.xml
 popd
 
 if not errorlevel 1 (
-    echo Clone successful!
-    echo Run `git fetch --unshallow` for full history
+    echo Packs successful!
 ) else (
-    echo Clone failed!
+    echo Packs failed!
     pause
 )

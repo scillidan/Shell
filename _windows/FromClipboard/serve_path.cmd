@@ -1,6 +1,6 @@
 @echo off
 REM Dependences: powershell, serve
-REM Usage: script.cmd <dir>
+REM Usage: file.cmd <dir>
 
 set "target_path=%1"
 

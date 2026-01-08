@@ -1,6 +1,6 @@
 @echo off
 REM Dependence: powershell, code2prompt
-REM Usage: script.cmd [path]
+REM Usage: file.cmd [path]
 
 set "target_path=%1"
 
