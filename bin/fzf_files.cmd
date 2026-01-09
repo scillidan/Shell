@@ -12,7 +12,7 @@ REM After switching modes, the sorting of Files mode will change. I don't know w
 setlocal
 
 REM Optionals
-set FD=fd -t l -p -E ".git" -E ".venv" -E "__pycache__" -E "node_modules" -E "public" -E "site"
+set FD=fd -H -t l -p -E ".git" -E ".venv" -E "__pycache__" -E "node_modules" -E "public" -E "site"
 set RG=rg --files --hidden --follow --glob "!.git" --glob "!.venv" --glob "!__pycache__" --glob "!node_modules" --glob "!public" --glob "!site"
 set ES=es -match-path "*" -path .
 
@@ -22,12 +22,11 @@ set EZA=eza --tree --icons --classify --group-directories-first --git
 set ERD=erd --layout inverted --color auto --human --sort name --dir-order first --hidden --follow
 
 set BAT=bat --force-colorization --style=numbers,changes --line-range=:500
-REM
-set PREVIEW_SCRIPT=fzf-preview.cmd
 
 set SEARCH_FILE=%FD% -t f
 set SEARCH_DIR=%FD% -t d
-set PREVIEW_FILE=%PREVIEW_SCRIPT%
+set OPEN_FILE=fzf-open.cmd
+set PREVIEW_FILE=fzf-preview.cmd
 set REVIEW_DIR=%DIRX%
 
 REM fzf

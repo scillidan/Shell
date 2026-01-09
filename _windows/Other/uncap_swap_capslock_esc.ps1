@@ -1,0 +1,1 @@
+Start-Process -WindowStyle Hidden -FilePath "uncap" -ArgumentList "-c 0x1b:0x14"

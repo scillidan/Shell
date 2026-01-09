@@ -5,7 +5,7 @@
 #     "langid"
 # ]
 # ///
-#
+
 # Tencent Cloud Translation API wrapper for translate Multi-language to Chinese or translate Chinese to English.
 # Reference: https://github.com/LexsionLee/tencent-translate-for-goldendict
 # Authors: DeepSeek🧙, scillidan🤡
@@ -15,9 +15,9 @@
 # TENCENT_SECRET_ID=<YOUR_SECRET_ID>
 # TENCENT_SECRET_KEY=<YOUR_SECRET_KEY>
 # Useage:
-# uv run file.py [--original-text] "<input>"
-# echo <text> | uv run file.py [--stdin]
-# cat file.txt | uv run file.py [--stdin]
+# uv run file.py "<input>"
+# echo <text> | uv run file.py
+# cat file.txt | uv run file.py
 
 import json
 import sys
@@ -25,6 +25,7 @@ import os
 import argparse
 import textwrap
 import unicodedata
+import re
 import codecs
 from typing import Optional, Tuple, List
 import langid
@@ -41,6 +42,9 @@ SECRET_KEY = os.getenv("TENCENT_SECRET_KEY")
 REGION = "ap-shanghai"
 PROJECT_ID = 0
 
+# Ensure stdout uses UTF-8 encoding
+sys.stdout.reconfigure(encoding='utf-8')
+
 
 def clean_surrogates(text: str) -> str:
     """Remove or replace surrogate characters."""
@@ -54,36 +58,6 @@ def clean_surrogates(text: str) -> str:
     )
 
     return cleaned
-
-
-def read_input_with_encoding(fileobj):
-    """Read input with proper encoding handling."""
-    # Try UTF-8 first
-    try:
-        content = fileobj.buffer.read()
-        return content.decode('utf-8')
-    except UnicodeDecodeError:
-        # Try UTF-16 if UTF-8 fails
-        try:
-            fileobj.buffer.seek(0)
-            bom = fileobj.buffer.read(2)
-            fileobj.buffer.seek(0)
-
-            if bom == b'\xff\xfe' or bom == b'\xfe\xff':
-                # UTF-16 with BOM
-                return fileobj.buffer.read().decode('utf-16')
-            else:
-                # Try UTF-16 LE/BE without BOM
-                try:
-                    fileobj.buffer.seek(0)
-                    return fileobj.buffer.read().decode('utf-16-le')
-                except:
-                    fileobj.buffer.seek(0)
-                    return fileobj.buffer.read().decode('utf-16-be')
-        except:
-            # Fall back to latin-1 (never fails)
-            fileobj.buffer.seek(0)
-            return fileobj.buffer.read().decode('latin-1', errors='replace')
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -122,14 +96,9 @@ def parse_arguments() -> argparse.Namespace:
         help='Output translation in HTML format'
     )
     parser.add_argument(
-        '--stdin',
+        '--utf16',
         action='store_true',
-        help='Read input from stdin instead of arguments'
-    )
-    parser.add_argument(
-        '--debug',
-        action='store_true',
-        help='Enable debug output'
+        help='Output translation in UTF-16 encoding'
     )
     return parser.parse_args()
 
@@ -142,7 +111,7 @@ def normalize_text(text: str) -> str:
     if not text:
         return ""
 
-    # First clean surrogate characters
+    # First clean any surrogate characters
     text = clean_surrogates(text)
 
     # Normalize Unicode characters
@@ -152,14 +121,30 @@ def normalize_text(text: str) -> str:
         # If normalization fails, return the cleaned text
         normalized = text
 
-    # Remove control characters that might cause issues
-    problematic_chars = ['\x00', '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07',
-                       '\x08', '\x0b', '\x0c', '\x0e', '\x0f',
-                       '\u200b', '\u200c', '\u200d', '\ufeff']  # Zero-width spaces and BOM
+    # Remove other problematic control characters
+    problematic_chars = [
+        '\x00', '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07',
+        '\x08', '\x0b', '\x0c', '\x0e', '\x0f',
+        '\u200b', '\u200c', '\u200d', '\ufeff'  # Zero-width spaces and BOM
+    ]
     for char in problematic_chars:
         normalized = normalized.replace(char, '')
 
-    return normalized.strip()
+    return normalized
+
+
+def safe_json_dumps(obj, ensure_ascii: bool = False) -> str:
+    """Safely serialize JSON with surrogate character handling."""
+    # First convert to JSON string
+    try:
+        json_str = json.dumps(obj, ensure_ascii=ensure_ascii)
+    except UnicodeEncodeError:
+        # If that fails, try with ensure_ascii=True
+        json_str = json.dumps(obj, ensure_ascii=True)
+
+    # Clean any remaining surrogates
+    json_str = clean_surrogates(json_str)
+    return json_str
 
 
 def detect_language(text: str) -> Optional[str]:
@@ -233,26 +218,11 @@ def initialize_tencent_client() -> Optional[tmt_client.TmtClient]:
         raise Exception(f"Failed to initialize Tencent Cloud client: {str(e)}")
 
 
-def safe_json_dumps(obj, ensure_ascii=False):
-    """Safely serialize JSON with surrogate character handling."""
-    # First convert to JSON string
-    try:
-        json_str = json.dumps(obj, ensure_ascii=ensure_ascii)
-    except UnicodeEncodeError:
-        # If that fails, try with ensure_ascii=True
-        json_str = json.dumps(obj, ensure_ascii=True)
-
-    # Clean any remaining surrogates
-    json_str = clean_surrogates(json_str)
-    return json_str
-
-
 def translate_text(
     text: str,
     source_lang: str,
     target_lang: str,
-    silent: bool = False,
-    debug: bool = False
+    silent: bool = False
 ) -> Tuple[Optional[str], Optional[str]]:
     """
     Translate text using Tencent Cloud Translation API
@@ -265,9 +235,6 @@ def translate_text(
     normalized_text = normalize_text(text)
     if not normalized_text:
         return None, None
-
-    if debug:
-        print(f"<!-- Normalized text: '{text[:100]}' -> '{normalized_text[:100]}' -->", file=sys.stderr)
 
     try:
         # Initialize client
@@ -284,9 +251,6 @@ def translate_text(
 
         # Use safe JSON serialization
         json_str = safe_json_dumps(params, ensure_ascii=False)
-        if debug:
-            print(f"<!-- Request params: {json_str[:500]}... -->", file=sys.stderr)
-
         req.from_json_string(json_str)
 
         # Send request
@@ -297,36 +261,67 @@ def translate_text(
         translated_text = dict_resp.get('TargetText')
 
         if translated_text:
-            # Clean the response text as well
+            # Clean any surrogate characters from the response
             translated_text = clean_surrogates(translated_text)
             return translated_text, target_lang
         else:
             if not silent:
-                print(f"Warning: No translation returned for text: {text[:50]}...", file=sys.stderr)
+                print(f"Warning: No translation returned for text: {text[:50]}...")
             return None, None
 
     except TencentCloudSDKException as e:
         if not silent:
-            print(f"Tencent Cloud API Error: {str(e)}", file=sys.stderr)
+            print(f"Tencent Cloud API Error: {str(e)}")
 
         # Provide more specific error messages
         error_code = str(e)
         if "AuthFailure" in error_code:
             if not silent:
-                print("Authentication failed. Please check your SecretId and SecretKey.", file=sys.stderr)
+                print("Authentication failed. Please check your SecretId and SecretKey.")
         elif "RequestLimitExceeded" in error_code:
             if not silent:
-                print("API rate limit exceeded. Please wait and try again.", file=sys.stderr)
+                print("API rate limit exceeded. Please wait and try again.")
         elif "FailedOperation.NoFreeAmount" in error_code:
             if not silent:
-                print("Free quota exhausted. Please upgrade to paid service.", file=sys.stderr)
+                print("Free quota exhausted. Please upgrade to paid service.")
 
         return None, None
 
     except Exception as e:
         if not silent:
-            print(f"Unexpected error: {str(e)}", file=sys.stderr)
+            print(f"Unexpected error: {str(e)}")
         return None, None
+
+
+def translate_multiline(
+    text: str,
+    source_lang: str,
+    target_lang: str,
+    silent: bool = False
+) -> Tuple[Optional[str], Optional[str]]:
+    """
+    Translate multi-line text, preserving line breaks
+    Returns: (translated_text, target_language_code)
+    """
+    if not text or not text.strip():
+        return None, None
+
+    lines = text.split('\n')
+    translated_lines = []
+
+    for i, line in enumerate(lines):
+        if line.strip():  # Only translate non-empty lines
+            translated_line, lang = translate_text(line, source_lang, target_lang, silent)
+            if translated_line:
+                translated_lines.append(translated_line)
+            else:
+                translated_lines.append(line)  # Keep original if translation fails
+        else:
+            translated_lines.append("")  # Keep empty lines
+
+    # Reconstruct with original line breaks
+    result = '\n'.join(translated_lines)
+    return result, target_lang
 
 
 def determine_translation_direction(source_lang: str) -> Tuple[str, str]:
@@ -349,30 +344,107 @@ def determine_translation_direction(source_lang: str) -> Tuple[str, str]:
             return source_lang, "en"
 
 
+def format_plaintext_output(original: str, translated: str, target_lang: str, show_original: bool = False) -> str:
+    """
+    Format plain text output, preserving original line breaks
+    """
+    if not translated:
+        return ""
+
+    # Clean up translation
+    clean_translation = translated.strip()
+
+    output = clean_translation
+
+    # Add original text if requested
+    if show_original:
+        separator = "\n"
+        output += separator + original
+
+    return output
+
+
+def format_html_output(original: str, translated: str, target_lang: str, show_original: bool = False) -> str:
+    """
+    Generate HTML output formatted for GoldenDict display
+    """
+    if not translated:
+        return ""
+
+    # Clean up translation
+    clean_translation = translated.strip()
+
+    # Split into lines
+    lines = clean_translation.split('\n')
+    source_lines = original.split('\n') if show_original else []
+
+    # Create HTML with minimal styling
+    html_output = '''<div style="margin: 0; padding: 0;">'''
+
+    for i, line in enumerate(lines):
+        if line.strip():
+            html_output += f'<p style="margin: 0; padding: 0">{line}</p>'
+        elif i < len(lines) - 1:  # Only add empty line if it's not the last line
+            html_output += '<p style="margin: 0; padding: 0">&nbsp;</p>'
+
+    html_output += '</div>'
+
+    # Add original text if requested
+    if show_original and source_lines:
+        html_output += '<div style="margin: 0; padding: 0;">'
+        for i, line in enumerate(source_lines):
+            if line.strip():
+                html_output += f'<p style="margin: 0; padding: 0">{line}</p>'
+            elif i < len(source_lines) - 1:
+                html_output += '<p style="margin: 0; padding: 0">&nbsp;</p>'
+        html_output += '</div>'
+
+    return html_output
+
+
+def read_input_with_encoding(fileobj):
+    """Read input with proper encoding handling."""
+    # Try UTF-8 first
+    try:
+        content = fileobj.buffer.read()
+        return content.decode('utf-8')
+    except UnicodeDecodeError:
+        # Try UTF-16 if UTF-8 fails
+        try:
+            fileobj.buffer.seek(0)
+            bom = fileobj.buffer.read(2)
+            fileobj.buffer.seek(0)
+
+            if bom == b'\xff\xfe' or bom == b'\xfe\xff':
+                # UTF-16 with BOM
+                return fileobj.buffer.read().decode('utf-16')
+            else:
+                # Try UTF-16 LE/BE without BOM
+                try:
+                    fileobj.buffer.seek(0)
+                    return fileobj.buffer.read().decode('utf-16-le')
+                except:
+                    fileobj.buffer.seek(0)
+                    return fileobj.buffer.read().decode('utf-16-be')
+        except:
+            # Fall back to latin-1 (never fails)
+            fileobj.buffer.seek(0)
+            return fileobj.buffer.read().decode('latin-1', errors='replace')
+
+
 def main():
     """Main execution function with improved error handling"""
     args = parse_arguments()
 
     # Read input text
-    source_text = ''
-    if args.stdin:
-        # Read from stdin with encoding detection
-        source_text = read_input_with_encoding(sys.stdin)
-        # Remove trailing newlines
-        if source_text.endswith('\n'):
-            source_text = source_text.rstrip('\n')
-    elif args.text:
+    if args.text:
         source_text = args.text
     else:
         try:
-            # Try to read from stdin
             source_text = read_input_with_encoding(sys.stdin)
-            # Remove trailing newlines
-            if source_text.endswith('\n'):
-                source_text = source_text.rstrip('\n')
         except Exception as e:
             if not args.silent:
-                print(f"Error reading from stdin: {e}", file=sys.stderr)
+                print(f"Error reading input: {str(e)}", file=sys.stderr)
             sys.exit(1)
 
     if not source_text:
@@ -380,16 +452,8 @@ def main():
             print("Error: Empty input text", file=sys.stderr)
         sys.exit(1)
 
-    if args.debug:
-        print(f"<!-- Input text length: {len(source_text)} -->", file=sys.stderr)
-        if source_text:
-            print(f"<!-- First 200 chars: {repr(source_text[:200])} -->", file=sys.stderr)
-
-    # Clean the source text of surrogate characters
-    source_text = clean_surrogates(source_text)
-
-    if args.debug and source_text != args.text and not args.stdin:
-        print(f"<!-- Cleaned text (removed surrogates) -->", file=sys.stderr)
+    # Remove trailing whitespace characters (including newlines)
+    source_text = source_text.rstrip('\r\n')
 
     # Detect source language
     source_lang = detect_language(source_text)
@@ -398,54 +462,45 @@ def main():
             print(f"Warning: Could not detect language for: {source_text[:50]}...", file=sys.stderr)
         source_lang = 'en'  # Default to English
 
-    if args.debug:
-        print(f"<!-- Detected language: {source_lang} -->", file=sys.stderr)
-
     # Determine translation direction
     actual_source, target_lang = determine_translation_direction(source_lang)
 
-    if args.debug:
-        print(f"<!-- Translation direction: {actual_source} -> {target_lang} -->", file=sys.stderr)
-
     # Perform translation
-    translated_text, final_target_lang = translate_text(
-        source_text,
-        actual_source,
-        target_lang,
-        silent=args.silent,
-        debug=args.debug
-    )
+    if source_text.count('\n') > 0:  # Multi-line text
+        translated_text, final_target_lang = translate_multiline(
+            source_text,
+            actual_source,
+            target_lang,
+            silent=args.silent
+        )
+    else:  # Single line text
+        translated_text, final_target_lang = translate_text(
+            source_text,
+            actual_source,
+            target_lang,
+            silent=args.silent
+        )
 
     # Output result
     if translated_text:
+        # Format output
         if args.html:
-            # Generate clean HTML output
-            lines = translated_text.split('\n')
-            html_output = '''<div style="margin: 0; padding: 0;">'''
-
-            for i, line in enumerate(lines):
-                if line.strip():
-                    html_output += f'<p style="margin: 0; padding: 0">{line}</p>'
-                elif i < len(lines) - 1:  # Only add empty line if it's not the last line
-                    html_output += '<p style="margin: 0; padding: 0">&nbsp;</p>'
-                # If it's the last empty line, skip it
-
-            html_output += '</div>'
-            print(html_output)
+            output_text = format_html_output(source_text, translated_text, final_target_lang, args.original_text)
         else:
-            # Plain text output
-            print(translated_text.strip())
+            output_text = format_plaintext_output(source_text, translated_text, final_target_lang, args.original_text)
+
+        # Output with or without UTF-16 encoding
+        if args.utf16:
+            encoded_output = output_text.encode("utf-16", errors="replace")
+            sys.stdout.buffer.write(encoded_output)
+            sys.stdout.buffer.flush()
+        else:
+            print(output_text)
     else:
         if not args.silent:
             print("Translation failed. Please check your API credentials and network connection.", file=sys.stderr)
         sys.exit(1)
 
-    # Output the original input text if requested
-    if args.original_text:
-        if args.html:
-            print(f'<div style="margin: 0; padding: 0;">{source_text}</div>')
-        else:
-            print(f"\n{source_text}")
 
 if __name__ == "__main__":
     main()
