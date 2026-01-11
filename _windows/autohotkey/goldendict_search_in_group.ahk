@@ -1,34 +1,29 @@
 ; Search current clipboard text in GoldenDict
 ; Authors: DeepSeek🧙‍♂️, scillidan🤡
 
-!z::
+SearchInGoldenDict(groupName) {
     oldClipboard := ClipboardAll
     Clipboard := ""
     Send, ^c
     ClipWait, 0.5
+
     if (Clipboard != "") {
         query := Trim(Clipboard)
-        ; Search in dictionary group
-        Run, goldendict --popup-group-name=default "%query%"
+        Run, goldendict --group-name=%groupName% "%query%"
         Clipboard := ""
         Sleep, 100
+    } else {
+        MsgBox, Not copied to any text, please select the word to query first.
     }
+
     Clipboard := oldClipboard
     oldClipboard := ""
+}
+
+!z::
+    SearchInGoldenDict("default")
     return
 
 !+z::
-    oldClipboard := ClipboardAll
-    Clipboard := ""
-    Send, ^c
-    ClipWait, 0.5
-    if (Clipboard != "") {
-        query := Trim(Clipboard)
-        ; Search in translate group
-        Run, goldendict --popup-group-name=translate "%query%"
-        Clipboard := ""
-        Sleep, 100
-    }
-    Clipboard := oldClipboard
-    oldClipboard := ""
+    SearchInGoldenDict("translate")
     return

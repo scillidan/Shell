@@ -10,12 +10,10 @@ trap cleanup EXIT
 
 case "$OSTYPE" in
     linux-gnu*)
-        # Update the path
-        BASE_DIR="$HOME\Usr\OptAud\OpenReader-WebUI"
+        BASE_DIR="$HOME"
         ;;
     msys|cygwin)
-        # Update the path
-        BASE_DIR="/c/Users/$USERNAME/Usr/OptAud/OpenReader-WebUI"
+        BASE_DIR="/c/Users/$USERNAME"
         ;;
     *)
         echo "Unsupported OS: $OSTYPE"
@@ -23,7 +21,8 @@ case "$OSTYPE" in
         ;;
 esac
 
-pushd "$BASE_DIR" || exit 1
+# Fill the path
+pushd "$BASE_DIR/Usr/OptAud/OpenReader-WebUI" || exit 1
 
 pnpm start
 

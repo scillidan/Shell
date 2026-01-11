@@ -19,13 +19,12 @@ trap cleanup EXIT
 
 case "$OSTYPE" in
     linux-gnu*)
-        # Fill the path
-        BASE_DIR="$HOME/Usr/OptAud/Kokoro-FastAPI"
+        BASE_DIR="$HOME"
         VENV_ACT=".venv/bin/activate"
         ;;
     msys|cygwin)
         # Fill the path
-        BASE_DIR="/c/Users/$USERNAME/Usr/OptAud/Kokoro-FastAPI"
+        BASE_DIR="/c/Users/$USERNAME"
         VENV_ACT=".venv/Scripts/activate"
         ;;
     *)
@@ -34,7 +33,8 @@ case "$OSTYPE" in
         ;;
 esac
 
-pushd "$BASE_DIR" || exit 1
+# Fill the path
+pushd "$BASE_DIR/Usr/OptAud/Kokoro-FastAPI" || exit 1
 
 if [ -f "$VENV_ACT" ]; then
     source "$VENV_ACT"
@@ -43,9 +43,6 @@ else
     exit 1
 fi
 
-## For espeak-ng on Windows
-# export PHONEMIZER_ESPEAK_LIBRARY=libespeak-ng.dll
-# export PHONEMIZER_ESPEAK_PATH=espeak-ng.exe
 export PYTHONUTF8=1
 export PROJECT_ROOT=$(pwd)
 export USE_GPU=true

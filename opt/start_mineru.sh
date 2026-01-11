@@ -11,13 +11,11 @@ trap cleanup EXIT
 
 case "$OSTYPE" in
     linux-gnu*)
-        # Update the path
-        BASE_DIR="$HOME/Usr/OptTxt/MinerU"
+        BASE_DIR="$HOME"
         VENV_ACT=".venv/bin/activate"
         ;;
     msys|cygwin)
-        # Update the path
-        BASE_DIR="/c/Users/$USERNAME/Usr/OptTxt/MinerU"
+        BASE_DIR="/c/Users/$USERNAME"
         VENV_ACT=".venv/Scripts/activate"
         ;;
     *)
@@ -26,7 +24,7 @@ case "$OSTYPE" in
         ;;
 esac
 
-pushd "$BASE_DIR" || exit 1
+pushd "$BASE_DIR/Usr/OptTxt/MinerU" || exit 1
 
 source "$VENV_ACT"
 # export MINERU_VIRTUAL_VRAM_SIZE=10
