@@ -132,6 +132,9 @@ for %%d in (%CONFIG_GLOBAL%) do (
     rem git clone --depth=1 https://github.com/christoph-heinrich/mpv-subtitle-lines
     mklink "%%d\scripts\subtitle-lines.lua" "%MPV_SRC%\mpv-subtitle-lines\subtitle-lines.lua"
 
+    rem git clone --depth=1 https://github.com/magnum357i/mpv-sidebarsubtitles
+    mklink /J "%%d\scripts\sidebarsubtitles" "%MPV_SRC%\mpv-sidebarsubtitles\sidebarsubtitles"
+
     echo Stream
 
     rem git clone --depth=1 https://github.com/mpv-player/mpv

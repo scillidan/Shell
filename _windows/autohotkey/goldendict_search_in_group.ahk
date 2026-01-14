@@ -3,15 +3,10 @@
 
 SearchInGoldenDict(groupName) {
     oldClipboard := ClipboardAll
-    Clipboard := ""
-    Send, ^c
-    ClipWait, 0.5
+    query := Trim(Clipboard)
 
-    if (Clipboard != "") {
-        query := Trim(Clipboard)
+    if (query != "") {
         Run, goldendict --group-name=%groupName% "%query%"
-        Clipboard := ""
-        Sleep, 100
     } else {
         MsgBox, Not copied to any text, please select the word to query first.
     }
