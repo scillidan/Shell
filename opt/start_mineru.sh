@@ -1,4 +1,6 @@
 #!/bin/bash
+# Usage:
+# (bash) file.sh
 
 set -e
 

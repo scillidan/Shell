@@ -6,6 +6,8 @@
 # cd subtitle-translator
 # yarn
 # yarn build:lang en
+# Usage:
+# (bash) file.sh
 
 set -e
 

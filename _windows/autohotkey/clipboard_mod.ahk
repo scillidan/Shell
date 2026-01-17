@@ -3,6 +3,7 @@ mode := false
 lastClipboard := ""
 targetExe := ""
 
+; Ctrl+Alt+Shift+g
 ^!+g::
 	mode := !mode
 	if (mode) {

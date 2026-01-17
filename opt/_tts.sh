@@ -1,5 +1,6 @@
 #!/bin/bash
-# CLI shell for https://github.com/coqui-ai/TTS
+
+# CLI shell for https://github.com/coqui-ai/TTS.
 # Authors: DeepSeek🧙‍♂️, scillidan🤡
 # Dependencies: CUDA (tested on 12.4)
 # Installation:
@@ -15,6 +16,8 @@
 # ./file.sh <speaker> <output.wav> "<text>"
 # ./file.sh <speaker> <output_dir> --file <filename>
 # (Windows) bash file.sh ...
+# Annex:
+# https://github.com/scillidan/example_TTS
 
 set -e
 

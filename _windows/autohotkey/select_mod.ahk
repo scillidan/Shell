@@ -2,6 +2,7 @@
 mode := false
 targetExe := ""
 
+; Ctrl+Alt+g
 ^!g::
 	mode := !mode
 	if (mode) {
