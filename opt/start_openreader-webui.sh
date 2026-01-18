@@ -1,4 +1,18 @@
 #!/bin/bash
+# OpenReader-WebUI
+# Source: https://github.com/richardr1126/OpenReader-WebUI
+# Install:
+# git clone --depth=1 https://github.com/richardr1126/OpenReader-WebUI
+# cd OpenReader-WebUI
+# pnpm i
+# cp template.env .env
+# subl .env
+# (Kokoro-FastAPI)
+# API_BASE=http://localhost:8880/v1/
+# pnpm build
+# pnpm start
+# Usage:
+# (bash) file.sh
 
 set -e
 

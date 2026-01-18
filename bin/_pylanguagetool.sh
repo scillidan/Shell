@@ -2,8 +2,7 @@
 # Activate Python virtual environment and run PyLanguageTool.
 # Dependencies: pylanguagetool
 # Usage:
-# (Linux) ./file.sh
-# (Windows) bash ./file.sh
+# (bash) ./file.sh
 
 cleanup() {
     unset BASE_DIR

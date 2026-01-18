@@ -16,8 +16,7 @@ set "name=%~n1"
 set "ext=%~x1"
 if "%ext%"=="" set "ext=.txt"
 
-echo Splitting: %input%
-split.exe -b 10MB "%input%" "%name%_"
+split -b 10MB "%input%" "%name%_"
 
 set /a count=1
 for %%f in ("%name%_*") do (
