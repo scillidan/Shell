@@ -24,7 +24,7 @@ set "workdir=%~1"
 
 echo Packs: %url%
 pushd %workdir%
-repomix --remote "%url%" --output _repomix.xml
+repomix --remote "%url%" --style markdown --output _repomix.md
 popd
 
 if not errorlevel 1 (
