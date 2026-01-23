@@ -213,9 +213,9 @@ for %%d in (%CONFIG_DIR_MANGA%) do (
 )
 
 rmdir /S /Q %MPV_DATA%
-mkdir %MPV_DATA%
-fastcopy /open_window /auto_close "%MPVC_VIDEO%" /to="%MPV_DATA%"
-echo(
+rem mkdir %MPV_DATA%
+rem fastcopy /open_window /auto_close "%MPVC_VIDEO%" /to="%MPV_DATA%"
+mklink /J "%MPV_DATA%" "%MPVC_VIDEO%"
 
 endlocal
 
