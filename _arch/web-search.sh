@@ -51,7 +51,7 @@ URLS=(
 	["open-vsx.org"]="https://open-vsx.org/?sortBy=relevance&sortOrder=desc&search="
 	["marketplace.visualstudio.com"]="https://marketplace.visualstudio.com/search?target=VSCode&category=All%20categories&sortBy=Relevance&term="
 	# Video
-	["animegarden"]="https://gm-anime-garden.vercel.app/resources/1?search="
+	["animegarden"]="https://animes.garden/resources/1?search=Sousou&search=no&search="
 	["nyaa.si"]="https://nyaa.si/?f=0&c=3_0&q="
 	["imdb.com"]="https://www.imdb.com/find?q="
 	["jackett"]="http://ubuntu22:9117/UI/Dashboard#filter=all&search="
