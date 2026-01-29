@@ -1,4 +1,4 @@
-# Generate chapters, concat audio, and merge lrc
+# Generate chapters, concat audio, and merge .lrc
 # Authors: MiniMax-M2.1🧙‍♂️, scillidan🤡
 # Usage: python file.py --chapters --concat --lyrics <dir>
 
