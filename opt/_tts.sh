@@ -13,6 +13,7 @@
 # tts --list_models
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_language_idxs
 # tts --model_name "tts_models/multilingual/multi-dataset/xtts_v2" --list_speaker_idxs
+# tts --text "<text>" --model_path "<path_to>" --config_path "<path_to>\config.json" --language_idx "en" --speaker_wav "<path_to>\ref.wav" --out_path output.wav
 # ./file.sh <speaker> <output.wav> "<text>"
 # ./file.sh <speaker> <output_dir> --file <filename>
 # (Windows) bash file.sh ...

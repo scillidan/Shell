@@ -4,6 +4,7 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Ollama.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CapsLock Input Method Switcher (Non Cursor).lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\CenterTaskbar.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Caffeine.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\DeskPins.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Ditto.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\dnGREP.lnk",
@@ -20,6 +21,7 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\T-Clock.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Virtual Desktop Manager.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Win10_BrightnessSlider.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Zeal.lnk"
     # Opt that set it run at startup
     # "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\AltBacktick.lnk"
