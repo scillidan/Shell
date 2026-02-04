@@ -20,7 +20,7 @@ $lnkPath = @(
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Sizer.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\T-Clock.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Tailscale.lnk",
-    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Virtual Desktop Manager.lnk",
+    "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\virgo.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Win10_BrightnessSlider.lnk",
     "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Scoop Apps\Zeal.lnk"
     # Opt that set it run at startup
