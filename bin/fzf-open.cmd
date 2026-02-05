@@ -19,6 +19,8 @@ if /i "!EXT!" == "cmd" (
     bash "%~1"
 ) else if /i "!EXT!" == "py" (
     uv run "%~1"
+) else if /i "!EXT!" == "md" (
+    dawn "%~1"
 ) else (
     execute "%~1"
 )
