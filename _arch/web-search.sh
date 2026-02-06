@@ -36,6 +36,7 @@ URLS=(
 	["cheatsheets.zip"]="https://cheatsheets.zip/?q="
 	["devdocs.io"]="https://devdocs.io/#q="
 	["mankier.com"]="https://www.mankier.com/1/"
+	["typst-examples-book"]="https://sitandr.github.io/typst-examples-book/book/basics/index.html?search="
 	["zealusercontributions"]="https://zealusercontributions.vercel.app/search?q="
 	# Opt
 	["alternativeto.net"]="https://alternativeto.net/browse/search/?q="

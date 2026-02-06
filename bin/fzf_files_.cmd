@@ -22,7 +22,7 @@ set FZF_DEFAULT_COMMAND=rg --files
 set FLAG=--layout=reverse --border none --preview-border none --no-scrollbar --no-separator --inline-info
 set BIND=--bind "ctrl-k:preview-up,ctrl-j:preview-down,ctrl-h:preview-page-up,ctrl-l:preview-page-down,ctrl-t:toggle-preview"
 set BIND_OPEN=--bind "enter:execute(less -RN {+})+abort"
-set BIND_VIEW=--bind "ctrl+e:execute(dawn {+})+abort"
+set BIND_VIEW=--bind "ctrl-e:execute(dawn {+})+abort"
 set PREVIEW=--preview "bat -f -p {}"
 set PREVIEW_WINDOW=--preview-window "up,80%%,+{2}+3/3,~2"
 
