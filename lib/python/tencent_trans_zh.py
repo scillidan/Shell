@@ -27,13 +27,31 @@ import textwrap
 import unicodedata
 import re
 import codecs
+import time
 from typing import Optional, Tuple, List
 import langid
+
+
+class RateLimiter:
+    def __init__(self, max_qps: float = 5.0):
+        self.min_interval = 1.0 / max_qps
+        self.last_call = 0.0
+
+    def wait(self):
+        elapsed = time.monotonic() - self.last_call
+        if elapsed < self.min_interval:
+            time.sleep(self.min_interval - elapsed)
+        self.last_call = time.monotonic()
+
+
+rate_limiter = RateLimiter(5.0)
 
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
-from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
+from tencentcloud.common.exception.tencent_cloud_sdk_exception import (
+    TencentCloudSDKException,
+)
 from tencentcloud.tmt.v20180321 import tmt_client, models
 
 
@@ -43,7 +61,7 @@ REGION = "ap-shanghai"
 PROJECT_ID = 0
 
 # Ensure stdout uses UTF-8 encoding
-sys.stdout.reconfigure(encoding='utf-8')
+sys.stdout.reconfigure(encoding="utf-8")
 
 
 def clean_surrogates(text: str) -> str:
@@ -52,10 +70,7 @@ def clean_surrogates(text: str) -> str:
         return ""
 
     # Remove surrogate characters (U+D800 to U+DFFF)
-    cleaned = ''.join(
-        char for char in text
-        if not ('\ud800' <= char <= '\udfff')
-    )
+    cleaned = "".join(char for char in text if not ("\ud800" <= char <= "\udfff"))
 
     return cleaned
 
@@ -64,41 +79,37 @@ def parse_arguments() -> argparse.Namespace:
     """Parse command line arguments with improved error handling"""
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        description=textwrap.dedent('''
+        description=textwrap.dedent("""
             Tencent Cloud Translation for GoldenDict
             Automatically detects language and translates:
             - Non-Chinese to Chinese
             - Chinese to English
             Supports languages listed at: https://cloud.tencent.com/document/api/551/15620
-        ''')
+        """),
     )
     parser.add_argument(
-        'text',
-        metavar='TEXT',
+        "text",
+        metavar="TEXT",
         type=str,
-        nargs='?',
-        default='',
-        help='Text to translate (reads from stdin if not provided)'
+        nargs="?",
+        default="",
+        help="Text to translate (reads from stdin if not provided)",
     )
     parser.add_argument(
-        '--silent',
-        action='store_true',
-        help='Suppress error messages (useful for GoldenDict integration)'
+        "--silent",
+        action="store_true",
+        help="Suppress error messages (useful for GoldenDict integration)",
     )
     parser.add_argument(
-        '--original-text',
-        action='store_true',
-        help='Show the original input text after translation'
+        "--original-text",
+        action="store_true",
+        help="Show the original input text after translation",
     )
     parser.add_argument(
-        '--html',
-        action='store_true',
-        help='Output translation in HTML format'
+        "--html", action="store_true", help="Output translation in HTML format"
     )
     parser.add_argument(
-        '--utf16',
-        action='store_true',
-        help='Output translation in UTF-16 encoding'
+        "--utf16", action="store_true", help="Output translation in UTF-16 encoding"
     )
     return parser.parse_args()
 
@@ -116,19 +127,33 @@ def normalize_text(text: str) -> str:
 
     # Normalize Unicode characters
     try:
-        normalized = unicodedata.normalize('NFKC', text)
+        normalized = unicodedata.normalize("NFKC", text)
     except:
         # If normalization fails, return the cleaned text
         normalized = text
 
     # Remove other problematic control characters
     problematic_chars = [
-        '\x00', '\x01', '\x02', '\x03', '\x04', '\x05', '\x06', '\x07',
-        '\x08', '\x0b', '\x0c', '\x0e', '\x0f',
-        '\u200b', '\u200c', '\u200d', '\ufeff'  # Zero-width spaces and BOM
+        "\x00",
+        "\x01",
+        "\x02",
+        "\x03",
+        "\x04",
+        "\x05",
+        "\x06",
+        "\x07",
+        "\x08",
+        "\x0b",
+        "\x0c",
+        "\x0e",
+        "\x0f",
+        "\u200b",
+        "\u200c",
+        "\u200d",
+        "\ufeff",  # Zero-width spaces and BOM
     ]
     for char in problematic_chars:
-        normalized = normalized.replace(char, '')
+        normalized = normalized.replace(char, "")
 
     return normalized
 
@@ -161,30 +186,30 @@ def detect_language(text: str) -> Optional[str]:
 
         # Map to Tencent Cloud language codes
         lang_map = {
-            'zh': 'zh',      # Chinese
-            'en': 'en',      # English
-            'ja': 'ja',      # Japanese
-            'ko': 'ko',      # Korean
-            'fr': 'fr',      # French
-            'de': 'de',      # German
-            'es': 'es',      # Spanish
-            'it': 'it',      # Italian
-            'ru': 'ru',      # Russian
-            'pt': 'pt',      # Portuguese
-            'ar': 'ar',      # Arabic
-            'th': 'th',      # Thai
-            'vi': 'vi',      # Vietnamese
-            'ms': 'ms',      # Malay
+            "zh": "zh",  # Chinese
+            "en": "en",  # English
+            "ja": "ja",  # Japanese
+            "ko": "ko",  # Korean
+            "fr": "fr",  # French
+            "de": "de",  # German
+            "es": "es",  # Spanish
+            "it": "it",  # Italian
+            "ru": "ru",  # Russian
+            "pt": "pt",  # Portuguese
+            "ar": "ar",  # Arabic
+            "th": "th",  # Thai
+            "vi": "vi",  # Vietnamese
+            "ms": "ms",  # Malay
         }
 
         # Return mapped language or default to English
-        return lang_map.get(detected_lang, 'en')
+        return lang_map.get(detected_lang, "en")
 
     except Exception as e:
         # Fallback detection for robustness
-        if any('\u4e00' <= char <= '\u9fff' for char in text):
-            return 'zh'
-        return 'en'  # Default to English
+        if any("\u4e00" <= char <= "\u9fff" for char in text):
+            return "zh"
+        return "en"  # Default to English
 
 
 def initialize_tencent_client() -> Optional[tmt_client.TmtClient]:
@@ -193,7 +218,9 @@ def initialize_tencent_client() -> Optional[tmt_client.TmtClient]:
     Handles credential validation and client setup
     """
     if not SECRET_ID or not SECRET_KEY:
-        raise ValueError("API credentials not configured. Please set SECRET_ID and SECRET_KEY.")
+        raise ValueError(
+            "API credentials not configured. Please set SECRET_ID and SECRET_KEY."
+        )
 
     try:
         # Initialize credentials
@@ -219,10 +246,7 @@ def initialize_tencent_client() -> Optional[tmt_client.TmtClient]:
 
 
 def translate_text(
-    text: str,
-    source_lang: str,
-    target_lang: str,
-    silent: bool = False
+    text: str, source_lang: str, target_lang: str, silent: bool = False
 ) -> Tuple[Optional[str], Optional[str]]:
     """
     Translate text using Tencent Cloud Translation API
@@ -246,7 +270,7 @@ def translate_text(
             "SourceText": normalized_text,
             "Source": source_lang,
             "Target": target_lang,
-            "ProjectId": PROJECT_ID
+            "ProjectId": PROJECT_ID,
         }
 
         # Use safe JSON serialization
@@ -258,7 +282,7 @@ def translate_text(
         dict_resp = json.loads(resp.to_json_string())
 
         # Extract translation
-        translated_text = dict_resp.get('TargetText')
+        translated_text = dict_resp.get("TargetText")
 
         if translated_text:
             # Clean any surrogate characters from the response
@@ -277,7 +301,9 @@ def translate_text(
         error_code = str(e)
         if "AuthFailure" in error_code:
             if not silent:
-                print("Authentication failed. Please check your SecretId and SecretKey.")
+                print(
+                    "Authentication failed. Please check your SecretId and SecretKey."
+                )
         elif "RequestLimitExceeded" in error_code:
             if not silent:
                 print("API rate limit exceeded. Please wait and try again.")
@@ -294,10 +320,7 @@ def translate_text(
 
 
 def translate_multiline(
-    text: str,
-    source_lang: str,
-    target_lang: str,
-    silent: bool = False
+    text: str, source_lang: str, target_lang: str, silent: bool = False
 ) -> Tuple[Optional[str], Optional[str]]:
     """
     Translate multi-line text, preserving line breaks
@@ -306,12 +329,14 @@ def translate_multiline(
     if not text or not text.strip():
         return None, None
 
-    lines = text.split('\n')
+    lines = text.split("\n")
     translated_lines = []
 
     for i, line in enumerate(lines):
         if line.strip():  # Only translate non-empty lines
-            translated_line, lang = translate_text(line, source_lang, target_lang, silent)
+            translated_line, lang = translate_text(
+                line, source_lang, target_lang, silent
+            )
             if translated_line:
                 translated_lines.append(translated_line)
             else:
@@ -320,7 +345,7 @@ def translate_multiline(
             translated_lines.append("")  # Keep empty lines
 
     # Reconstruct with original line breaks
-    result = '\n'.join(translated_lines)
+    result = "\n".join(translated_lines)
     return result, target_lang
 
 
@@ -330,12 +355,26 @@ def determine_translation_direction(source_lang: str) -> Tuple[str, str]:
     Returns: (source_lang_code, target_lang_code)
     """
     # If Chinese, translate to English
-    if source_lang == 'zh':
+    if source_lang == "zh":
         return "zh", "en"
     # Otherwise, translate to Chinese (if supported) or to English
     else:
         # Languages that can be translated to Chinese
-        supported_to_chinese = ['en', 'ja', 'ko', 'fr', 'de', 'es', 'it', 'ru', 'pt', 'ms', 'th', 'vi', 'ar']
+        supported_to_chinese = [
+            "en",
+            "ja",
+            "ko",
+            "fr",
+            "de",
+            "es",
+            "it",
+            "ru",
+            "pt",
+            "ms",
+            "th",
+            "vi",
+            "ar",
+        ]
 
         if source_lang in supported_to_chinese:
             return source_lang, "zh"
@@ -344,7 +383,9 @@ def determine_translation_direction(source_lang: str) -> Tuple[str, str]:
             return source_lang, "en"
 
 
-def format_plaintext_output(original: str, translated: str, target_lang: str, show_original: bool = False) -> str:
+def format_plaintext_output(
+    original: str, translated: str, target_lang: str, show_original: bool = False
+) -> str:
     """
     Format plain text output, preserving original line breaks
     """
@@ -364,7 +405,9 @@ def format_plaintext_output(original: str, translated: str, target_lang: str, sh
     return output
 
 
-def format_html_output(original: str, translated: str, target_lang: str, show_original: bool = False) -> str:
+def format_html_output(
+    original: str, translated: str, target_lang: str, show_original: bool = False
+) -> str:
     """
     Generate HTML output formatted for GoldenDict display
     """
@@ -375,11 +418,11 @@ def format_html_output(original: str, translated: str, target_lang: str, show_or
     clean_translation = translated.strip()
 
     # Split into lines
-    lines = clean_translation.split('\n')
-    source_lines = original.split('\n') if show_original else []
+    lines = clean_translation.split("\n")
+    source_lines = original.split("\n") if show_original else []
 
     # Create HTML with minimal styling
-    html_output = '''<div style="margin: 0; padding: 0;">'''
+    html_output = """<div style="margin: 0; padding: 0;">"""
 
     for i, line in enumerate(lines):
         if line.strip():
@@ -387,7 +430,7 @@ def format_html_output(original: str, translated: str, target_lang: str, show_or
         elif i < len(lines) - 1:  # Only add empty line if it's not the last line
             html_output += '<p style="margin: 0; padding: 0">&nbsp;</p>'
 
-    html_output += '</div>'
+    html_output += "</div>"
 
     # Add original text if requested
     if show_original and source_lines:
@@ -397,7 +440,7 @@ def format_html_output(original: str, translated: str, target_lang: str, show_or
                 html_output += f'<p style="margin: 0; padding: 0">{line}</p>'
             elif i < len(source_lines) - 1:
                 html_output += '<p style="margin: 0; padding: 0">&nbsp;</p>'
-        html_output += '</div>'
+        html_output += "</div>"
 
     return html_output
 
@@ -407,7 +450,7 @@ def read_input_with_encoding(fileobj):
     # Try UTF-8 first
     try:
         content = fileobj.buffer.read()
-        return content.decode('utf-8')
+        return content.decode("utf-8")
     except UnicodeDecodeError:
         # Try UTF-16 if UTF-8 fails
         try:
@@ -415,21 +458,21 @@ def read_input_with_encoding(fileobj):
             bom = fileobj.buffer.read(2)
             fileobj.buffer.seek(0)
 
-            if bom == b'\xff\xfe' or bom == b'\xfe\xff':
+            if bom == b"\xff\xfe" or bom == b"\xfe\xff":
                 # UTF-16 with BOM
-                return fileobj.buffer.read().decode('utf-16')
+                return fileobj.buffer.read().decode("utf-16")
             else:
                 # Try UTF-16 LE/BE without BOM
                 try:
                     fileobj.buffer.seek(0)
-                    return fileobj.buffer.read().decode('utf-16-le')
+                    return fileobj.buffer.read().decode("utf-16-le")
                 except:
                     fileobj.buffer.seek(0)
-                    return fileobj.buffer.read().decode('utf-16-be')
+                    return fileobj.buffer.read().decode("utf-16-be")
         except:
             # Fall back to latin-1 (never fails)
             fileobj.buffer.seek(0)
-            return fileobj.buffer.read().decode('latin-1', errors='replace')
+            return fileobj.buffer.read().decode("latin-1", errors="replace")
 
 
 def main():
@@ -453,41 +496,42 @@ def main():
         sys.exit(1)
 
     # Remove trailing whitespace characters (including newlines)
-    source_text = source_text.rstrip('\r\n')
+    source_text = source_text.rstrip("\r\n")
 
     # Detect source language
     source_lang = detect_language(source_text)
     if not source_lang:
         if not args.silent:
-            print(f"Warning: Could not detect language for: {source_text[:50]}...", file=sys.stderr)
-        source_lang = 'en'  # Default to English
+            print(
+                f"Warning: Could not detect language for: {source_text[:50]}...",
+                file=sys.stderr,
+            )
+        source_lang = "en"  # Default to English
 
     # Determine translation direction
     actual_source, target_lang = determine_translation_direction(source_lang)
 
     # Perform translation
-    if source_text.count('\n') > 0:  # Multi-line text
+    if source_text.count("\n") > 0:  # Multi-line text
         translated_text, final_target_lang = translate_multiline(
-            source_text,
-            actual_source,
-            target_lang,
-            silent=args.silent
+            source_text, actual_source, target_lang, silent=args.silent
         )
     else:  # Single line text
         translated_text, final_target_lang = translate_text(
-            source_text,
-            actual_source,
-            target_lang,
-            silent=args.silent
+            source_text, actual_source, target_lang, silent=args.silent
         )
 
     # Output result
     if translated_text:
         # Format output
         if args.html:
-            output_text = format_html_output(source_text, translated_text, final_target_lang, args.original_text)
+            output_text = format_html_output(
+                source_text, translated_text, final_target_lang, args.original_text
+            )
         else:
-            output_text = format_plaintext_output(source_text, translated_text, final_target_lang, args.original_text)
+            output_text = format_plaintext_output(
+                source_text, translated_text, final_target_lang, args.original_text
+            )
 
         # Output with or without UTF-16 encoding
         if args.utf16:
@@ -498,7 +542,10 @@ def main():
             print(output_text)
     else:
         if not args.silent:
-            print("Translation failed. Please check your API credentials and network connection.", file=sys.stderr)
+            print(
+                "Translation failed. Please check your API credentials and network connection.",
+                file=sys.stderr,
+            )
         sys.exit(1)
 
 
