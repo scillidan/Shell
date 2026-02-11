@@ -36,14 +36,7 @@ function ugrep_files() {
             ugrep --smart-case --recursive --split --fuzzy=best -Q \
             "$BASE_DIR/Usr/File/file_rofi-shortcuts/cheatsheet" \
             "$BASE_DIR/Usr/File/file_rofi-shortcuts/cheatsheet_2zh" \
-            "$BASE_DIR/Usr/Git/Mark/mark_chat" \
-            "$BASE_DIR/Usr/Git/Mark/mark_cheat" \
-            "$BASE_DIR/Usr/Git/Mark/mark_comment" \
-            "$BASE_DIR/Usr/Git/Mark/mark_entry" \
-            "$BASE_DIR/Usr/Git/Mark/mark_etymonline" \
-            "$BASE_DIR/Usr/Git/Mark/mark_list" \
-            "$BASE_DIR/Usr/Git/Mark/mark_part" \
-            "$BASE_DIR/Usr/Git/Mark/mark_post" \
+            "$BASE_DIR/Usr/Git/Mark" \
             "$BASE_DIR/Usr/ProjSite/BYYA-site/content.zh/docs/jaffa" \
             "$BASE_DIR/Usr/ProjSite/BYYA-site/content.zh/docs/laguna" \
             "$BASE_DIR/Usr/ProjSite/BYYA-site/content.zh/docs/lyra-a" \
