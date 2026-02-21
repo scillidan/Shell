@@ -1,1 +1,1 @@
-piper -m %USERHOME%\Usr\Data\piper\en_US-libritts_r-medium.onnx --output_raw -- %* | ffplay -nodisp -autoexit -f s16le -ar 22050 -ch_layout mono -
+echo %* | piper -m C:\Users\User\Usr\Data\piper\en_US-libritts_r-medium.onnx --output-raw | ffplay -nodisp -autoexit -f s16le -ar 22050 -ch_layout mono -i -
