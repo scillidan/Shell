@@ -12,7 +12,15 @@ setlocal enabledelayedexpansion
 if "%~1"=="" exit /b
 
 for %%I in (%*) do (
-    set "outputFile=%%~dpI_yoga_%%~nI.png"
+    set "inputExt=%%~xI"
+
+    if /i "!inputExt!"==".jpg" (
+        set "outputExt=.jpg"
+    ) else (
+        set "outputExt=.png"
+    )
+
+    set "outputFile=%%~dpI_yoga_%%~nI!outputExt!"
 
     yoga image --resize 1920 "%%~I" "!outputFile!"
 
