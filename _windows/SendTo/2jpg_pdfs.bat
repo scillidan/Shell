@@ -16,5 +16,5 @@ if "!page!"=="" set "page=1"
 set /a imgpage=page-1
 
 for %%F in (%*) do (
-    magick "%%F[!imgpage!]" "%%~nF_p!page!.jpg"
+    magick "%%F[!imgpage!]" -alpha remove "%%~nF_p!page!.jpg"
 )
