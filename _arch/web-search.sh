@@ -70,6 +70,7 @@ URLS=(
 	# Subtitle
 	["opensubtitles.org"]="https://www.opensubtitles.org/en/search2/sublanguageid-chi,eng/moviename-"
 	["subhd.tv"]="https://subhd.tv/search/"
+	["subtitlecat.com"]="https://www.subtitlecat.com/index.php?search="
 	# Web
 	["github"]="https://github.com/search?type=repositories&q="
 	["github_action"]="https://github.com/marketplace?type=actions&query="
@@ -85,6 +86,7 @@ URLS=(
 	["virustotal.com"]="https://www.virustotal.com/gui/seach/"
 	# Other
 	["flickr.com"]="https://www.flickr.com/search/?license=2%2C3%2C4%2C5%2C6%2C9&text="
+	["genius.com"]="https://genius.com/search?q="
 	["ScoopInstaller/Extras/pulls"]="https://github.com/ScoopInstaller/Extras/pulls?q="
 	# Cache
 	#" [site/yomitan"]="= chrome-extension://likgccmbimhjbgkjambclfkhldnlhbnn/search.html?query="
