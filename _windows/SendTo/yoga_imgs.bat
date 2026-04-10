@@ -22,7 +22,7 @@ for %%I in (%*) do (
 
     set "outputFile=%%~dpI_yoga_%%~nI!outputExt!"
 
-    yoga image --resize 1920 "%%~I" "!outputFile!"
+    yoga image "%%~I" "!outputFile!"
 
     if exist "!outputFile!" del "%%~I"
 )
