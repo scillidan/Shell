@@ -1,0 +1,1 @@
+mprocs "languagetool-server --port 8040 --allow-origin"
