@@ -26,17 +26,8 @@ esac
 
 function ugrep_files() {
     case "$1" in
-        shortcut)
-            ugrep --smart-case --recursive --split --fuzzy=best -Q \
-            "$BASE_DIR/Usr/File/file_rofi-shortcuts/shortcut" \
-            "$BASE_DIR/Usr/File/file_rofi-shortcuts/shortcut_windows" \
-            "$BASE_DIR/Usr/File/file_rofi-shortcuts/shortcut_dev"
-        ;;
         cheatsheet)
             ugrep --smart-case --recursive --split --fuzzy=best -Q \
-            "$BASE_DIR/Usr/File/file_rofi-shortcuts/cheatsheet" \
-            "$BASE_DIR/Usr/File/file_rofi-shortcuts/cheatsheet_2zh" \
-            "$BASE_DIR/Usr/Git/Mark" \
             "$BASE_DIR/Usr/ProjSite/BYYA-site/content.zh/docs/jaffa" \
             "$BASE_DIR/Usr/ProjSite/BYYA-site/content.zh/docs/laguna" \
             "$BASE_DIR/Usr/ProjSite/BYYA-site/content.zh/docs/lyra-a" \
