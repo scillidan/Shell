@@ -4,7 +4,7 @@ REM Dependences: fd, dir, bat, fzf
 REM Optionals: rg, everything-cli(es), dirx, eza ...
 REM References:
 REM - https://github.com/chrisant996/clink-gizmos/issues/19
-REM - https://thevaluable.dev/practical-guide-fzf-example
+REM - https://thevaluable.dev/practical-guide-fzf-example/
 REM - https://github.com/narnaud/clink-terminal/blob/main/scripts/fzf-preview.cmd
 REM PS:
 REM After switching modes, the sorting of Files mode will change. I don't know why.
